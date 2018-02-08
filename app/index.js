@@ -89,8 +89,8 @@ class pWindow {
         this.move(this.beforeMax.x, this.beforeMax.y)
         return
       }
-      this.beforeMax = {...this.pos}
-      // this.beforeMax = {x:this.pos.x,y:this.pos.y,w:this.pos.w,h:this.pos.h}
+      // this.beforeMax = {...this.pos}
+      this.beforeMax = {x:this.pos.x,y:this.pos.y,w:this.pos.w,h:this.pos.h}
       this.move(0,0)
       this.size(window.innerWidth, window.innerHeight)
       this.maximised = true
