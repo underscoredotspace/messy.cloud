@@ -6,19 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Colin Tindle - Portfolio</title>
   <link rel="stylesheet" href="index.scss">
-  <!-- <script defer src="../node_modules/@fortawesome/fontawesome-free-solid/index.js"></script> -->
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
   <div id="window-template">
     <div class="window">
       <div class="window__button close"><i class="fas fa-times"></i></div>
-      <div class="window__title">Window Title</div>
+      <div class="window__title"></div>
       <div class="window__button min"><i class="fas fa-window-minimize"></i></div>
       <div class="window__button max"><i class="fas fa-expand-arrows-alt"></i></div>
       
       <div class="window__content">
-        
+        <div class="window__content__loading">Loading...</div>
+        <iframe class="window__content__iframe" src="about:blank" scrolling="no"></iframe>
+        <div class="window__content__cover"></div>
       </div>
       <div class="window__button scroll up"><i class="fas fa-arrow-up"></i></div>
       <div class="window__scroll-bar vert"></div>
