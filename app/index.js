@@ -97,7 +97,10 @@ class pWindow {
     })
     
     // Move window start
-    this.title.addEventListener('mousedown', e => {
+    const handleMoveStart = e => {
+      const pageX = e.pageX || e.touches[0].pageX
+      const pageY = e.pageY || e.touches[0].pageY
+
       if (this.maximised) {return}
       el.classList.add('changing')
       this.contentCover.style.display = 'block'
@@ -106,15 +109,20 @@ class pWindow {
       
       const box = el.getBoundingClientRect()
       this.start = {
-        x: e.pageX - box.x, 
-        y: e.pageY - box.y
+        x: pageX - box.x, 
+        y: pageY - box.y
       }
       
       e.preventDefault()
-    })
+    }
+    this.title.addEventListener('mousedown', handleMoveStart)
+    this.title.addEventListener('touchstart', handleMoveStart)
     
     // Resize window start
-    this.sizeHandle.addEventListener('mousedown', e => {
+    const handleResizeStart = (e) => {
+      const pageX = e.pageX || e.touches[0].pageX
+      const pageY = e.pageY || e.touches[0].pageY
+
       if (this.maximised) {return}
       el.classList.add('changing')
       this.contentCover.style.display = 'block'
@@ -123,24 +131,30 @@ class pWindow {
       
       const box = el.getBoundingClientRect()
       this.start = {
-        w: e.pageX - box.width, 
-        h: e.pageY - box.height
+        w: pageX - box.width, 
+        h: pageY - box.height
       }
       
       e.preventDefault()
-    })
+    }
+
+    this.sizeHandle.addEventListener('mousedown', handleResizeStart)
+    this.sizeHandle.addEventListener('touchstart', handleResizeStart)
     
     // Handle drag for Resize and Move
     const handleMouseMove = (e) => {
+      const pageX = e.pageX || e.touches[0].pageX
+      const pageY = e.pageY || e.touches[0].pageY
+
       if (this.dragging) {
-        this.move(e.pageX - this.start.x, e.pageY - this.start.y)
+        this.move(pageX - this.start.x, pageY - this.start.y)
       } else if (this.sizing) {
-        this.size(e.pageX - this.start.w, e.pageY - this.start.h)
+        this.size(pageX - this.start.w, pageY - this.start.h)
       }
     }
     
     document.addEventListener('mousemove', handleMouseMove)
-    this.content.contentWindow.window.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('touchmove', handleMouseMove)
     
     // Release Move/Resize    
     const handleMouseUp = (e) => {
@@ -154,7 +168,7 @@ class pWindow {
     }
     
     document.addEventListener('mouseup', handleMouseUp)
-    this.content.contentWindow.window.addEventListener('mouseup', handleMouseUp)
+    document.addEventListener('touchend', handleMouseUp)
   }
 }
 
