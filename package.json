@@ -4,6 +4,7 @@
   "description": "Fake windows in HTML",
   "repository": "https://github.com/underscoredotspace/messy.cloud",
   "author": "Colin Tindle <ampersand@underscore.space>",
+  "main": "app/index.js",
   "license": "CC-BY-4.0",
   "private": true,
   "scripts": {
