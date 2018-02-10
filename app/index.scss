@@ -10,6 +10,37 @@ html {
 }
 
 body {
+  overflow: hidden;
+}
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.5rem 1fr 2rem;
+}
+
+#menu-bar, #task-bar {
+  z-index: 1000;
+}
+
+#menu-bar {
+  background: white;
+  border-bottom: black solid 1px;
+}
+
+#task-bar {
+  background: silver;
+  border-top: black solid 1px;
+}
+
+#desktop {
   background: hsl(120, 20%, 60%);
 }
 
@@ -39,25 +70,24 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    &__iframe {
-      display: none;
-      width: 100%;
-      height: 100%;
-      border: none;
+    overflow: hidden;
+    &__iframe, &__cover, &__loading {
       grid-column: 1 / span 1;
       grid-row: 1 / span 1;
     }
+    &__iframe {
+      min-width: 0;
+      min-height: 0;
+      display: none;
+      border: none;
+    }
     &__cover {
       display: none;
-      grid-column: 1 / span 1;
-      grid-row: 1 / span 1;
     }
     &__loading {
       display: grid;
       justify-content: center;
       align-content: center;
-      width: 100%;
-      height: 100%;
     }
   }
   
@@ -73,11 +103,15 @@ body {
   
   &__button {
     background: silver;
+    &.size.disabled {
+      color: slategray;
+    }
   }
   
   &.changing {
     border: 1px solid white;
   }
+
   &.maximising {
     transition: 0.1s all; 
   }
