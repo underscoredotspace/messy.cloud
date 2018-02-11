@@ -40,7 +40,6 @@ export default class Taskbar {
   }
 
   removeWindow(id) {
-    this.os.windows = this.os.windows.filter(win => win.id !== id)
-    document.getElementById(`task-${id}`).remove()
+    this.getTask(id).remove()
   }
 }

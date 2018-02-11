@@ -7,24 +7,28 @@ export default class os {
     this.taskBar = new Taskbar(this)
   }
 
+  getWindow(id) {
+    return this.windows.filter(win => win.id === id)[0]
+  }
+
   openWindow(win) {
     const newWindow = new Window(win, this)
     this.taskBar.addWindow(newWindow, win.title)
   }
 
-  minimise(id) {
+  closeWindow(id) {
+    this.taskBar.removeWindow(id)
+    this.getWindow(id).close()
+    this.windows = this.windows.filter(win => win.id !== id)
+  }
+
+  minimiseWindow(id) {
     this.taskBar.minimiseWindow(id)
+    this.getWindow(id).minimise()
   }
 
   taskClick(id, e) {
     this.taskBar.setActive(id)
-
-    for (let win of this.windows) {
-      const window = document.getElementById(`window-${win.id}`)
-      if (win.id === id) {
-        win.takeFocus()
-        return
-      }
-    }
+    this.getWindow(id).takeFocus()
   }
 }

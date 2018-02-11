@@ -14,10 +14,10 @@
   display:grid;
   align-content: center;
   justify-content: center;
-  box-shadow: inset -1px -1px 1px #000, inset 1px 1px 1px #fff;
+  box-shadow: inset -1px -1px 0 black, inset 1px 1px 0 white;
   &.active {
     background: silver;
-    box-shadow: inset 1px 1px 1px #000, inset -1px -1px 1px #fff;
+    box-shadow: inset 1px 1px 0 black, inset -1px -1px 0 white;
   }
   &.minimised {
     color: gray;

@@ -43,12 +43,11 @@ export default class tosWindow {
 
   loadContent(page, title = this.window.id) {
       this.content.src = page
-      const el = this.window
+      this.title.innerText = title
       
       this.content.addEventListener('load', e => {
-        this.title.innerText = title
         e.target.style.display = 'grid'
-        el.querySelector('.window__content__loading').style.display = 'none'
+        this.window.querySelector('.window__content__loading').style.display = 'none'
       })
   }
 
@@ -92,14 +91,13 @@ export default class tosWindow {
   }
 
   minimise(e) {
-    this.os.minimise(this.id)
     this.window.classList.add('minimised')
     this.minimised = true
   }
 
   unminimise() {
     this.window.classList.remove('minimised')
-    this.minimise = false
+    this.minimised = false
   }
 
   maximise() {
@@ -115,16 +113,15 @@ export default class tosWindow {
 
   unmaximise() {
     this.animate(() => {
-      this.beforeMax = {}
       this.size(this.beforeMax.w, this.beforeMax.h)
       this.move(this.beforeMax.x, this.beforeMax.y)
+      this.beforeMax = {}
       this.sizeHandle.classList.remove('disabled')
       this.maximised = false
     })
   }
 
   close(e) {
-    this.os.taskBar.removeWindow(this.id)
     this.content.src = 'about:blank'
     this.window.remove()
     // give another window focus?
@@ -151,10 +148,10 @@ export default class tosWindow {
     this.window.addEventListener('mouseup', this.takeFocus)
     
     // Close window
-    this.closeButton.addEventListener('click', this.close)
+    this.closeButton.addEventListener('click', e => this.os.closeWindow(this.id))
 
     // Minimise window
-    this.minButton.addEventListener('click', this.minimise)
+    this.minButton.addEventListener('click', e => this.os.minimiseWindow(this.id))
     
     // Maximise window
     this.maxButton.addEventListener('click', e => {     
