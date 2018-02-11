@@ -1,13 +1,13 @@
 const template = document.getElementById('task-template').querySelector('.task')
 
-export default class Taskbar {
+export default class TaskBar {
   constructor(os) {
     this.os = os
-    this.bar = document.getElementById('task-bar')
+    this.taskbar = document.getElementById('task-bar')
   }
 
   getTask(id) {
-    return document.getElementById(`task-${id}`)
+    return this.taskbar.querySelector(`#task-${id}`)
   }
 
   setActive(id) {
@@ -35,8 +35,9 @@ export default class Taskbar {
     newTask.id = `task-${win.id}`
     newTask.classList.add('active')
     newTask.innerText = title
-    newTask.addEventListener('click', e => this.os.taskClick(win.id, e))
-    this.bar.appendChild(newTask)
+    newTask.addEventListener('click', e => this.os.setFocus(win.id))
+    this.taskbar.appendChild(newTask)
+    this.os.setFocus(win.id)
   }
 
   removeWindow(id) {
