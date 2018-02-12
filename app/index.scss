@@ -10,6 +10,7 @@ html {
 }
 
 body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   overflow: hidden;
 }
 
@@ -20,24 +21,11 @@ body {
   left: 0;
   right: 0;
   display: grid;
-  height: 100%;
-  width: 100%;
   grid-template-columns: 1fr;
   grid-template-rows: 1.5rem 1fr 2rem;
 }
 
-#menu-bar {
-  z-index: 1000;
-}
-
-#menu-bar {
-  background: white;
-  border-bottom: black solid 1px;
-}
-
-#desktop {
-  background: hsl(120, 20%, 60%);
-}
-
 @import './window.scss';
+@import './desktop.scss';
 @import './task-bar.scss';
+@import './menu-bar.scss';

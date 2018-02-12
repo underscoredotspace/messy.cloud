@@ -1,0 +1,35 @@
+#desktop {
+  background: hsl(120, 20%, 60%);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 92px);
+  grid-template-rows: repeat(auto-fit, 64px);
+  grid-gap: 2rem;
+  padding: 0.5rem;
+}
+
+.icon {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1rem;
+  grid-gap: 0.5rem;
+  --atari-white: #e0e0e0;
+  --icon-title: var(--atari-white);
+  --text-color: black;
+  &__title {
+    display: grid;
+    background: var(--icon-title);
+    color: var(--text-color);
+    justify-content: center;
+    align-content: center;
+    text-transform: uppercase;
+    font-size:0.7rem;
+  }
+  &__image {
+    background-repeat:no-repeat;
+    background-position: center bottom;
+  }
+  &.selected {
+    background: rgba(0, 0, 0, 0.5);
+    color: black !important;
+  }
+}

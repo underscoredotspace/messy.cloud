@@ -12,15 +12,22 @@ export default class os {
     this.menuBar = new MenuBar(this)
     this.desktop = new Desktop(this)
     this.taskBar = new TaskBar(this)
+
+    this.icon = {
+      app: 0,
+      file: 1
+    }
   }
 
   getWindow(id) {
     return this.windows.filter(win => win.id === id)[0]
   }
 
-  openWindow(win) {
+  openWindow(win, icon) {
     const newWindow = new Window(win, this)
     const desktop = this.desktop.pos()
+    newWindow.icon = icon
+
     this.windows.push(newWindow)
     this.desktop.addWindow(newWindow)
     this.taskBar.addWindow(newWindow, win.title)
@@ -31,6 +38,10 @@ export default class os {
     if (!win.hasOwnProperty('x')) {win.x = ((desktop.r-desktop.x) / 2) - (win.w / 2)}
     if (!win.hasOwnProperty('y')) {win.y = ((desktop.b-desktop.y) / 2) - (win.h / 2)}
     this.moveWindow(newWindow.id, win.x+desktop.x, win.y+desktop.y)
+  }
+
+  addIcon(icon) {
+    this.desktop.addIcon(icon)
   }
 
   resizeWindow(id, w, h) {
@@ -62,11 +73,6 @@ export default class os {
     this.taskBar.removeWindow(id)
     this.getWindow(id).close()
     this.windows = this.windows.filter(window => window.id !== id)
-    
-    // // activate another window
-    // if (this.windows.length !== 0) {
-    //   this.setFocus(this.windows[this.windows.length-1].id)
-    // }
   }
 
   setFocus(id) {
@@ -78,6 +84,7 @@ export default class os {
   }
 
   selectTask(id) {
+    // If window is already active it should be minimised instead
     if (this.getWindow(id).focused) {
       this.minimiseWindow(id)
     } else {

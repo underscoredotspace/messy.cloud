@@ -1,7 +1,7 @@
 import uuid from 'uuid'
 const template = document.getElementById('window-template').querySelector('.window')
 
-export default class tosWindow {
+export default class Window {
   constructor({page, title}, os) {
     const win = template.cloneNode(true)
     
@@ -18,13 +18,10 @@ export default class tosWindow {
     this.title = win.querySelector('.window__title')
     this.content = win.querySelector('.window__content__iframe')
     this.contentCover = win.querySelector('.window__content__cover')
+    this.loadingIndicator = win.querySelector('.window__content__loading')
     
     if (page) {this.loadContent(page, title)}
     
-    this.close = this.close.bind(this)
-    this.animate = this.animate.bind(this)
-    this.minimise = this.minimise.bind(this)
-    this.loadContent = this.loadContent.bind(this)
     this.initEventListeners()
   }
 
@@ -38,17 +35,15 @@ export default class tosWindow {
       this.title.innerText = title
       
       this.content.addEventListener('load', e => {
-        e.target.style.display = 'grid'
-        this.window.querySelector('.window__content__loading').style.display = 'none'
+        this.content.style.display = 'grid'
+        this.loadingIndicator.style.display = 'none'
       })
   }
 
   animate(callback) {
     this.window.classList.add('animate')
-    setTimeout(()=> {
-      this.window.classList.remove('animate')
-    }, 500)
     callback()
+    setTimeout(()=>this.window.classList.remove('animate'), 500)
   }
   
   move(x, y) {
@@ -67,7 +62,7 @@ export default class tosWindow {
 
   minimise(translateX, translateY) {
     this.animate(() => {
-      this.window.style.transform = `translate(${translateX}px, ${translateY}px) scale(0.1)`
+      this.window.style.transform = `translate(${translateX}px, ${translateY}px) scale(0)`
     })
     this.minimised = true
     this.unFocus()
@@ -140,6 +135,7 @@ export default class tosWindow {
       const pageY = e.pageY || e.touches[0].pageY
 
       this.window.classList.add('changing')
+      this.contentCover.classList.remove('active')
       this.title.style.cursor = 'move'
       this.dragging = true
       
@@ -163,7 +159,7 @@ export default class tosWindow {
       const pageY = e.pageY || e.touches[0].pageY
 
       this.window.classList.add('changing')
-      this.contentCover.style.display = 'block'
+      this.contentCover.classList.remove('active')
       this.sizeHandle.style.cursor = 'nwse-resize'
       this.sizing = true
       

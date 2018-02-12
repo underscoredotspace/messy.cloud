@@ -7,8 +7,8 @@
   grid-template-rows: 1.5rem 1.5rem 1fr 1.5rem 1.5rem; 
   font-size: 12px;
   line-height: 10px;
-  font-family: monospace;
   z-index: 1;
+  will-change: contents;
   
   > * {
     display: grid;
@@ -83,6 +83,6 @@
   }
 
   &.animate {
-    transition: 0.3s all; 
+    transition: 0.5s all; 
   }
 }
