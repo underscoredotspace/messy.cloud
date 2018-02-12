@@ -135,6 +135,7 @@ export default class Window {
       const pageY = e.pageY || e.touches[0].pageY
 
       this.window.classList.add('changing')
+      this.contentCover.classList.remove('active')
       this.title.style.cursor = 'move'
       this.dragging = true
       
@@ -158,7 +159,7 @@ export default class Window {
       const pageY = e.pageY || e.touches[0].pageY
 
       this.window.classList.add('changing')
-      this.contentCover.style.display = 'block'
+      this.contentCover.classList.remove('active')
       this.sizeHandle.style.cursor = 'nwse-resize'
       this.sizing = true
       
