@@ -63,10 +63,10 @@ export default class os {
     this.getWindow(id).close()
     this.windows = this.windows.filter(window => window.id !== id)
     
-    // activate another window
-    if (this.windows.length !== 0) {
-      this.setFocus(this.windows[this.windows.length-1].id)
-    }
+    // // activate another window
+    // if (this.windows.length !== 0) {
+    //   this.setFocus(this.windows[this.windows.length-1].id)
+    // }
   }
 
   setFocus(id) {
@@ -86,8 +86,10 @@ export default class os {
   }
 
   minimiseWindow(id) {
-    this.taskBar.minimiseWindow(id)
-    this.getWindow(id).minimise()
+    const win = this.getWindow(id).pos()
+    const translateX = this.taskBar.minimiseWindow(id) - (win.x + (win.w/2))
+    const translateY = this.desktop.pos().b - win.y
+    this.getWindow(id).minimise(translateX, translateY)
   }
 
   maximiseWindow(id) {

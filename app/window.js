@@ -44,9 +44,9 @@ export default class tosWindow {
   }
 
   animate(callback) {
-    this.window.classList.add('maximising')
+    this.window.classList.add('animate')
     setTimeout(()=> {
-      this.window.classList.remove('maximising')
+      this.window.classList.remove('animate')
     }, 500)
     callback()
   }
@@ -65,14 +65,18 @@ export default class tosWindow {
     })
   }
 
-  minimise() {
-    this.window.classList.add('minimised')
+  minimise(translateX, translateY) {
+    this.animate(() => {
+      this.window.style.transform = `translate(${translateX}px, ${translateY}px) scale(0.1)`
+    })
     this.minimised = true
     this.unFocus()
   }
 
   unminimise() {
-    this.window.classList.remove('minimised')
+    this.animate(() => {
+      this.window.style.transform = 'translate(0) scale(1)'
+    })
     this.minimised = false
   }
 

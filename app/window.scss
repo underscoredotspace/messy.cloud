@@ -82,11 +82,7 @@
     border: 1px solid white;
   }
 
-  &.maximising {
-    transition: 0.1s all; 
-  }
-
-  &.minimised {
-    display: none;
+  &.animate {
+    transition: 3s all; 
   }
 }
