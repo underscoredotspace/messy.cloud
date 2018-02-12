@@ -21,9 +21,11 @@ export default class TaskBar {
       task.classList.remove('active')
       
       if (win.id === id) {
-        win.unminimise()
+        if (win.minimised) {
+          win.unminimise()
+          task.classList.remove('minimised')
+        }
         task.classList.add('active')
-        task.classList.remove('minimised')
       }
     }
   }

@@ -99,26 +99,25 @@ export default class tosWindow {
     })
   }
 
-  close(e) {
+  close() {
     this.content.src = 'about:blank'
     this.window.remove()
-    // give another window focus?
   }
 
   setFocus() {    
-    if(this.focused) {return}
+    // if(this.focused) {return}
     this.focused = true
     this.window.classList.add('active')
     this.title.classList.add('active')
-    this.contentCover.classList.remove('active')
+    this.contentCover.classList.add('active')
   }
 
   unFocus() {
-    if(!this.focused) {return}
+    // if(!this.focused) {return}
     this.focused = false
     this.window.classList.remove('active')
     this.title.classList.remove('active')
-    this.contentCover.classList.add('active')
+    this.contentCover.classList.remove('active')
   }
   
   initEventListeners() {
@@ -141,7 +140,6 @@ export default class tosWindow {
       const pageY = e.pageY || e.touches[0].pageY
 
       this.window.classList.add('changing')
-      this.contentCover.style.display = 'block'
       this.title.style.cursor = 'move'
       this.dragging = true
       
@@ -187,7 +185,7 @@ export default class tosWindow {
       const pageX = e.pageX || e.touches[0].pageX
       const pageY = e.pageY || e.touches[0].pageY
 
-      this.contentCover.style.display = 'block'
+      this.contentCover.classList.remove('active')
 
       if (this.dragging) {
         this.os.moveWindow(this.id, pageX - this.start.x, pageY - this.start.y)
@@ -206,6 +204,7 @@ export default class tosWindow {
       this.sizeHandle.style.cursor = 'default'
       this.title.style.cursor = 'default'
       this.window.classList.remove('changing')
+      this.contentCover.classList.add('active')
 
       this.dragging = false
       this.sizing = false

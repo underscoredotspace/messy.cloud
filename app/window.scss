@@ -39,9 +39,9 @@
     }
     &__cover {
       z-index: 2;
-      display: none;
+      display: block;
       &.active {
-        display: block;
+        display: none;
       }
     }
     &__loading {
@@ -83,6 +83,6 @@
   }
 
   &.animate {
-    transition: 3s all; 
+    transition: 0.3s all; 
   }
 }
