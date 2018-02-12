@@ -1,5 +1,5 @@
 .window {
-  box-shadow: 5px 10px 10px rgba(0,0,0,0.3), -2px -2px 20px rgba(0,0,0,0.3);
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.3), -1px -1px 5px rgba(0,0,0,0.3);
   position: absolute;
   display: grid;
   border: 1px solid black;
@@ -40,6 +40,9 @@
     &__cover {
       z-index: 2;
       display: none;
+      &.active {
+        display: block;
+      }
     }
     &__loading {
       display: grid;
@@ -52,6 +55,12 @@
     background: lightsteelblue;
     overflow: hidden;
     white-space: nowrap;
+    color: steelblue;
+
+    &.active {
+      background: steelblue;
+      color: black;
+    }
   }
   
   &__scroll-bar {
@@ -63,6 +72,10 @@
     &.size.disabled {
       color: slategray;
     }
+  }
+  &.active {
+    z-index: 2;
+    box-shadow: 5px 10px 10px rgba(0,0,0,0.3), -2px -2px 20px rgba(0,0,0,0.3);
   }
   
   &.changing {

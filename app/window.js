@@ -65,9 +65,10 @@ export default class tosWindow {
     })
   }
 
-  minimise(e) {
+  minimise() {
     this.window.classList.add('minimised')
     this.minimised = true
+    this.unFocus()
   }
 
   unminimise() {
@@ -100,20 +101,20 @@ export default class tosWindow {
     // give another window focus?
   }
 
-  setFocus() {
+  setFocus() {    
+    if(this.focused) {return}
     this.focused = true
-    this.window.style.zIndex = 2
-    this.title.style.backgroundColor = 'steelblue'
-    this.title.style.color = 'black'
-    this.contentCover.style.display = 'none'
+    this.window.classList.add('active')
+    this.title.classList.add('active')
+    this.contentCover.classList.remove('active')
   }
 
   unFocus() {
+    if(!this.focused) {return}
     this.focused = false
-    this.window.style.zIndex = 1
-    this.title.style.backgroundColor = 'lightsteelblue'
-    this.title.style.color = 'steelblue'
-    this.contentCover.style.display = 'block'
+    this.window.classList.remove('active')
+    this.title.classList.remove('active')
+    this.contentCover.classList.add('active')
   }
   
   initEventListeners() {
@@ -124,11 +125,7 @@ export default class tosWindow {
     this.minButton.addEventListener('click', e => this.os.minimiseWindow(this.id))
     
     this.maxButton.addEventListener('click', e => {     
-      if (this.maximised) {
-        this.unmaximise()
-      } else {
-        this.maximise()
-      }
+      !this.maximised ? this.maximise() : this.unmaximise()
     })
 
     // Move window start

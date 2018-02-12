@@ -24,6 +24,7 @@ export default class os {
     this.windows.push(newWindow)
     this.desktop.addWindow(newWindow)
     this.taskBar.addWindow(newWindow, win.title)
+    this.setFocus(newWindow.id)
 
     this.resizeWindow(newWindow.id, win.w, win.h)
 
@@ -69,14 +70,19 @@ export default class os {
   }
 
   setFocus(id) {
-    for (let window of this.windows) {
-      if (window.id === id) {
-        window.setFocus()
-      } else {
-        window.unFocus()
-      }
+    for(let win of this.windows) {
+      win.id === id ? win.setFocus() : win.unFocus()
     }
+
     this.taskBar.setActive(id)
+  }
+
+  selectTask(id) {
+    if (this.getWindow(id).focused) {
+      this.minimiseWindow(id)
+    } else {
+      this.setFocus(id)
+    }
   }
 
   minimiseWindow(id) {

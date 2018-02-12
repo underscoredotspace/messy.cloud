@@ -30,14 +30,13 @@ export default class TaskBar {
   }
 
   addWindow(win, title) {
-    this.os.windows.push(win)
     const newTask = template.cloneNode(true)
     newTask.id = `task-${win.id}`
     newTask.classList.add('active')
     newTask.innerText = title
-    newTask.addEventListener('click', e => this.os.setFocus(win.id))
+    newTask.title = title
+    newTask.addEventListener('click', e => this.os.selectTask(win.id))
     this.taskbar.appendChild(newTask)
-    this.os.setFocus(win.id)
   }
 
   removeWindow(id) {
