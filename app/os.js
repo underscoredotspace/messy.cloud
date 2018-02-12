@@ -62,11 +62,6 @@ export default class os {
     this.taskBar.removeWindow(id)
     this.getWindow(id).close()
     this.windows = this.windows.filter(window => window.id !== id)
-    
-    // // activate another window
-    // if (this.windows.length !== 0) {
-    //   this.setFocus(this.windows[this.windows.length-1].id)
-    // }
   }
 
   setFocus(id) {
@@ -78,6 +73,7 @@ export default class os {
   }
 
   selectTask(id) {
+    // If window is already active it should be minimised instead
     if (this.getWindow(id).focused) {
       this.minimiseWindow(id)
     } else {

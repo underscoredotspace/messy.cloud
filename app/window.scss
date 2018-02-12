@@ -9,6 +9,7 @@
   line-height: 10px;
   font-family: monospace;
   z-index: 1;
+  will-change: contents;
   
   > * {
     display: grid;
@@ -83,6 +84,6 @@
   }
 
   &.animate {
-    transition: 0.3s all; 
+    transition: 0.5s all; 
   }
 }
