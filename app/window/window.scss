@@ -64,11 +64,11 @@
   }
   
   &__scroll-bar {
-    background: lightgrey;
+    background: $atari-white;
   }
   
   &__button {
-    background: silver;
+    background: $atari-white;
     &.size.disabled {
       color: slategray;
     }
@@ -79,7 +79,7 @@
   }
   
   &.changing {
-    border: 1px solid white;
+    border: 1px solid $atari-white;
   }
 
   &.animate {

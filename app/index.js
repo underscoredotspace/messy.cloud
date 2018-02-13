@@ -1,4 +1,4 @@
-import tos from './os'
+import tos from './os/os'
 window.os = new tos
 
 os.addIcon({title:'emojis.htm', type:os.icon.file, window: {

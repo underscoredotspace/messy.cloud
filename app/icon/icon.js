@@ -6,7 +6,7 @@ import FILE_ICON from './icons/file.png'
 const ICONS = [APP_ICON, FILE_ICON]
 const ICON_TEMPLATE = document.getElementById('icon-template').querySelector('.icon')
 
-class Icon {
+export default class Icon {
   constructor(os, {title, type, window}) {
     this.os = os
     this.icon = ICON_TEMPLATE.cloneNode(true)
@@ -43,36 +43,5 @@ class Icon {
     this.icon.classList.remove('selected')
     this.icon.style.setProperty('--text-color', 'black')
     this.icon.style.setProperty('--icon-title', 'var(--atari-white)')
-  }
-}
-
-export default class Desktop {
-  constructor(os) {
-    this.os = os
-    this.icons = []
-
-    this.desktop = document.getElementById('desktop')
-
-    this.desktop.addEventListener('click', e => this.deselectAllIcons(e))
-  }
-
-  pos() {
-    const {top, right, bottom, left, width, height} = this.desktop.getBoundingClientRect()
-    return {y:top, r:right, b:bottom, x:left, w:width, h:height}
-  }
-
-  addWindow(win) {
-    this.desktop.appendChild(win.window)
-  }
-
-  addIcon(icon) {
-    const newIcon = new Icon(this.os, icon)
-    this.icons.push(newIcon)
-    this.desktop.appendChild(newIcon.icon)
-  }
-
-  deselectAllIcons(e) {
-    if (e && e.target.id !== 'desktop') {return}
-    this.icons.forEach(icon => icon.deselect())
   }
 }

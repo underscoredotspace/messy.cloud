@@ -1,4 +1,4 @@
-const template = document.getElementById('task-template').querySelector('.task')
+const TASK_TEMPLATE = document.getElementById('task-template').querySelector('.task')
 
 export default class TaskBar {
   constructor(os) {
@@ -40,7 +40,7 @@ export default class TaskBar {
   }
 
   addWindow(win, title) {
-    const newTask = template.cloneNode(true)
+    const newTask = TASK_TEMPLATE.cloneNode(true)
     newTask.id = `task-${win.id}`
     newTask.classList.add('active')
     newTask.innerText = title

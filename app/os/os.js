@@ -1,7 +1,7 @@
-import Window from './window'
-import MenuBar from './menu-bar'
-import Desktop from './desktop'
-import TaskBar from './task-bar'
+import Window from '../window/window'
+import MenuBar from '../menu-bar/menu-bar'
+import Desktop from '../desktop/desktop'
+import TaskBar from '../task-bar/task-bar'
 
 const MIN_WINDOW_W = 240
 const MIN_WINDOW_H = 200
