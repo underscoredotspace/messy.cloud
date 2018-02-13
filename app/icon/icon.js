@@ -4,12 +4,12 @@ import APP_ICON from './icons/app.png'
 import FILE_ICON from './icons/file.png'
 
 const ICONS = [APP_ICON, FILE_ICON]
-const ICON_TEMPLATE = document.getElementById('icon-template').querySelector('.icon')
+import {ICON} from '../templates'
 
 export default class Icon {
   constructor(os, {title, type, window}) {
     this.os = os
-    this.icon = ICON_TEMPLATE.cloneNode(true)
+    this.icon = ICON.cloneNode(true)
     this.id = uuid()
 
     this.title = this.icon.querySelector('.icon__title')
@@ -18,7 +18,7 @@ export default class Icon {
     this.title.innerText = title
     this.image.style.backgroundImage = `url(${ICONS[type]})`
     this.icon.addEventListener('dblclick', () => this.load(window))
-    this.icon.addEventListener('click', e => this.select(e))
+    this.icon.addEventListener('click', () => this.select())
   }
 
   load(window) {

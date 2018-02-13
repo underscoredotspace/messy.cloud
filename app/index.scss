@@ -27,7 +27,8 @@ body {
   grid-template-rows: 1.5rem 1fr 2rem;
 }
 
-@import './window.scss';
-@import './desktop.scss';
-@import './task-bar.scss';
-@import './menu-bar.scss';
+@import './menu-bar/menu-bar.scss';
+@import './desktop/desktop.scss';
+@import './icon/icon.scss';
+@import './window/window.scss';
+@import './task-bar/task-bar.scss';

@@ -1,9 +1,9 @@
 import {v4 as uuid} from 'uuid'
-const WINDOW_TEMPLATE = document.getElementById('window-template').querySelector('.window')
+import {WINDOW} from '../templates'
 
-export default class Window {
+  export default class Window {
   constructor({page, title}, os) {
-    const win = WINDOW_TEMPLATE.cloneNode(true)
+    const win = WINDOW.cloneNode(true)
     
     this.window = win
     this.os = os
