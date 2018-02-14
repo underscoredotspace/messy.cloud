@@ -10,3 +10,11 @@ os.addIcon({title:'scrsaver.app', type:os.icon.app, window: {
 os.addIcon({title:'router.htm', type:os.icon.file, window: {
   page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200, y:365
 }})
+
+os.openDialog({
+  title: 'Messy Cloud v0.1', 
+  text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
+  
+  Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
+  buttons: {}
+})

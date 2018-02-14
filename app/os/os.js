@@ -40,6 +40,10 @@ export default class os {
     this.moveWindow(newWindow.id, win.x+desktop.x, win.y+desktop.y)
   }
 
+  openDialog(dialog) {
+    this.desktop.addDialog(dialog)
+  }
+
   addIcon(icon) {
     this.desktop.addIcon(icon)
   }

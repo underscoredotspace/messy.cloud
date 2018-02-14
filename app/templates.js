@@ -25,9 +25,19 @@ export const WINDOW = elementFromString`<div class="window">
   <div class="window__button size">&#x25E2;</div>
 </div>`
 
+export const DIALOG = elementFromString`<div class="dialog__cover">
+<div class="dialog__frame">
+  <div class="dialog">
+    <h1 class="dialog__title">Title</h1>
+    <div class="dialog__text">Body text</div>
+    <div class="dialog__buttons">
+      <button class="dialog__button default">Ok</button>
+    </div>
+  </div>
+</div>
+</div>`
+
 export const ICON = elementFromString`<div class="icon">
   <div class="icon__image"></div>
   <div class="icon__title">title</div>
 </div>`
-
-export const TASK = elementFromString`<div class="task"></div>`

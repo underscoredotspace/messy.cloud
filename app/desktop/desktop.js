@@ -1,4 +1,5 @@
 import Icon from '../icon/icon'
+import Dialog from '../dialog/dialog'
 
 export default class Desktop {
   constructor(os) {
@@ -17,6 +18,10 @@ export default class Desktop {
 
   addWindow(win) {
     this.desktop.appendChild(win.window)
+  }
+
+  addDialog(dialog) {
+    this.desktop.appendChild(new Dialog(dialog).dialog)
   }
 
   addIcon(icon) {
