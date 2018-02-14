@@ -11,10 +11,12 @@ export default class Dialog {
 
     this.button = this.dialog.querySelector('.dialog__button.default')
     this.button.addEventListener('click', e => this.clickButton())
+    this.dialog.addEventListener('keypress', e => {
+      if (e.key==="Enter") {this.clickButton()}
+    })
   }
 
   clickButton(id) {
-
     this.close()
   }
 
