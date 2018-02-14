@@ -24,7 +24,7 @@ export default class os {
   }
 
   openWindow(win, icon) {
-    const newWindow = new Window(win, this)
+    const newWindow = new Window(this, win, icon)
     const desktop = this.desktop.pos()
     newWindow.icon = icon
 
@@ -32,12 +32,13 @@ export default class os {
     this.desktop.addWindow(newWindow)
     this.taskBar.addWindow(newWindow, win.title)
     this.setFocus(newWindow.id)
-
+    
     this.resizeWindow(newWindow.id, win.w, win.h)
-
+    
     if (!win.hasOwnProperty('x')) {win.x = ((desktop.r-desktop.x) / 2) - (win.w / 2)}
     if (!win.hasOwnProperty('y')) {win.y = ((desktop.b-desktop.y) / 2) - (win.h / 2)}
     this.moveWindow(newWindow.id, win.x+desktop.x, win.y+desktop.y)
+    newWindow.translate(icon, {x:win.x, y:win.y, h:win.h, w:win.w})
   }
 
   openDialog(dialog) {

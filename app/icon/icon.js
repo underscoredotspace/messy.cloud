@@ -1,5 +1,3 @@
-import {v4 as uuid} from 'uuid'
-
 import APP_ICON from './icons/app.png'
 import FILE_ICON from './icons/file.png'
 
@@ -10,7 +8,6 @@ export default class Icon {
   constructor(os, {title, type, window}) {
     this.os = os
     this.icon = ICON.cloneNode(true)
-    this.id = uuid()
 
     this.title = this.icon.querySelector('.icon__title')
     this.image = this.icon.querySelector('.icon__image')
@@ -21,8 +18,17 @@ export default class Icon {
     this.icon.addEventListener('click', () => this.select())
   }
 
+  pos() {
+    const {top, right, bottom, left, width, height} = this.icon.getBoundingClientRect()
+    return {y:top, r:right, b:bottom, x:left, w:width, h:height}
+  }
+
   load(window) {
-    this.os.openWindow(window, this.id)
+    const icon = this.pos()
+    const x = icon.x + (icon.w/2)
+    const y = icon.y + (icon.h/2)
+    
+    this.os.openWindow(window, {x,y})
   }
 
   select() {
