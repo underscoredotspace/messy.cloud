@@ -1,9 +1,9 @@
-import uuid from 'uuid'
-const template = document.getElementById('window-template').querySelector('.window')
+import {v4 as uuid} from 'uuid'
+import {WINDOW} from '../templates'
 
-export default class Window {
-  constructor({page, title}, os) {
-    const win = template.cloneNode(true)
+  export default class Window {
+  constructor(os, {page, title}) {
+    const win = WINDOW.cloneNode(true)
     
     this.window = win
     this.os = os
@@ -19,10 +19,22 @@ export default class Window {
     this.content = win.querySelector('.window__content__iframe')
     this.contentCover = win.querySelector('.window__content__cover')
     this.loadingIndicator = win.querySelector('.window__content__loading')
-    
+
     if (page) {this.loadContent(page, title)}
     
     this.initEventListeners()
+  }
+
+  translate(icon, win) {
+    const x = icon.x - win.x - (win.w/2)
+    const y = icon.y - win.y - (win.h/2)
+
+    this.window.style.transform = `translate(${x}px, ${y}px) scale(0)`
+    requestAnimationFrame(() => {
+      this.animate(() => {
+        this.window.style.transform = ''
+      })
+    })
   }
 
   pos() {
@@ -95,8 +107,14 @@ export default class Window {
   }
 
   close() {
-    this.content.src = 'about:blank'
-    this.window.remove()
+    this.animate(() => {
+      this.window.style.transformOrigin = 'left top'
+      this.window.style.transform = 'scale(0)'
+      setTimeout(() => {
+        this.content.src = 'about:blank'
+        this.window.remove()
+      }, 500)
+    })
   }
 
   setFocus() {    

@@ -1,6 +1,6 @@
 {
   "name": "fake-windows",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Fake windows in HTML",
   "repository": "https://github.com/underscoredotspace/messy.cloud",
   "author": "Colin Tindle <ampersand@underscore.space>",

@@ -34,7 +34,6 @@
       z-index: 1;
       width: 100%;
       height: 100%;
-      display: none;
       border: none;
     }
     &__cover {
@@ -48,6 +47,7 @@
       display: grid;
       justify-content: center;
       align-content: center;
+      background: white;
     }
   }
   
@@ -64,11 +64,11 @@
   }
   
   &__scroll-bar {
-    background: lightgrey;
+    background: $atari-white;
   }
   
   &__button {
-    background: silver;
+    background: $atari-white;
     &.size.disabled {
       color: slategray;
     }
@@ -79,10 +79,10 @@
   }
   
   &.changing {
-    border: 1px solid white;
+    border: 1px solid $atari-white;
   }
 
   &.animate {
-    transition: 0.5s all; 
+    transition: 0.3s all; 
   }
 }
