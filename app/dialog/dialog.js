@@ -30,6 +30,4 @@ class Button {
     this.isDefault = isDefault
     this.button = document.createElement('button')
   }
-
-
 }
