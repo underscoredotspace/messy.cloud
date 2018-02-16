@@ -9,6 +9,7 @@ import {WINDOW} from '../templates'
     this.os = os
     this.id = uuid()
     this.window.id = `window-${this.id}`
+    this.page = page
 
     this.desktop = document.getElementById('desktop')
     this.sizeHandle = win.querySelector('.window__button.size')

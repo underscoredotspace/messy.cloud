@@ -20,10 +20,16 @@ export default class os {
   }
 
   getWindow(id) {
-    return this.windows.filter(win => win.id === id)[0]
+    return this.windows.find(win => win.id === id)
+  }
+
+  alreadyOpen(page) {
+    return this.windows.filter(win => win.page===page).length > 0
   }
 
   openWindow(win, icon) {
+    if(this.alreadyOpen(win.page)) {return}
+
     const newWindow = new Window(this, win, icon)
     const desktop = this.desktop.pos()
     newWindow.icon = icon
