@@ -10,6 +10,7 @@ import {WINDOW} from '../templates'
     this.id = uuid()
     this.window.id = `window-${this.id}`
     this.page = page
+    this.setIndex()
 
     this.desktop = document.getElementById('desktop')
     this.sizeHandle = win.querySelector('.window__button.size')
@@ -41,6 +42,10 @@ import {WINDOW} from '../templates'
   pos() {
     const {top, right, bottom, left, width, height} = this.window.getBoundingClientRect()
     return {y:top, r:right, b:bottom, x:left, w:width, h:height}
+  }
+
+  setIndex(zIndex) {
+    this.window.style.zIndex = this.zIndex = zIndex
   }
 
   loadContent(page, title = this.window.id) {
