@@ -20,18 +20,23 @@ export default class os {
   }
 
   getWindow(id) {
-    return this.windows.filter(win => win.id === id)[0]
+    return this.windows.find(win => win.id === id)
+  }
+
+  alreadyOpen(page) {
+    return this.windows.filter(win => win.page === page).length > 0
   }
 
   openWindow(win, icon) {
-    const newWindow = new Window(this, win, icon)
+    if(this.alreadyOpen(win.page)) {return}
+
+    const newWindow = new Window(this, win)
     const desktop = this.desktop.pos()
     newWindow.icon = icon
 
     this.windows.push(newWindow)
     this.desktop.addWindow(newWindow)
     this.taskBar.addWindow(newWindow, win.title)
-    this.setFocus(newWindow.id)
     
     this.resizeWindow(newWindow.id, win.w, win.h)
     
@@ -39,6 +44,7 @@ export default class os {
     if (!win.hasOwnProperty('y')) {win.y = ((desktop.b-desktop.y) / 2) - (win.h / 2)}
     this.moveWindow(newWindow.id, win.x+desktop.x, win.y+desktop.y)
     newWindow.translate(icon, {x:win.x, y:win.y, h:win.h, w:win.w})
+    this.setFocus(newWindow.id)
   }
 
   openDialog(dialog) {
@@ -81,9 +87,21 @@ export default class os {
   }
 
   setFocus(id) {
+    const thisWin = this.getWindow(id)
+    if (thisWin.focused) {return}
+    const startIndex = thisWin.zIndex
+
     for(let win of this.windows) {
-      win.id === id ? win.setFocus() : win.unFocus()
+      if (win.zIndex > startIndex) {win.setIndex(win.zIndex-1)}
+      if (win.id !== id) {win.unFocus()}
     }
+
+    if (!thisWin.hasOwnProperty('zIndex')) {
+      thisWin.setIndex(this.windows.length)
+    } else {
+      thisWin.setIndex(this.windows.length + 1)
+    }
+    thisWin.setFocus()
 
     this.taskBar.setActive(id)
   }
@@ -98,10 +116,15 @@ export default class os {
   }
 
   minimiseWindow(id) {
-    const win = this.getWindow(id).pos()
-    const translateX = this.taskBar.minimiseWindow(id) - (win.x + (win.w/2))
-    const translateY = this.desktop.pos().b - win.y
-    this.getWindow(id).minimise(translateX, translateY)
+    const win = this.getWindow(id)
+    const winPos = win.pos()
+    const translateX = this.taskBar.minimiseWindow(id) - (winPos.x + (winPos.w/2))
+    const translateY = this.desktop.pos().b - winPos.y
+    win.minimise(translateX, translateY)
+
+    if (this.windows.length > 1) {
+      this.setFocus()
+    }
   }
 
   maximiseWindow(id) {

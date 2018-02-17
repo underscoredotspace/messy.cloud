@@ -9,6 +9,8 @@ import {WINDOW} from '../templates'
     this.os = os
     this.id = uuid()
     this.window.id = `window-${this.id}`
+    this.page = page
+    this.setIndex()
 
     this.desktop = document.getElementById('desktop')
     this.sizeHandle = win.querySelector('.window__button.size')
@@ -42,6 +44,10 @@ import {WINDOW} from '../templates'
     return {y:top, r:right, b:bottom, x:left, w:width, h:height}
   }
 
+  setIndex(zIndex) {
+    this.window.style.zIndex = this.zIndex = zIndex
+  }
+
   loadContent(page, title = this.window.id) {
       this.content.src = page
       this.title.innerText = title
@@ -59,17 +65,13 @@ import {WINDOW} from '../templates'
   }
   
   move(x, y) {
-    requestAnimationFrame(() => {
-      this.window.style.left = `${x}px`
-      this.window.style.top = `${y}px`
-    })
+    this.window.style.left = `${x}px`
+    this.window.style.top = `${y}px`
   }
   
   resize(w, h) {
-    requestAnimationFrame(() => {
-      this.window.style.width = `${w}px`
-      this.window.style.height = `${h}px`
-    })
+    this.window.style.width = `${w}px`
+    this.window.style.height = `${h}px`
   }
 
   minimise(translateX, translateY) {
@@ -118,7 +120,6 @@ import {WINDOW} from '../templates'
   }
 
   setFocus() {    
-    // if(this.focused) {return}
     this.focused = true
     this.window.classList.add('active')
     this.title.classList.add('active')
@@ -126,7 +127,6 @@ import {WINDOW} from '../templates'
   }
 
   unFocus() {
-    // if(!this.focused) {return}
     this.focused = false
     this.window.classList.remove('active')
     this.title.classList.remove('active')
