@@ -15,7 +15,7 @@ os.addIcon({title:'router.htm', type:os.icon.file, window: {
 }})
 
 os.openDialog({
-  title: 'Messy Cloud v0.2', 
+  title: 'Messy Cloud v0.3', 
   text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
   
   Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
