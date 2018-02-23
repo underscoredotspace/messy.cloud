@@ -23,12 +23,13 @@ export default class Icon {
     return {y:top, r:right, b:bottom, x:left, w:width, h:height}
   }
 
-  load(window) {
+  load(win) {
     const icon = this.pos()
     const x = icon.x + (icon.w/2)
     const y = icon.y + (icon.h/2)
     
-    this.os.openWindow(window, {x,y})
+    this.os.openWindow(win, {x,y})
+    window.getSelection().removeAllRanges()
   }
 
   select() {
