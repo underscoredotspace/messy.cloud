@@ -81,8 +81,8 @@ export default class os {
   }
 
   closeWindow(id) {
-    this.taskBar.removeWindow(id)
     this.getWindow(id).close()
+    this.taskBar.removeWindow(id)
     this.windows = this.windows.filter(window => window.id !== id)
   }
 
@@ -121,10 +121,6 @@ export default class os {
     const translateX = this.taskBar.minimiseWindow(id) - (winPos.x + (winPos.w/2))
     const translateY = this.desktop.pos().b - winPos.y
     win.minimise(translateX, translateY)
-
-    if (this.windows.length > 1) {
-      this.setFocus()
-    }
   }
 
   maximiseWindow(id) {
