@@ -1,6 +1,12 @@
 import OS from './os/os'
 window.os = new OS()
 
+if (module.hot) {
+  window.os.desktop.desktop.innerHTML = ''
+  window.os.taskBar.taskbar.innerHTML = ''
+  window.os.menuBar.menubar.innerHTML = ''
+}
+
 os.addIcon({title:'emojis.htm', type:os.icon.file, window: {
   page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:386, h:330, y:10
 }})
@@ -17,10 +23,10 @@ os.addIcon({title:'router.htm', type:os.icon.file, window: {
   page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200, y:365
 }})
 
-os.openDialog({
-  title: 'Messy Cloud v0.3', 
-  text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
+// os.openDialog({
+//   title: 'Messy Cloud v0.3', 
+//   text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
   
-  Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
-  buttons: {}
-})
+//   Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
+//   buttons: {}
+// })

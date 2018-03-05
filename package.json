@@ -4,7 +4,6 @@
   "description": "Colin Tindle's portfolio. Looks like Atari ST TOS/GEM. ",
   "repository": "https://github.com/underscoredotspace/messy.cloud",
   "author": "Colin Tindle <ampersand@underscore.space>",
-  "main": "app/index.html",
   "license": "CC-BY-4.0",
   "private": true,
   "scripts": {
