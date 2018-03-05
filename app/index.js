@@ -1,5 +1,5 @@
-import tos from './os/os'
-window.os = new tos
+import OS from './os/os'
+window.os = new OS()
 
 os.addIcon({title:'emojis.htm', type:os.icon.file, window: {
   page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:386, h:330, y:10
@@ -9,6 +9,9 @@ os.addIcon({title:'scrsaver.app', type:os.icon.app, window: {
 }})
 os.addIcon({title:'winter.app', type:os.icon.app, window: {
   page: 'https://winter.messy.cloud', title: 'Winter Scene', w:415, h:500
+}})
+os.addIcon({title:'frogger.app', type:os.icon.app, window: {
+  page: 'https://underscoredotspace.github.io/frogger/', title: 'Frogger', w:448, h:271
 }})
 os.addIcon({title:'router.htm', type:os.icon.file, window: {
   page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200, y:365

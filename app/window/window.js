@@ -3,14 +3,15 @@ import {WINDOW} from '../templates'
 
   export default class Window {
   constructor(os, {page, title}) {
-    const win = WINDOW.cloneNode(true)
-    
-    this.window = win
     this.os = os
+
+    const win = WINDOW.cloneNode(true)
+    this.window = win
+
     this.id = uuid()
     this.window.id = `window-${this.id}`
     this.page = page
-    this.setIndex()
+    this.zIndex = null
 
     this.desktop = document.getElementById('desktop')
     this.sizeHandle = win.querySelector('.window__button.size')
