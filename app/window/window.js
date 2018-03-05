@@ -85,7 +85,7 @@ import {WINDOW} from '../templates'
 
   unminimise() {
     this.animate(() => {
-      this.window.style.transform = 'translate(0) scale(1)'
+      this.window.style.transform = 'none'
     })
     this.minimised = false
   }
