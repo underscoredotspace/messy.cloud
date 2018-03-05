@@ -1,20 +1,19 @@
 {
-  "name": "fake-windows",
+  "name": "messycloud",
   "version": "0.3.0",
-  "description": "Fake windows in HTML",
+  "description": "Colin Tindle's portfolio. Looks like Atari ST TOS/GEM. ",
   "repository": "https://github.com/underscoredotspace/messy.cloud",
   "author": "Colin Tindle <ampersand@underscore.space>",
-  "main": "app/index.js",
   "license": "CC-BY-4.0",
   "private": true,
   "scripts": {
-    "start": "parcel ./app/index.html --open",
-    "build": "parcel build ./app/index.html --public-url ./ --detailed-report",
+    "start": "parcel app/index.html",
+    "build": "parcel build app/index.html --public-url ./ --detailed-report",
     "test": "echo \"No tests. Sorry\""
   },
   "dependencies": {
     "node-sass": "^4.7.2",
-    "parcel-bundler": "^1.6.0",
+    "parcel-bundler": "^1.6.2",
     "uuid": "^3.2.1"
   }
 }

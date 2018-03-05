@@ -3,14 +3,15 @@ import {WINDOW} from '../templates'
 
   export default class Window {
   constructor(os, {page, title}) {
-    const win = WINDOW.cloneNode(true)
-    
-    this.window = win
     this.os = os
+
+    const win = WINDOW.cloneNode(true)
+    this.window = win
+
     this.id = uuid()
     this.window.id = `window-${this.id}`
     this.page = page
-    this.setIndex()
+    this.zIndex = null
 
     this.desktop = document.getElementById('desktop')
     this.sizeHandle = win.querySelector('.window__button.size')
@@ -84,7 +85,7 @@ import {WINDOW} from '../templates'
 
   unminimise() {
     this.animate(() => {
-      this.window.style.transform = 'translate(0) scale(1)'
+      this.window.style.transform = 'none'
     })
     this.minimised = false
   }

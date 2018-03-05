@@ -6,7 +6,7 @@ import TaskBar from '../task-bar/task-bar'
 const MIN_WINDOW_W = 240
 const MIN_WINDOW_H = 200
 
-export default class os {
+export default class OS {
   constructor() {
     this.windows = []
     this.menuBar = new MenuBar(this)
