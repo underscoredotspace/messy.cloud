@@ -15,7 +15,8 @@ export default class OS {
 
     this.icon = {
       app: 0,
-      file: 1
+      file: 1,
+      trash: 2
     }
   }
 

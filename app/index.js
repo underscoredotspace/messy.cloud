@@ -22,6 +22,9 @@ os.addIcon({title:'frogger.app', type:os.icon.app, window: {
 os.addIcon({title:'router.htm', type:os.icon.file, window: {
   page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200, y:365
 }})
+os.addIcon({title:'TRASH', type:os.icon.trash, window: {
+  page:'https://underscore.space', title:'[CAB] underscore .  space', w:490, h:1000
+}})
 
 // os.openDialog({
 //   title: 'Messy Cloud v0.3', 

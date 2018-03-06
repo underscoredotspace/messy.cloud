@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 92px);
   grid-template-rows: repeat(auto-fit, 64px);
-  grid-gap: 2rem;
+  grid-auto-flow: column;
+  grid-gap: 1rem;
   padding: 0.5rem;
 }
