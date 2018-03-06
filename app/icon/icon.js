@@ -1,7 +1,8 @@
 import APP_ICON from './icons/app.png'
 import FILE_ICON from './icons/file.png'
+import TRASH_ICON from './icons/trash.png'
 
-const ICONS = [APP_ICON, FILE_ICON]
+const ICONS = [APP_ICON, FILE_ICON, TRASH_ICON]
 import {ICON} from '../templates'
 
 export default class Icon {
