@@ -29,7 +29,10 @@ export default class OS {
   }
 
   openWindow(win, icon) {
-    if(this.alreadyOpen(win.page)) {return}
+    if(this.alreadyOpen(win.page)) {
+      this.openDialog({title:'Error', text:'Window is already open!'})
+      return
+    }
 
     const newWindow = new Window(this, win)
     const desktop = this.desktop.pos()
