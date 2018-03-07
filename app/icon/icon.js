@@ -15,8 +15,8 @@ export default class Icon {
 
     this.title.innerText = title
     this.image.style.backgroundImage = `url(${ICONS[type]})`
-    this.icon.addEventListener('dblclick', () => this.load(window))
-    this.icon.addEventListener('click', () => this.select())
+    this.icon.addEventListener('dblclick', e => this.load(window, e))
+    this.icon.addEventListener('click', e => this.select(e))
   }
 
   pos() {
@@ -24,13 +24,14 @@ export default class Icon {
     return {y:top, r:right, b:bottom, x:left, w:width, h:height}
   }
 
-  load(win) {
+  load(win, e) {
+    e.preventDefault()
+    window.getSelection().removeAllRanges()
     const icon = this.pos()
     const x = icon.x + (icon.w/2)
     const y = icon.y + (icon.h/2)
     
     this.os.openWindow(win, {x,y})
-    window.getSelection().removeAllRanges()
   }
 
   select() {
