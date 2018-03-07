@@ -18,6 +18,16 @@ export default class OS {
       file: 1,
       trash: 2
     }
+
+    window.addEventListener('resize', e => this.handleBrowserResize(e))
+  }
+
+  handleBrowserResize(e) {
+    for (let win of this.windows) {
+      const {w, h, x, y} = win.pos()
+      this.resizeWindow(win.id, w, h)
+      this.moveWindow(win.id, x, y)
+    }
   }
 
   getWindow(id) {
@@ -63,11 +73,10 @@ export default class OS {
     const win = this.getWindow(id)
     const {x,y} = win.pos()
     const desktop = this.desktop.pos()
-    if (w < MIN_WINDOW_W) {w = MIN_WINDOW_W}
-    if (h < MIN_WINDOW_H) {h = MIN_WINDOW_H}
     if (w + x > desktop.r) {w = desktop.r - x}
     if (h + y > desktop.b) {h = desktop.b - y}
-
+    if (w < MIN_WINDOW_W) {w = MIN_WINDOW_W}
+    if (h < MIN_WINDOW_H) {h = MIN_WINDOW_H}
     win.resize(w, h)
   }
 
@@ -78,8 +87,15 @@ export default class OS {
 
     if (x < desktop.x) {x = desktop.x}
     if (y < desktop.y) {y = desktop.y}
-    if (x + w > desktop.r) {x = desktop.r - w}
-    if (y + h > desktop.b) {y = desktop.b - h}
+    if (x + w > desktop.r) {
+      console.log(x+w, desktop.y)
+      x = desktop.r - w
+      if (x < desktop.x) {x = desktop.x}
+    }
+    if (y + h > desktop.b) {
+      y = desktop.b - h
+      if (y < desktop.y) {y = desktop.y}
+    }
 
     win.move(x, y)
   }
