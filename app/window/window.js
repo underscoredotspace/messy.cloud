@@ -87,6 +87,7 @@ import {WINDOW} from '../templates'
       this.window.style.transform = 'none'
     })
     this.minimised = false
+
   }
 
   maximise() {

@@ -24,9 +24,11 @@ export default class OS {
 
   handleBrowserResize(e) {
     for (let win of this.windows) {
+      if (win.minimised) { continue }
+
       const {w, h, x, y} = win.pos()
-      this.resizeWindow(win.id, w, h)
       this.moveWindow(win.id, x, y)
+      this.resizeWindow(win.id, w, h)
     }
   }
 
@@ -88,7 +90,6 @@ export default class OS {
     if (x < desktop.x) {x = desktop.x}
     if (y < desktop.y) {y = desktop.y}
     if (x + w > desktop.r) {
-      console.log(x+w, desktop.y)
       x = desktop.r - w
       if (x < desktop.x) {x = desktop.x}
     }
