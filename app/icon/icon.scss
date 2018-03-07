@@ -3,6 +3,8 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1rem;
   grid-gap: 0.5rem;
+  min-width: 92px;
+  min-height: 64px;
   --atari-white: $atari-white;
   --icon-title: var(--atari-white);
   --text-color: black;

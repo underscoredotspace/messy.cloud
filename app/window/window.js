@@ -13,7 +13,6 @@ import {WINDOW} from '../templates'
     this.page = page
     this.zIndex = null
 
-    this.desktop = document.getElementById('desktop')
     this.sizeHandle = win.querySelector('.window__button.size')
     this.closeButton = win.querySelector('.window__button.close')
     this.maxButton = win.querySelector('.window__button.max')
@@ -88,6 +87,7 @@ import {WINDOW} from '../templates'
       this.window.style.transform = 'none'
     })
     this.minimised = false
+
   }
 
   maximise() {
@@ -170,7 +170,7 @@ import {WINDOW} from '../templates'
     this.title.addEventListener('touchstart', handleMoveStart)
     
     // Resize window start
-    const handleResizeStart = (e) => {
+    const handleResizeStart = e => {
       if (this.maximised) {return}
       if (!this.focused) {this.os.setFocus(this.id)}
 
