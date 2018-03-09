@@ -1,6 +1,75 @@
 #menu-bar {
   z-index: 1000;
   background: $atari-white;
+  color: black;
   border-bottom: black solid 1px;
   overflow: hidden;
+  font-size: 90%;
+  display: flex;
+  padding: 0 0.5rem;
+  
+  :first-child {
+    font-weight: bold;
+  }
+
+  .menu {
+    &__title {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      padding: 0 0.75rem;
+      cursor: default;
+      background: inherit;
+      color: inherit;
+      height: 100%;
+      
+      &.selected, &:hover {
+        filter: invert(1);
+      }
+    }
+
+    &__cover {
+      z-index: 9000;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right:0;
+      bottom:0;
+    }
+
+    &__items {
+      position: absolute;
+      top: 1.5rem;
+      min-width: 8rem;
+      display: inline-flex;
+      flex-flow: column nowrap;
+      background-color: $atari-white;
+      border: 1px solid black;
+
+      hr {
+        width: 100%;
+        border: none;
+        border-top: 1px dotted black;
+        height: 0;
+        margin: 1px auto;
+      }
+    }
+  
+    &__item {
+      border: none;
+      font-size: 1rem;
+      text-align: left;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      height: 1.5rem;
+      cursor: default;
+      background-color: inherit;
+      padding: 0 0.75rem;
+
+      &:hover {
+        filter: invert(1); 
+      }
+    }
+  } 
 }

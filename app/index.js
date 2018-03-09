@@ -33,3 +33,5 @@ os.openDialog({
   Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
   buttons: {}
 })
+
+os.loadMenus()

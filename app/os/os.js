@@ -22,6 +22,23 @@ export default class OS {
     window.addEventListener('resize', e => this.handleBrowserResize(e))
   }
 
+  loadMenus() {
+    this.menuBar.addMenu({title: 'MessyCloud', items: [
+      {label: 'item1', action: this.test},
+      {label: 'item2', action: this.test},
+      {label: 'item3', action: this.test},
+      {label: 'item4', action: this.test}
+    ]})
+    this.menuBar.addMenu({title: 'File'})
+    this.menuBar.addMenu({title: 'Edit'})
+    this.menuBar.addMenu({title: 'View'})
+    this.menuBar.addMenu({title: 'Options'})
+  }
+
+  test() {
+    console.log('menu test')
+  }
+
   handleBrowserResize(e) {
     for (let win of this.windows) {
       if (win.minimised) { continue }
