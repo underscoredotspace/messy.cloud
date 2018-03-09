@@ -7,6 +7,8 @@ if (module.hot) {
   window.os.menuBar.menubar.innerHTML = ''
 }
 
+os.loadMenus()
+
 os.addIcon({title:'emojis.htm', type:os.icon.file, window: {
   page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:386, h:330
 }})
@@ -26,12 +28,12 @@ os.addIcon({title:'TRASH', type:os.icon.trash, window: {
   page:'https://underscore.space', title:'[CAB] underscore .  space', w:490, h:1000
 }})
 
-os.openDialog({
-  title: 'Messy Cloud v0.4', 
-  text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
-  
-  Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
-  buttons: {}
-})
-
-os.loadMenus()
+if (location.hostname !== 'localhost') {
+  os.openDialog({
+    title: 'Messy Cloud v0.4', 
+    text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
+    
+    Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
+    buttons: {}
+  })
+}

@@ -1,5 +1,5 @@
 import {v4 as uuid} from 'uuid'
-import {MENU} from '../templates'
+import {MENU, MENU_ITEMS, MENU_ITEM} from '../templates'
 
 export default class MenuBar {
   constructor(os) {
@@ -10,6 +10,11 @@ export default class MenuBar {
 
   getMenu(id) {
     return this.menus.find(menu => menu.id === id)
+  }
+
+  menuPos(id) {
+    const {top, right, bottom, left, width, height} = this.getMenu(id).menu.getBoundingClientRect()
+    return {y:top, r:right, b:bottom, x:left, w:width, h:height}
   }
 
   addMenu({title, items}) {
@@ -23,12 +28,28 @@ export default class MenuBar {
 
   showMenu(id) {
     const menu = this.getMenu(id)
-    //show invisible element behind with click event to close menu
-    //create item wrapper
-    //position item wrapper
-    //create children with click events
-    for (let item of menu.items) {
+    menu.menu.classList.add('selected')
 
+    const menuWrapper = MENU_ITEMS.cloneNode(true)
+    menuWrapper.addEventListener('click', () => {
+      menuItems.style.opacity = 0
+      setTimeout(() => {
+        menu.menu.classList.remove('selected')
+        menuWrapper.remove()
+      }, 200)
+    })
+    const menuItems = menuWrapper.querySelector('.menu__items')
+    menuItems.style.left = `${this.menuPos(id).x}px`
+
+    for (let item of menu.items) {
+      const menuItem = MENU_ITEM.cloneNode(true)
+      menuItem.innerText = item.label
+      menuItem.addEventListener('click', item.action)
+      menuItems.appendChild(menuItem)
     }
+    this.menubar.appendChild(menuWrapper)
+    setTimeout(() => {
+      menuItems.style.opacity = 1
+    }, 10)
   }
 }

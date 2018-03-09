@@ -7,8 +7,9 @@
   font-size: 90%;
   display: flex;
   padding: 0 0.5rem;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
   
-  :first-child {
+  .menu__title:first-child {
     font-weight: bold;
   }
 
@@ -38,6 +39,7 @@
     }
 
     &__items {
+      z-index: 1;
       position: absolute;
       top: 1.5rem;
       min-width: 8rem;
@@ -45,6 +47,10 @@
       flex-flow: column nowrap;
       background-color: $atari-white;
       border: 1px solid black;
+      border-top: none;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: 0.3s all; 
 
       hr {
         width: 100%;

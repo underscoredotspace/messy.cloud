@@ -29,10 +29,18 @@ export default class OS {
       {label: 'item3', action: this.test},
       {label: 'item4', action: this.test}
     ]})
-    this.menuBar.addMenu({title: 'File'})
-    this.menuBar.addMenu({title: 'Edit'})
-    this.menuBar.addMenu({title: 'View'})
-    this.menuBar.addMenu({title: 'Options'})
+    this.menuBar.addMenu({title: 'File', items: [
+      {label: 'item1', action: this.test}
+    ]})
+    this.menuBar.addMenu({title: 'Edit', items: [
+      {label: 'item1', action: this.test}
+    ]})
+    this.menuBar.addMenu({title: 'View', items: [
+      {label: 'item1', action: this.test}
+    ]})
+    this.menuBar.addMenu({title: 'Options', items: [
+      {label: 'item1', action: this.test}
+    ]})
   }
 
   test() {
