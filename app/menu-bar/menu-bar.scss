@@ -32,7 +32,7 @@
     &__cover {
       z-index: 9000;
       position: absolute;
-      top: 0;
+      top: 1.5rem;
       left: 0;
       right:0;
       bottom:0;
@@ -41,7 +41,7 @@
     &__items {
       z-index: 1;
       position: absolute;
-      top: 1.5rem;
+      top: 0;
       min-width: 8rem;
       display: inline-flex;
       flex-flow: column nowrap;

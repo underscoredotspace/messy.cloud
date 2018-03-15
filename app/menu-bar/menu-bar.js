@@ -27,18 +27,21 @@ export default class MenuBar {
   }
 
   showMenu(id) {
+    document.querySelectorAll('.menu__cover').forEach(menu=>menu.remove())
     const menu = this.getMenu(id)
     menu.menu.classList.add('selected')
 
     const menuWrapper = MENU_ITEMS.cloneNode(true)
-    menuWrapper.addEventListener('click', () => {
+    const menuItems = menuWrapper.querySelector('.menu__items')
+
+    document.addEventListener('click', e => {
+      if (e.target === menu.menu) {return}
       menuItems.style.opacity = 0
       setTimeout(() => {
         menu.menu.classList.remove('selected')
         menuWrapper.remove()
       }, 200)
     })
-    const menuItems = menuWrapper.querySelector('.menu__items')
     menuItems.style.left = `${this.menuPos(id).x}px`
 
     for (let item of menu.items) {
