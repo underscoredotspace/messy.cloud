@@ -4,7 +4,6 @@
   color: black;
   border-bottom: black solid 1px;
   overflow: hidden;
-  font-size: 90%;
   display: flex;
   padding: 0 0.5rem;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
@@ -14,13 +13,18 @@
   }
 
   .menu {
+    &__title, &__item {
+      font-size: 90%;
+      text-align: left;
+      padding: 0 0.75rem;
+      background: inherit;
+      color: inherit;
+    }
+    
     &__title {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      padding: 0 0.75rem;
-      background: inherit;
-      color: inherit;
       height: 100%;
       
       &.selected, &:hover:not(:disabled) {
@@ -63,13 +67,10 @@
     &__item {
       border: none;
       font-size: 1rem;
-      text-align: left;
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
       height: 1.5rem;
-      background-color: inherit;
-      padding: 0 0.75rem;
 
       &:hover {
         filter: invert(1); 

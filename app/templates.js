@@ -19,18 +19,15 @@ export const WINDOW = elementFromString`<div class="window">
   <button class="window__button max"><i class="fas fa-expand-arrows-alt"></i></button>
 
   <div class="window__content">
-    <iframe class="window__content__iframe" src="about:blank" scrolling="no"></iframe>
+    <iframe class="window__content__iframe" src="about:blank" scrolling="yes"></iframe>
     <div class="window__content__loading">Loading...</div>
     <div class="window__content__cover"></div>
   </div>
-  <div class="window__button scroll up"><i class="fas fa-arrow-up"></i></div>
-  <div class="window__scroll-bar vert"></div>
-  <div class="window__button scroll down"><i class="fas fa-arrow-down"></i></div>
-
-  <div class="window__button scroll left"><i class="fas fa-arrow-left"></i></div>  
-  <div class="window__scroll-bar horiz"></div>
-  <div class="window__button scroll right"><i class="fas fa-arrow-right"></i></div>
-  <button class="window__button size">&#x25E2;</button>
+  <button class="window__button size">
+    <svg viewBox="0 0 10 10">
+      <line x1="0" y1="100%" x2="100%" y2="0" stroke="black" />
+    </svg>
+  </button>
 </div>`
 
 export const DIALOG = elementFromString`<div class="dialog__cover">
