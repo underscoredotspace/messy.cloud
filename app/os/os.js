@@ -35,7 +35,6 @@ export default class OS {
   }
 
   removeBee() {
-    return
     document.body.classList.remove('busy-bee')
     const buttons = document.querySelectorAll('button')
     buttons.forEach(button => button.disabled = false)
