@@ -4,7 +4,7 @@ function elementFromString(elementString) {
   return element.firstChild
 }
 
-export const MENU = elementFromString`<div class="menu__title"></div>`
+export const MENU = elementFromString`<button class="menu__title" disabled="true"></button>`
 
 export const MENU_ITEMS = elementFromString`<div class="menu__cover">
   <div class="menu__items"></div>
@@ -13,14 +13,14 @@ export const MENU_ITEMS = elementFromString`<div class="menu__cover">
 export const MENU_ITEM = elementFromString`<button class="menu__item"></button>`
 
 export const WINDOW = elementFromString`<div class="window">
-  <div class="window__button close"><i class="fas fa-times"></i></div>
+  <button class="window__button close"><i class="fas fa-times"></i></button>
   <div class="window__title"></div>
-  <div class="window__button min"><i class="fas fa-window-minimize"></i></div>
-  <div class="window__button max"><i class="fas fa-expand-arrows-alt"></i></div>
+  <button class="window__button min"><i class="fas fa-window-minimize"></i></button>
+  <button class="window__button max"><i class="fas fa-expand-arrows-alt"></i></button>
 
   <div class="window__content">
-    <div class="window__content__loading">Loading...</div>
     <iframe class="window__content__iframe" src="about:blank" scrolling="no"></iframe>
+    <div class="window__content__loading">Loading...</div>
     <div class="window__content__cover"></div>
   </div>
   <div class="window__button scroll up"><i class="fas fa-arrow-up"></i></div>
@@ -30,7 +30,7 @@ export const WINDOW = elementFromString`<div class="window">
   <div class="window__button scroll left"><i class="fas fa-arrow-left"></i></div>  
   <div class="window__scroll-bar horiz"></div>
   <div class="window__button scroll right"><i class="fas fa-arrow-right"></i></div>
-  <div class="window__button size">&#x25E2;</div>
+  <button class="window__button size">&#x25E2;</button>
 </div>`
 
 export const DIALOG = elementFromString`<div class="dialog__cover">

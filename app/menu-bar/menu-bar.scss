@@ -19,12 +19,11 @@
       flex-flow: row nowrap;
       align-items: center;
       padding: 0 0.75rem;
-      cursor: default;
       background: inherit;
       color: inherit;
       height: 100%;
       
-      &.selected, &:hover {
+      &.selected, &:hover:not(:disabled) {
         filter: invert(1);
       }
     }
@@ -69,7 +68,6 @@
       flex-flow: column nowrap;
       justify-content: center;
       height: 1.5rem;
-      cursor: default;
       background-color: inherit;
       padding: 0 0.75rem;
 

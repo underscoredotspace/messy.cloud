@@ -14,7 +14,6 @@
     justify-content: center;
     align-content: center;
     border: 1px solid black;
-    cursor: default;
   }
   
   &__content {
@@ -43,6 +42,7 @@
       }
     }
     &__loading {
+      z-index: 3;
       display: grid;
       justify-content: center;
       align-content: center;
@@ -68,6 +68,7 @@
   
   &__button {
     background: $atari-white;
+    text-align: center;
     &.size.disabled {
       color: slategray;
     }
@@ -78,6 +79,12 @@
   
   &.changing {
     border: 1px solid $atari-white;
+    &.move {
+      cursor: move;
+    }
+    &.resize {
+      cursor: nwse-resize;
+    }
   }
 
   &.animate {
