@@ -24,23 +24,28 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     overflow: hidden;
+    
     &__iframe, &__cover, &__loading {
       grid-column: 1 / span 1;
       grid-row: 1 / span 1;
     }
+    
     &__iframe {
       z-index: 1;
       width: 100%;
       height: 100%;
       border: none;
     }
+    
     &__cover {
       z-index: 2;
       display: block;
+    
       &.active {
         display: none;
       }
     }
+
     &__loading {
       z-index: 3;
       display: grid;
@@ -62,17 +67,16 @@
     }
   }
   
-  &__scroll-bar {
-    background: $atari-white;
-  }
-  
   &__button {
     background: $atari-white;
     text-align: center;
+
     svg {
       margin: auto;
     }
+
     &.size {
+      background-color: transparentize($atari-white, 0.2);
       cursor: inherit;
       width: 100%;
       height: 100%;
@@ -80,20 +84,25 @@
       z-index: 4;
       grid-row: 3;
       grid-column: 4;
+
       &.disabled {
         display: none;
       }
     }
   }
+
   &.active {
     box-shadow: 5px 10px 10px rgba(0,0,0,0.3), -2px -2px 20px rgba(0,0,0,0.3);
   }
   
   &.changing {
     border: 1px solid $atari-white;
+    opacity: 0.9;
+
     &.move {
       cursor: move;
     }
+
     &.resize {
       cursor: nwse-resize;
     }

@@ -19,6 +19,11 @@
       padding: 0 0.75rem;
       background: inherit;
       color: inherit;
+
+      &.selected, &:hover:not(:disabled) {
+        background: black;
+        color: $atari-white;
+      }
     }
     
     &__title {
@@ -26,10 +31,6 @@
       flex-flow: row nowrap;
       align-items: center;
       height: 100%;
-      
-      &.selected, &:hover:not(:disabled) {
-        filter: invert(1);
-      }
     }
 
     &__cover {
@@ -48,7 +49,7 @@
       min-width: 8rem;
       display: inline-flex;
       flex-flow: column nowrap;
-      background-color: $atari-white;
+      background-color: transparentize($atari-white, 0.2);
       border: 1px solid black;
       border-top: none;
       box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
@@ -71,10 +72,6 @@
       flex-flow: column nowrap;
       justify-content: center;
       height: 1.5rem;
-
-      &:hover {
-        filter: invert(1); 
-      }
     }
   } 
 }

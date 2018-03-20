@@ -63,7 +63,7 @@ export default class OS {
   
   loadIcons() {
     this.desktop.addIcon({title:'emojis.htm', type:this.icon.file, window: {
-      page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:386, h:330
+      page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:362, h:306
     }})
     this.desktop.addIcon({title:'scrsaver.app', type:this.icon.app, window: {
       page:'https://screensaver.messy.cloud', title:'Mac Plus Screensaver', w:320, h:300
@@ -72,7 +72,7 @@ export default class OS {
       page: 'https://winter.messy.cloud', title: 'Winter Scene', w:415, h:500
     }})
     this.desktop.addIcon({title:'frogger.app', type:this.icon.app, window: {
-      page: 'https://underscoredotspace.github.io/frogger/', title: 'Frogger', w:448, h:271
+      page: 'https://underscoredotspace.github.io/frogger/', title: 'Frogger', w:424, h:248
     }})
     this.desktop.addIcon({title:'router.htm', type:this.icon.file, window: {
       page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200
