@@ -22,6 +22,77 @@ export default class OS {
     window.addEventListener('resize', e => this.handleBrowserResize(e))
   }
 
+  init() {
+    this.loadMenus()
+    this.loadIcons()
+    this.removeBee()
+  }
+
+  addBee() {
+    document.body.classList.add('busy-bee')
+    const buttons = document.querySelectorAll('button')
+    buttons.forEach(button => button.disabled = true)
+  }
+
+  removeBee() {
+    document.body.classList.remove('busy-bee')
+    const buttons = document.querySelectorAll('button')
+    buttons.forEach(button => button.disabled = false)
+  }
+
+  loadMenus() {
+    this.menuBar.addMenu({title: 'MessyCloud', items: [
+      {label: 'About', action: this.about}
+    ]})
+    this.menuBar.addMenu({title: 'File', items: [
+      {label: 'Not yet', action: this.test}
+    ]})
+    this.menuBar.addMenu({title: 'Edit', items: [
+      {label: 'Not yet', action: this.test}
+    ]})
+    this.menuBar.addMenu({title: 'View', items: [
+      {label: 'Not yet', action: this.test}
+    ]})
+    this.menuBar.addMenu({title: 'Options', items: [
+      {label: 'Not yet', action: this.test}
+    ]})
+  }
+  
+  loadIcons() {
+    this.desktop.addIcon({title:'emojis.htm', type:this.icon.file, window: {
+      page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:362, h:306
+    }})
+    this.desktop.addIcon({title:'scrsaver.app', type:this.icon.app, window: {
+      page:'https://screensaver.messy.cloud', title:'Mac Plus Screensaver', w:320, h:300
+    }})
+    this.desktop.addIcon({title:'winter.app', type:this.icon.app, window: {
+      page: 'https://winter.messy.cloud', title: 'Winter Scene', w:415, h:500
+    }})
+    this.desktop.addIcon({title:'frogger.app', type:this.icon.app, window: {
+      page: 'https://underscoredotspace.github.io/frogger/', title: 'Frogger', w:424, h:248
+    }})
+    this.desktop.addIcon({title:'router.htm', type:this.icon.file, window: {
+      page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200
+    }})
+    this.desktop.addIcon({title:'TRASH', type:this.icon.trash, window: {
+      page:'https://underscore.space', title:'[CAB] underscore .  space', w:490, h:1000
+    }})
+  }
+
+  test() {
+    console.log('menu test')
+  }
+
+  about() {
+    os.openDialog({
+      title: 'Messy Cloud v0.5', 
+      text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
+      
+      Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
+      buttons: {}
+    })
+  }
+
   handleBrowserResize(e) {
     for (let win of this.windows) {
       if (win.minimised) { continue }
@@ -45,7 +116,8 @@ export default class OS {
       this.openDialog({title:'Error', text:'Window is already open!'})
       return
     }
-
+    
+    this.addBee()
     const newWindow = new Window(this, win)
     const desktop = this.desktop.pos()
     newWindow.icon = icon
@@ -65,10 +137,6 @@ export default class OS {
 
   openDialog(dialog) {
     this.desktop.addDialog(dialog)
-  }
-
-  addIcon(icon) {
-    this.desktop.addIcon(icon)
   }
 
   resizeWindow(id, w, h) {

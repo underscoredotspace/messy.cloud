@@ -1,4 +1,4 @@
-$atari-white: #e0e0e0;
+$atari-white: rgb(224, 224, 224);
 
 html {
   box-sizing: border-box;
@@ -14,6 +14,20 @@ html {
 body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   overflow: hidden;
+  cursor: default;
+}
+
+.busy-bee {
+  cursor: url("./bee.png"), auto !important;
+}
+
+button {
+  background: none;
+  border: none;
+  line-height: 1;
+  font-size: 1rem;
+  padding: 0;
+  outline: none;
 }
 
 .wrapper {

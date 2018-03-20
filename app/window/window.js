@@ -55,6 +55,7 @@ import {WINDOW} from '../templates'
       this.content.addEventListener('load', e => {
         this.content.style.display = 'grid'
         this.loadingIndicator.style.display = 'none'
+        this.os.removeBee()
       })
   }
 
@@ -153,9 +154,8 @@ import {WINDOW} from '../templates'
       const pageX = e.pageX || e.touches[0].pageX
       const pageY = e.pageY || e.touches[0].pageY
 
-      this.window.classList.add('changing')
+      this.window.classList.add('changing', 'move')
       this.contentCover.classList.remove('active')
-      this.title.style.cursor = 'move'
       this.dragging = true
       
       const {x,y} = this.pos()
@@ -177,9 +177,8 @@ import {WINDOW} from '../templates'
       const pageX = e.pageX || e.touches[0].pageX
       const pageY = e.pageY || e.touches[0].pageY
 
-      this.window.classList.add('changing')
+      this.window.classList.add('changing','resize')
       this.contentCover.classList.remove('active')
-      this.sizeHandle.style.cursor = 'nwse-resize'
       this.sizing = true
       
       const {w,h} = this.pos()
@@ -216,9 +215,7 @@ import {WINDOW} from '../templates'
     const handleMouseUp = (e) => {
       if (!this.dragging && !this.sizing) {return}
 
-      this.sizeHandle.style.cursor = 'default'
-      this.title.style.cursor = 'default'
-      this.window.classList.remove('changing')
+      this.window.classList.remove('changing', 'move', 'resize')
       this.contentCover.classList.add('active')
 
       this.dragging = false
