@@ -42,22 +42,19 @@ export default class OS {
 
   loadMenus() {
     this.menuBar.addMenu({title: 'MessyCloud', items: [
-      {label: 'item1', action: this.test},
-      {label: 'item2', action: this.test},
-      {label: 'item3', action: this.test},
-      {label: 'item4', action: this.test}
+      {label: 'About', action: this.about}
     ]})
     this.menuBar.addMenu({title: 'File', items: [
-      {label: 'item1', action: this.test}
+      {label: 'Not yet', action: this.test}
     ]})
     this.menuBar.addMenu({title: 'Edit', items: [
-      {label: 'item1', action: this.test}
+      {label: 'Not yet', action: this.test}
     ]})
     this.menuBar.addMenu({title: 'View', items: [
-      {label: 'item1', action: this.test}
+      {label: 'Not yet', action: this.test}
     ]})
     this.menuBar.addMenu({title: 'Options', items: [
-      {label: 'item1', action: this.test}
+      {label: 'Not yet', action: this.test}
     ]})
   }
   
@@ -84,6 +81,16 @@ export default class OS {
 
   test() {
     console.log('menu test')
+  }
+
+  about() {
+    os.openDialog({
+      title: 'Messy Cloud v0.5', 
+      text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
+      
+      Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
+      buttons: {}
+    })
   }
 
   handleBrowserResize(e) {
