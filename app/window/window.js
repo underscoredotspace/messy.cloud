@@ -57,6 +57,11 @@ import {WINDOW} from '../templates'
         this.loadingIndicator.style.display = 'none'
         this.os.removeBee()
       })
+
+      setTimeout(() => {
+        this.loadingIndicator.innerText = 'Error: timeout'
+        this.os.removeBee()
+      }, 10 * 1000) // 10s timeout
   }
 
   animate(callback) {
