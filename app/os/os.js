@@ -41,7 +41,7 @@ export default class OS {
   }
 
   loadMenus() {
-    this.menuBar.addMenu({title: 'MessyCloud', items: [
+    this.menuBar.addMenu({title: 'Messy Cloud', items: [
       {label: 'About', action: this.about}
     ]})
     this.menuBar.addMenu({title: 'File', items: [
