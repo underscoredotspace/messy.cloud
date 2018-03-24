@@ -2,7 +2,7 @@ import {v4 as uuid} from 'uuid'
 import {WINDOW} from '../templates'
 
   export default class Window {
-  constructor(os, {page, title}) {
+  constructor(os, {page, title, fixedSize = false}) {
     this.os = os
 
     const win = WINDOW.cloneNode(true)
@@ -11,8 +11,9 @@ import {WINDOW} from '../templates'
     this.id = uuid()
     this.window.id = `window-${this.id}`
     this.page = page
+    this.fixedSize = fixedSize
     this.zIndex = null
-
+    
     this.sizeHandle = win.querySelector('.window__button.size')
     this.closeButton = win.querySelector('.window__button.close')
     this.maxButton = win.querySelector('.window__button.max')
@@ -21,6 +22,11 @@ import {WINDOW} from '../templates'
     this.content = win.querySelector('.window__content__iframe')
     this.contentCover = win.querySelector('.window__content__cover')
     this.loadingIndicator = win.querySelector('.window__content__loading')
+    
+    if (this.fixedSize) {
+      this.sizeHandle.style.display = 'none'
+      this.maxButton.disabled = true
+    }
 
     if (page) {this.loadContent(page, title)}
     
@@ -51,17 +57,18 @@ import {WINDOW} from '../templates'
   loadContent(page, title = this.window.id) {
       this.content.src = page
       this.title.innerText = title
+
+      const timeout = setTimeout(() => {
+        this.loadingIndicator.innerText = 'Error: timeout'
+        this.os.removeBee()
+      }, 10 * 1000) // 10s timeout
       
       this.content.addEventListener('load', e => {
         this.content.style.display = 'grid'
         this.loadingIndicator.style.display = 'none'
+        clearTimeout(timeout)
         this.os.removeBee()
       })
-
-      setTimeout(() => {
-        this.loadingIndicator.innerText = 'Error: timeout'
-        this.os.removeBee()
-      }, 10 * 1000) // 10s timeout
   }
 
   animate(callback) {
@@ -97,6 +104,7 @@ import {WINDOW} from '../templates'
   }
 
   maximise() {
+    if (this.fixedSize) {return}
     this.animate(() => {
       this.beforeMax = this.pos()
       this.os.maximiseWindow(this.id)
@@ -176,7 +184,7 @@ import {WINDOW} from '../templates'
     
     // Resize window start
     const handleResizeStart = e => {
-      if (this.maximised) {return}
+      if (this.maximised || this.fixedSize) {return}
       if (!this.focused) {this.os.setFocus(this.id)}
 
       const pageX = e.pageX || e.touches[0].pageX

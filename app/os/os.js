@@ -20,6 +20,8 @@ export default class OS {
     }
 
     window.addEventListener('resize', e => this.handleBrowserResize(e))
+
+    this.minimiseAll = this.minimiseAll.bind(this)
   }
 
   init() {
@@ -30,14 +32,10 @@ export default class OS {
 
   addBee() {
     document.body.classList.add('busy-bee')
-    const buttons = document.querySelectorAll('button')
-    buttons.forEach(button => button.disabled = true)
   }
 
   removeBee() {
     document.body.classList.remove('busy-bee')
-    const buttons = document.querySelectorAll('button')
-    buttons.forEach(button => button.disabled = false)
   }
 
   loadMenus() {
@@ -51,7 +49,7 @@ export default class OS {
       {label: 'Not yet', action: this.test}
     ]})
     this.menuBar.addMenu({title: 'View', items: [
-      {label: 'Not yet', action: this.test}
+      {label: 'Minimise All', action: this.minimiseAll}
     ]})
     this.menuBar.addMenu({title: 'Options', items: [
       {label: 'Not yet', action: this.test}
@@ -60,7 +58,7 @@ export default class OS {
   
   loadIcons() {
     this.desktop.addIcon({title:'emojis.htm', type:this.icon.file, window: {
-      page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:362, h:306
+      page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:362, h:306, fixedSize: true
     }})
     this.desktop.addIcon({title:'scrsaver.app', type:this.icon.app, window: {
       page:'https://screensaver.messy.cloud', title:'Mac Plus Screensaver', w:320, h:300
@@ -69,7 +67,7 @@ export default class OS {
       page: 'https://winter.messy.cloud', title: 'Winter Scene', w:415, h:500
     }})
     this.desktop.addIcon({title:'frogger.app', type:this.icon.app, window: {
-      page: 'https://underscoredotspace.github.io/frogger/', title: 'Frogger', w:424, h:248
+      page: 'https://underscoredotspace.github.io/frogger/', title: 'Frogger', w:424, h:248, fixedSize: true
     }})
     this.desktop.addIcon({title:'router.htm', type:this.icon.file, window: {
       page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200
@@ -91,6 +89,12 @@ export default class OS {
       Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
       buttons: {}
     })
+  }
+
+  minimiseAll() {
+    for (let win of this.windows) {
+      this.minimiseWindow(win.id)
+    }
   }
 
   handleBrowserResize(e) {
