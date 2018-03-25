@@ -22,6 +22,7 @@ export default class OS {
     window.addEventListener('resize', e => this.handleBrowserResize(e))
 
     this.minimiseAll = this.minimiseAll.bind(this)
+    this.restoreAll = this.restoreAll.bind(this)
   }
 
   init() {
@@ -49,7 +50,8 @@ export default class OS {
       {label: 'Not yet', action: this.test}
     ]})
     this.menuBar.addMenu({title: 'View', items: [
-      {label: 'Minimise All', action: this.minimiseAll}
+      {label: 'Minimise All', action: this.minimiseAll},
+      {label: 'Restore All', action: this.restoreAll}
     ]})
     this.menuBar.addMenu({title: 'Options', items: [
       {label: 'Not yet', action: this.test}
@@ -89,6 +91,12 @@ export default class OS {
       Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
       buttons: {}
     })
+  }
+
+  restoreAll() {
+    for (let win of this.windows) {
+      this.selectTask(win.id)
+    }
   }
 
   minimiseAll() {
