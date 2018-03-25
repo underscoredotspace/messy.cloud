@@ -4,7 +4,7 @@ function elementFromString(elementString) {
   return element.firstChild
 }
 
-export const MENU = elementFromString`<button class="menu__title" disabled="true"></button>`
+export const MENU = elementFromString`<button class="menu__title"></button>`
 
 export const MENU_ITEMS = elementFromString`<div class="menu__cover">
   <div class="menu__items"></div>
