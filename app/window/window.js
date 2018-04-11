@@ -66,6 +66,7 @@ import {WINDOW} from '../templates'
       this.content.addEventListener('load', e => {
         this.content.style.display = 'grid'
         this.loadingIndicator.style.display = 'none'
+        this.content.contentWindow.focus()
         clearTimeout(timeout)
         this.os.removeBee()
       })
@@ -139,6 +140,7 @@ import {WINDOW} from '../templates'
     this.window.classList.add('active')
     this.title.classList.add('active')
     this.contentCover.classList.add('active')
+    this.content.contentWindow.focus()
   }
 
   unFocus() {
