@@ -77,6 +77,9 @@ export default class OS {
     this.desktop.addIcon({title:'TRASH', type:this.icon.trash, window: {
       page:'https://underscore.space', title:'[CAB] underscore .  space', w:490, h:1000
     }})
+    this.desktop.addIcon({title:'webtris.exe', type:this.icon.app, window: {
+      page:'https://5b1527efdd6a5463dc57d6e1--keen-lewin-9ad369.netlify.com/', title:'Webtris', w:770, h:1000
+    }})
   }
 
   test() {
