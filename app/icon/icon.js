@@ -3,10 +3,10 @@ import FILE_ICON from './icons/file.png'
 import TRASH_ICON from './icons/trash.png'
 
 const ICONS = [APP_ICON, FILE_ICON, TRASH_ICON]
-import {ICON} from '../templates'
+import { ICON } from '../templates'
 
 export default class Icon {
-  constructor(os, {title, type, window}) {
+  constructor(os, { title, type, window }) {
     this.os = os
     this.icon = ICON.cloneNode(true)
 
@@ -20,18 +20,25 @@ export default class Icon {
   }
 
   pos() {
-    const {top, right, bottom, left, width, height} = this.icon.getBoundingClientRect()
-    return {y:top, r:right, b:bottom, x:left, w:width, h:height}
+    const {
+      top,
+      right,
+      bottom,
+      left,
+      width,
+      height
+    } = this.icon.getBoundingClientRect()
+    return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
   load(win, e) {
     e.preventDefault()
     window.getSelection().removeAllRanges()
     const icon = this.pos()
-    const x = icon.x + (icon.w/2)
-    const y = icon.y + (icon.h/2)
-    
-    this.os.openWindow(win, {x,y})
+    const x = icon.x + icon.w / 2
+    const y = icon.y + icon.h / 2
+
+    this.os.openWindow(win, { x, y })
   }
 
   select() {

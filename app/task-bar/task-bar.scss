@@ -3,17 +3,17 @@
   background: lightgray;
   border-top: black solid 1px;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   grid-column-gap: 3px;
   padding: 3px;
   font-size: 0.75rem;
   overflow: hidden;
-  box-shadow: -1px -1px 5px rgba(0,0,0,0.3);
+  box-shadow: -1px -1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .task {
   min-width: 0;
-  display:grid;
+  display: grid;
   align-content: center;
   justify-content: center;
   white-space: nowrap;

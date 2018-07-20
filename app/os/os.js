@@ -40,46 +40,105 @@ export default class OS {
   }
 
   loadMenus() {
-    this.menuBar.addMenu({title: 'Messy Cloud', items: [
-      {label: 'About', action: this.about}
-    ]})
-    this.menuBar.addMenu({title: 'File', items: [
-      {label: 'Not yet', action: this.test}
-    ]})
-    this.menuBar.addMenu({title: 'Edit', items: [
-      {label: 'Not yet', action: this.test}
-    ]})
-    this.menuBar.addMenu({title: 'View', items: [
-      {label: 'Minimise All', action: this.minimiseAll},
-      {label: 'Restore All', action: this.restoreAll}
-    ]})
-    this.menuBar.addMenu({title: 'Options', items: [
-      {label: 'Not yet', action: this.test}
-    ]})
+    this.menuBar.addMenu({
+      title: 'Messy Cloud',
+      items: [{ label: 'About', action: this.about }]
+    })
+    this.menuBar.addMenu({
+      title: 'File',
+      items: [{ label: 'Not yet', action: this.test }]
+    })
+    this.menuBar.addMenu({
+      title: 'Edit',
+      items: [{ label: 'Not yet', action: this.test }]
+    })
+    this.menuBar.addMenu({
+      title: 'View',
+      items: [
+        { label: 'Minimise All', action: this.minimiseAll },
+        { label: 'Restore All', action: this.restoreAll }
+      ]
+    })
+    this.menuBar.addMenu({
+      title: 'Options',
+      items: [{ label: 'Not yet', action: this.test }]
+    })
   }
-  
+
   loadIcons() {
-    this.desktop.addIcon({title:'emojis.htm', type:this.icon.file, window: {
-      page:'https://emoji.messy.cloud', title:'[CAB] Emojis', w:362, h:306, fixedSize: true
-    }})
-    this.desktop.addIcon({title:'scrsaver.app', type:this.icon.app, window: {
-      page:'https://screensaver.messy.cloud', title:'Mac Plus Screensaver', w:320, h:300
-    }})
-    this.desktop.addIcon({title:'winter.app', type:this.icon.app, window: {
-      page: 'https://winter.messy.cloud', title: 'Winter Scene', w:415, h:500
-    }})
-    this.desktop.addIcon({title:'frogger.app', type:this.icon.app, window: {
-      page: 'https://underscoredotspace.github.io/frogger/', title: 'Frogger', w:424, h:248, fixedSize: true
-    }})
-    this.desktop.addIcon({title:'router.htm', type:this.icon.file, window: {
-      page:'https://router.messy.cloud', title:'[CAB] neeko-router Demo', w:320, h:200
-    }})
-    this.desktop.addIcon({title:'TRASH', type:this.icon.trash, window: {
-      page:'https://underscore.space', title:'[CAB] underscore .  space', w:490, h:1000
-    }})
-    this.desktop.addIcon({title:'webtris.exe', type:this.icon.app, window: {
-      page:'https://5b1527efdd6a5463dc57d6e1--keen-lewin-9ad369.netlify.com/', title:'Webtris', w:770, h:1000
-    }})
+    this.desktop.addIcon({
+      title: 'emojis.htm',
+      type: this.icon.file,
+      window: {
+        page: 'https://emoji.messy.cloud',
+        title: '[CAB] Emojis',
+        w: 362,
+        h: 306,
+        fixedSize: true
+      }
+    })
+    this.desktop.addIcon({
+      title: 'scrsaver.app',
+      type: this.icon.app,
+      window: {
+        page: 'https://screensaver.messy.cloud',
+        title: 'Mac Plus Screensaver',
+        w: 320,
+        h: 300
+      }
+    })
+    this.desktop.addIcon({
+      title: 'winter.app',
+      type: this.icon.app,
+      window: {
+        page: 'https://winter.messy.cloud',
+        title: 'Winter Scene',
+        w: 415,
+        h: 500
+      }
+    })
+    this.desktop.addIcon({
+      title: 'frogger.app',
+      type: this.icon.app,
+      window: {
+        page: 'https://underscoredotspace.github.io/frogger/',
+        title: 'Frogger',
+        w: 424,
+        h: 248,
+        fixedSize: true
+      }
+    })
+    this.desktop.addIcon({
+      title: 'router.htm',
+      type: this.icon.file,
+      window: {
+        page: 'https://router.messy.cloud',
+        title: '[CAB] neeko-router Demo',
+        w: 320,
+        h: 200
+      }
+    })
+    this.desktop.addIcon({
+      title: 'TRASH',
+      type: this.icon.trash,
+      window: {
+        page: 'https://underscore.space',
+        title: '[CAB] underscore .  space',
+        w: 490,
+        h: 1000
+      }
+    })
+    this.desktop.addIcon({
+      title: 'webtris.exe',
+      type: this.icon.app,
+      window: {
+        page:
+          'https://5b1527efdd6a5463dc57d6e1--keen-lewin-9ad369.netlify.com/',
+        title: 'Webtris',
+        w: 770,
+        h: 1000
+      }
+    })
   }
 
   test() {
@@ -88,7 +147,7 @@ export default class OS {
 
   about() {
     os.openDialog({
-      title: 'Messy Cloud v0.6', 
+      title: 'Messy Cloud v0.6',
       text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
       
       Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
@@ -110,9 +169,11 @@ export default class OS {
 
   handleBrowserResize(e) {
     for (let win of this.windows) {
-      if (win.minimised) { continue }
+      if (win.minimised) {
+        continue
+      }
 
-      const {w, h, x, y} = win.pos()
+      const { w, h, x, y } = win.pos()
       this.moveWindow(win.id, x, y)
       this.resizeWindow(win.id, w, h)
     }
@@ -127,11 +188,11 @@ export default class OS {
   }
 
   openWindow(win, icon) {
-    if(this.alreadyOpen(win.page)) {
-      this.openDialog({title:'Error', text:'Window is already open!'})
+    if (this.alreadyOpen(win.page)) {
+      this.openDialog({ title: 'Error', text: 'Window is already open!' })
       return
     }
-    
+
     this.addBee()
     const newWindow = new Window(this, win)
     const desktop = this.desktop.pos()
@@ -140,13 +201,17 @@ export default class OS {
     this.windows.push(newWindow)
     this.desktop.addWindow(newWindow)
     this.taskBar.addWindow(newWindow, win.title)
-    
+
     this.resizeWindow(newWindow.id, win.w, win.h)
-    
-    if (!win.hasOwnProperty('x')) {win.x = ((desktop.r-desktop.x) / 2) - (win.w / 2)}
-    if (!win.hasOwnProperty('y')) {win.y = ((desktop.b-desktop.y) / 2) - (win.h / 2)}
-    this.moveWindow(newWindow.id, win.x+desktop.x, win.y+desktop.y)
-    newWindow.translate(icon, {x:win.x, y:win.y, h:win.h, w:win.w})
+
+    if (!win.hasOwnProperty('x')) {
+      win.x = (desktop.r - desktop.x) / 2 - win.w / 2
+    }
+    if (!win.hasOwnProperty('y')) {
+      win.y = (desktop.b - desktop.y) / 2 - win.h / 2
+    }
+    this.moveWindow(newWindow.id, win.x + desktop.x, win.y + desktop.y)
+    newWindow.translate(icon, { x: win.x, y: win.y, h: win.h, w: win.w })
     this.setFocus(newWindow.id)
   }
 
@@ -156,29 +221,45 @@ export default class OS {
 
   resizeWindow(id, w, h) {
     const win = this.getWindow(id)
-    const {x,y} = win.pos()
+    const { x, y } = win.pos()
     const desktop = this.desktop.pos()
-    if (w + x > desktop.r) {w = desktop.r - x}
-    if (h + y > desktop.b) {h = desktop.b - y}
-    if (w < MIN_WINDOW_W) {w = MIN_WINDOW_W}
-    if (h < MIN_WINDOW_H) {h = MIN_WINDOW_H}
+    if (w + x > desktop.r) {
+      w = desktop.r - x
+    }
+    if (h + y > desktop.b) {
+      h = desktop.b - y
+    }
+    if (w < MIN_WINDOW_W) {
+      w = MIN_WINDOW_W
+    }
+    if (h < MIN_WINDOW_H) {
+      h = MIN_WINDOW_H
+    }
     win.resize(w, h)
   }
 
   moveWindow(id, x, y) {
     const win = this.getWindow(id)
-    const {w,h} = win.pos()
+    const { w, h } = win.pos()
     const desktop = this.desktop.pos()
 
-    if (x < desktop.x) {x = desktop.x}
-    if (y < desktop.y) {y = desktop.y}
+    if (x < desktop.x) {
+      x = desktop.x
+    }
+    if (y < desktop.y) {
+      y = desktop.y
+    }
     if (x + w > desktop.r) {
       x = desktop.r - w
-      if (x < desktop.x) {x = desktop.x}
+      if (x < desktop.x) {
+        x = desktop.x
+      }
     }
     if (y + h > desktop.b) {
       y = desktop.b - h
-      if (y < desktop.y) {y = desktop.y}
+      if (y < desktop.y) {
+        y = desktop.y
+      }
     }
 
     win.move(x, y)
@@ -192,12 +273,18 @@ export default class OS {
 
   setFocus(id) {
     const thisWin = this.getWindow(id)
-    if (thisWin.focused) {return}
+    if (thisWin.focused) {
+      return
+    }
     const startIndex = thisWin.zIndex
 
-    for(let win of this.windows) {
-      if (win.zIndex > startIndex) {win.setIndex(win.zIndex-1)}
-      if (win.id !== id) {win.unFocus()}
+    for (let win of this.windows) {
+      if (win.zIndex > startIndex) {
+        win.setIndex(win.zIndex - 1)
+      }
+      if (win.id !== id) {
+        win.unFocus()
+      }
     }
 
     if (!thisWin.hasOwnProperty('zIndex')) {
@@ -222,14 +309,15 @@ export default class OS {
   minimiseWindow(id) {
     const win = this.getWindow(id)
     const winPos = win.pos()
-    const translateX = this.taskBar.minimiseWindow(id) - (winPos.x + (winPos.w/2))
+    const translateX =
+      this.taskBar.minimiseWindow(id) - (winPos.x + winPos.w / 2)
     const translateY = this.desktop.pos().b - winPos.y
     win.minimise(translateX, translateY)
   }
 
   maximiseWindow(id) {
     const win = this.getWindow(id)
-    const {x, y, w, h} = this.desktop.pos()
+    const { x, y, w, h } = this.desktop.pos()
     win.move(x, y)
     win.resize(w, h)
   }

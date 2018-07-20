@@ -9,15 +9,17 @@ export default class TaskBar {
   }
 
   taskPos(id) {
-    const {top, right, bottom, left, width, height} = this.getTask(id).getBoundingClientRect()
-    return {y:top, r:right, b:bottom, x:left, w:width, h:height}
+    const { top, right, bottom, left, width, height } = this.getTask(
+      id
+    ).getBoundingClientRect()
+    return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
   setActive(id) {
     for (let win of this.os.windows) {
       const task = this.getTask(win.id)
       task.classList.remove('active')
-      
+
       if (win.id === id) {
         if (win.minimised) {
           win.unminimise()
@@ -34,7 +36,7 @@ export default class TaskBar {
     task.classList.add('minimised')
 
     const taskPos = this.taskPos(id)
-    return taskPos.x + (taskPos.w/2)
+    return taskPos.x + taskPos.w / 2
   }
 
   addWindow(win, title) {
