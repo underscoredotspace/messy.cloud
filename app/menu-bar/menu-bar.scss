@@ -1,31 +1,33 @@
 #menu-bar {
   z-index: 1000;
-  background: $atari-white;
+  background: var(--atari-white);
   color: black;
   border-bottom: black solid 1px;
   overflow: hidden;
   display: flex;
   padding: 0 0.5rem;
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-  
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+
   .menu__title:first-child {
     font-weight: bold;
   }
 
   .menu {
-    &__title, &__item {
+    &__title,
+    &__item {
       font-size: 90%;
       text-align: left;
       padding: 0 0.75rem;
       background: inherit;
       color: inherit;
 
-      &.selected, &:hover:not(:disabled) {
+      &.selected,
+      &:hover:not(:disabled) {
         background: black;
-        color: $atari-white;
+        color: var(--atari-white);
       }
     }
-    
+
     &__title {
       display: flex;
       flex-flow: row nowrap;
@@ -39,8 +41,8 @@
       position: absolute;
       top: 1.5rem;
       left: 0;
-      right:0;
-      bottom:0;
+      right: 0;
+      bottom: 0;
     }
 
     &__items {
@@ -50,12 +52,12 @@
       min-width: 8rem;
       display: inline-flex;
       flex-flow: column nowrap;
-      background-color: transparentize($atari-white, 0.2);
+      background-color: var(--atari-white);
       border: 1px solid black;
       border-top: none;
-      box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
       opacity: 0;
-      transition: 0.3s all; 
+      transition: 0.3s all;
 
       hr {
         width: 100%;
@@ -65,7 +67,7 @@
         margin: 1px auto;
       }
     }
-  
+
     &__item {
       border: none;
       font-size: 1rem;
@@ -74,5 +76,5 @@
       justify-content: center;
       height: 1.5rem;
     }
-  } 
+  }
 }

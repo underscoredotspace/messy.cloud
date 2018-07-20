@@ -1,21 +1,21 @@
 .window {
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.3), -1px -1px 5px rgba(0,0,0,0.3);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3), -1px -1px 5px rgba(0, 0, 0, 0.3);
   position: absolute;
   display: grid;
   border: 1px solid black;
   grid-template-columns: 1.5rem 1fr 1.5rem 1.5rem;
-  grid-template-rows: 1.5rem 1fr 1.5rem; 
+  grid-template-rows: 1.5rem 1fr 1.5rem;
   font-size: 12px;
   line-height: 10px;
   will-change: contents;
-  
+
   > * {
     display: grid;
     justify-content: center;
     align-content: center;
     border: 1px solid black;
   }
-  
+
   &__content {
     grid-row: 2 / span 3;
     grid-column: 1 / span 4;
@@ -24,23 +24,25 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     overflow: hidden;
-    
-    &__iframe, &__cover, &__loading {
+
+    &__iframe,
+    &__cover,
+    &__loading {
       grid-column: 1 / span 1;
       grid-row: 1 / span 1;
     }
-    
+
     &__iframe {
       z-index: 1;
       width: 100%;
       height: 100%;
       border: none;
     }
-    
+
     &__cover {
       z-index: 2;
       display: block;
-    
+
       &.active {
         display: none;
       }
@@ -54,7 +56,7 @@
       background: white;
     }
   }
-  
+
   &__title {
     background: lightsteelblue;
     overflow: hidden;
@@ -66,9 +68,9 @@
       color: black;
     }
   }
-  
+
   &__button {
-    background: $atari-white;
+    background: var(--atari-white);
     text-align: center;
 
     svg {
@@ -76,7 +78,8 @@
     }
 
     &.size {
-      background-color: transparentize($atari-white, 0.2);
+      background-color: var(--atari-white);
+      opacity: 0.8;
       cursor: inherit;
       width: 100%;
       height: 100%;
@@ -92,11 +95,12 @@
   }
 
   &.active {
-    box-shadow: 5px 10px 10px rgba(0,0,0,0.3), -2px -2px 20px rgba(0,0,0,0.3);
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.3),
+      -2px -2px 20px rgba(0, 0, 0, 0.3);
   }
-  
+
   &.changing {
-    border: 1px solid $atari-white;
+    border: 1px solid var(--atari-white);
     opacity: 0.9;
 
     &.move {
@@ -109,6 +113,6 @@
   }
 
   &.animate {
-    transition: 0.3s all; 
+    transition: 0.3s all;
   }
 }

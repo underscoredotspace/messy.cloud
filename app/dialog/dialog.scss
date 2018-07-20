@@ -12,7 +12,7 @@
   padding: 0 10px;
   .dialog__frame {
     box-shadow: 5px 10px 10px rgba(0,0,0,0.3), -2px -2px 20px rgba(0,0,0,0.3);
-    background: $atari-white;
+    background: var(--atari-white);
     max-width: 500px;
     border: 3px solid black;
     padding: 3px;
@@ -43,7 +43,7 @@
           display: block;
           border: solid black;
           border-width: 3px 2px;
-          background: $atari-white;
+          background: var(--atari-white);
           padding: 4px;
           font-weight: 700;
 
@@ -55,7 +55,7 @@
 
           &:active {
             background: black;
-            color: $atari-white;
+            color: var(--atari-white);
           }
         }
       }
