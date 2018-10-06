@@ -98,6 +98,26 @@ export default class OS {
       }
     })
     this.desktop.addIcon({
+      title: 'todo.app',
+      type: this.icon.app,
+      window: {
+        page: 'https://todo.messy.cloud',
+        title: 'To-Do',
+        w: 550,
+        h: 300
+      }
+    })
+    this.desktop.addIcon({
+      title: 'tictacto.app',
+      type: this.icon.app,
+      window: {
+        page: 'https://noughts.messy.cloud',
+        title: 'Tic Tac Toe',
+        w: 320,
+        h: 480
+      }
+    })
+    this.desktop.addIcon({
       title: 'frogger.app',
       type: this.icon.app,
       window: {
