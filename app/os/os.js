@@ -98,6 +98,17 @@ export default class OS {
       }
     })
     this.desktop.addIcon({
+      title: 'match.app',
+      type: this.icon.app,
+      window: {
+        page: 'https://match.messy.cloud',
+        title: 'Awesome Match',
+        w: 360,
+        h: 420,
+        fixedSize: true
+      }
+    })
+    this.desktop.addIcon({
       title: 'todo.app',
       type: this.icon.app,
       window: {
@@ -108,7 +119,7 @@ export default class OS {
       }
     })
     this.desktop.addIcon({
-      title: 'tictacto.app',
+      title: 'tictac~1.app',
       type: this.icon.app,
       window: {
         page: 'https://noughts.messy.cloud',
