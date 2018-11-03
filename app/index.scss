@@ -1,9 +1,13 @@
-$atari-white: rgb(224, 224, 224);
+:root {
+  --atari-white: rgb(224, 224, 224);
+}
 
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -12,13 +16,14 @@ html {
 }
 
 body {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   overflow: hidden;
   cursor: default;
 }
 
 .busy-bee {
-  cursor: url("./bee.png"), auto !important;
+  cursor: url('./bee.png'), auto !important;
 }
 
 button {

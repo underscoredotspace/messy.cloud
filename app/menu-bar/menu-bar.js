@@ -1,5 +1,5 @@
-import {v4 as uuid} from 'uuid'
-import {MENU, MENU_ITEMS, MENU_ITEM} from '../templates'
+import { v4 as uuid } from 'uuid'
+import { MENU, MENU_ITEMS, MENU_ITEM } from '../templates'
 
 export default class MenuBar {
   constructor(os) {
@@ -13,21 +13,23 @@ export default class MenuBar {
   }
 
   menuPos(id) {
-    const {top, right, bottom, left, width, height} = this.getMenu(id).menu.getBoundingClientRect()
-    return {y:top, r:right, b:bottom, x:left, w:width, h:height}
+    const { top, right, bottom, left, width, height } = this.getMenu(
+      id
+    ).menu.getBoundingClientRect()
+    return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
-  addMenu({title, items}) {
+  addMenu({ title, items }) {
     const id = uuid()
     const newMenu = MENU.cloneNode(true)
     newMenu.innerText = title
     newMenu.addEventListener('click', e => this.showMenu(id))
     this.menubar.appendChild(newMenu)
-    this.menus.push({id, menu:newMenu, items})
+    this.menus.push({ id, menu: newMenu, items })
   }
 
   showMenu(id) {
-    document.querySelectorAll('.menu__cover').forEach(menu=>menu.remove())
+    document.querySelectorAll('.menu__cover').forEach(menu => menu.remove())
     const menu = this.getMenu(id)
     menu.menu.classList.add('selected')
 
@@ -35,7 +37,9 @@ export default class MenuBar {
     const menuItems = menuWrapper.querySelector('.menu__items')
 
     document.addEventListener('click', e => {
-      if (e.target === menu.menu) {return}
+      if (e.target === menu.menu) {
+        return
+      }
       menuItems.style.opacity = 0
       setTimeout(() => {
         menu.menu.classList.remove('selected')
