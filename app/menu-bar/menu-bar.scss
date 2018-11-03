@@ -70,11 +70,9 @@
 
     &__item {
       border: none;
-      font-size: 1rem;
       display: flex;
       flex-flow: column nowrap;
-      justify-content: center;
-      height: 1.5rem;
+      padding: 0.5rem 0.75rem;
     }
   }
 }
