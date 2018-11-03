@@ -28,6 +28,11 @@ export default class Window {
       this.maxButton.disabled = true
     }
 
+    if (this.fixedSize) {
+      this.sizeHandle.style.display = 'none'
+      this.maxButton.disabled = true
+    }
+
     if (page) {
       this.loadContent(page, title)
     }
