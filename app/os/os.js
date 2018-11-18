@@ -177,7 +177,7 @@ export default class OS {
   }
 
   restoreAll() {
-    this.windows.forEach(win => this.selectTask(win.id))
+    this.windows.forEach(win => this.setFocus(win.id))
   }
 
   minimiseAll() {
