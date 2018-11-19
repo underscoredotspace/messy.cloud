@@ -22,7 +22,7 @@ export default class MenuBar {
   addMenu({ title, items }) {
     const id = uuid()
     const newMenu = MENU.cloneNode(true)
-    newMenu.innerText = title
+    newMenu.textContent = title
     newMenu.addEventListener('click', e => this.showMenu(id))
     this.menubar.appendChild(newMenu)
     this.menus.push({ id, menu: newMenu, items })
@@ -49,10 +49,19 @@ export default class MenuBar {
     menuItems.style.left = `${this.menuPos(id).x}px`
 
     for (let item of menu.items) {
-      const menuItem = MENU_ITEM.cloneNode(true)
-      menuItem.innerText = item.label
-      menuItem.addEventListener('click', item.action)
-      menuItems.appendChild(menuItem)
+      if (item.link) {
+        const menuLink = document.createElement('a')
+        menuLink.className = 'menu__item'
+        menuLink.textContent = item.label
+        menuLink.href = item.link
+        menuLink.target = '_blank'
+        menuItems.appendChild(menuLink)
+      } else {
+        const menuItem = MENU_ITEM.cloneNode(true)
+        menuItem.textContent = item.label
+        menuItem.addEventListener('click', item.action)
+        menuItems.appendChild(menuItem)
+      }
     }
     this.menubar.appendChild(menuWrapper)
     setTimeout(() => {

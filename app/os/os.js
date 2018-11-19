@@ -42,7 +42,13 @@ export default class OS {
   loadMenus() {
     this.menuBar.addMenu({
       title: 'Messy Cloud',
-      items: [{ label: 'About', action: this.about }]
+      items: [
+        { label: 'About', action: this.about },
+        {
+          label: 'Issues',
+          link: 'https://github.com/underscoredotspace/messy.cloud/issues'
+        }
+      ]
     })
     this.menuBar.addMenu({
       title: 'File',
@@ -128,27 +134,17 @@ export default class OS {
         h: 480
       }
     })
-    this.desktop.addIcon({
-      title: 'frogger.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://underscoredotspace.github.io/frogger/',
-        title: 'Frogger',
-        w: 424,
-        h: 248,
-        fixedSize: true
-      }
-    })
-    this.desktop.addIcon({
-      title: 'router.htm',
-      type: this.icon.file,
-      window: {
-        page: 'https://router.messy.cloud',
-        title: '[CAB] neeko-router Demo',
-        w: 320,
-        h: 200
-      }
-    })
+    // this.desktop.addIcon({
+    //   title: 'frogger.app',
+    //   type: this.icon.app,
+    //   window: {
+    //     page: 'https://underscoredotspace.github.io/frogger/',
+    //     title: 'Frogger',
+    //     w: 424,
+    //     h: 248,
+    //     fixedSize: true
+    //   }
+    // })
     this.desktop.addIcon({
       title: 'TRASH',
       type: this.icon.trash,
@@ -187,15 +183,11 @@ export default class OS {
   }
 
   restoreAll() {
-    for (let win of this.windows) {
-      this.selectTask(win.id)
-    }
+    this.windows.forEach(win => this.setFocus(win.id))
   }
 
   minimiseAll() {
-    for (let win of this.windows) {
-      this.minimiseWindow(win.id)
-    }
+    this.windows.forEach(win => this.minimiseWindow(win.id))
   }
 
   handleBrowserResize(e) {
@@ -215,7 +207,7 @@ export default class OS {
   }
 
   alreadyOpen(page) {
-    return this.windows.filter(win => win.page === page).length > 0
+    return !!this.windows.find(win => win.page === page)
   }
 
   openWindow(win, icon) {
@@ -241,8 +233,9 @@ export default class OS {
     if (!win.hasOwnProperty('y')) {
       win.y = (desktop.b - desktop.y) / 2 - win.h / 2
     }
+
     this.moveWindow(newWindow.id, win.x + desktop.x, win.y + desktop.y)
-    newWindow.translate(icon, { x: win.x, y: win.y, h: win.h, w: win.w })
+    newWindow.translate(icon, win)
     this.setFocus(newWindow.id)
   }
 
@@ -330,11 +323,7 @@ export default class OS {
 
   selectTask(id) {
     // If window is already active it should be minimised instead
-    if (this.getWindow(id).focused) {
-      this.minimiseWindow(id)
-    } else {
-      this.setFocus(id)
-    }
+    this.getWindow(id).focused ? this.minimiseWindow(id) : this.setFocus(id)
   }
 
   minimiseWindow(id) {
