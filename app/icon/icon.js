@@ -13,7 +13,7 @@ export default class Icon {
     this.title = this.icon.querySelector('.icon__title')
     this.image = this.icon.querySelector('.icon__image')
 
-    this.title.innerText = title
+    this.title.textContent = title
     this.image.style.backgroundImage = `url(${ICONS[type]})`
     this.icon.addEventListener('dblclick', e => this.load(window, e))
     this.icon.addEventListener('click', e => this.select(e))

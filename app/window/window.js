@@ -70,10 +70,10 @@ export default class Window {
 
   loadContent(page, title = this.window.id) {
     this.content.src = page
-    this.title.innerText = title
+    this.title.textContent = title
 
     const timeout = setTimeout(() => {
-      this.loadingIndicator.innerText = 'Error: timeout'
+      this.loadingIndicator.textContent = 'Error: timeout'
       this.os.removeBee()
     }, 10 * 1000) // 10s timeout
 

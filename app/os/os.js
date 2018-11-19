@@ -42,7 +42,13 @@ export default class OS {
   loadMenus() {
     this.menuBar.addMenu({
       title: 'Messy Cloud',
-      items: [{ label: 'About', action: this.about }]
+      items: [
+        { label: 'About', action: this.about },
+        {
+          label: 'Issues',
+          link: 'https://github.com/underscoredotspace/messy.cloud/issues'
+        }
+      ]
     })
     this.menuBar.addMenu({
       title: 'File',

@@ -1,12 +1,12 @@
 import { DIALOG } from '../templates'
 
 export default class Dialog {
-  constructor({ title, text, buttons }, os) {
+  constructor({ title, text, link, buttons }, os) {
     this.os = os
     this.dialog = DIALOG.cloneNode(true)
 
-    this.dialog.querySelector('.dialog__title').innerText = title
-    this.dialog.querySelector('.dialog__text').innerText = text
+    this.dialog.querySelector('.dialog__title').textContent = title
+    this.dialog.querySelector('.dialog__text').textContent = text
 
     this.button = this.dialog.querySelector('.dialog__button.default')
     this.button.addEventListener('click', e => this.clickButton())
