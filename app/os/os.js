@@ -134,23 +134,12 @@ export default class OS {
         h: 480
       }
     })
-    // this.desktop.addIcon({
-    //   title: 'frogger.app',
-    //   type: this.icon.app,
-    //   window: {
-    //     page: 'https://underscoredotspace.github.io/frogger/',
-    //     title: 'Frogger',
-    //     w: 424,
-    //     h: 248,
-    //     fixedSize: true
-    //   }
-    // })
     this.desktop.addIcon({
-      title: 'TRASH',
-      type: this.icon.trash,
+      title: 'shutopia.app',
+      type: this.icon.app,
       window: {
-        page: 'https://underscore.space',
-        title: '[CAB] underscore .  space',
+        page: 'https://strim.messy.cloud',
+        title: 'Shutopia',
         w: 490,
         h: 1000
       }
@@ -160,9 +149,31 @@ export default class OS {
       type: this.icon.app,
       window: {
         page:
-          'https://5b1527efdd6a5463dc57d6e1--keen-lewin-9ad369.netlify.com/',
+        'https://webtris.messy.cloud/',
         title: 'Webtris',
         w: 770,
+        h: 1000
+      }
+    })
+    this.desktop.addIcon({
+      title: 'llamas.app',
+      type: this.icon.app,
+      window: {
+        page:
+        'https://llamas.messy.cloud/',
+        title: 'Llamatron',
+        w: 665,
+        h: 455,
+        fixedSize: true
+      }
+    })
+    this.desktop.addIcon({
+      title: 'TRASH',
+      type: this.icon.trash,
+      window: {
+        page: 'https://underscore.space',
+        title: '[CAB] underscore .  space',
+        w: 490,
         h: 1000
       }
     })
