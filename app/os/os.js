@@ -134,16 +134,16 @@ export default class OS {
         h: 480
       }
     })
-    this.desktop.addIcon({
-      title: 'shutopia.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://strim.messy.cloud',
-        title: 'Shutopia',
-        w: 490,
-        h: 1000
-      }
-    })
+    // this.desktop.addIcon({
+    //   title: 'shutopia.app',
+    //   type: this.icon.app,
+    //   window: {
+    //     page: 'https://strim.messy.cloud',
+    //     title: 'Shutopia',
+    //     w: 490,
+    //     h: 1000
+    //   }
+    // })
     this.desktop.addIcon({
       title: 'webtris.exe',
       type: this.icon.app,
