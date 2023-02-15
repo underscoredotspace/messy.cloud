@@ -1,4 +1,4 @@
-import { default as OS } from './os/os'
+import OS from './os/os'
 const os = new OS()
 
 window.os = os
