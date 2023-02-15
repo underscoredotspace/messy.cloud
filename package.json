@@ -6,6 +6,9 @@
   "author": "Colin Tindle <ampersand@underscore.space>",
   "license": "CC-BY-4.0",
   "private": true,
+  "engines": {
+    "node": ">= v18"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
