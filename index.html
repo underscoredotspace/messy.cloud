@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Colin Tindle - Portfolio</title>
+    <link rel="stylesheet" href="./app/index.scss" />
+    <link
+      rel="preload"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      href="https://use.fontawesome.com/releases/v6.3.0/css/solid.css"
+    />
+    <link
+      rel="preload"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      href="https://use.fontawesome.com/releases/v6.3.0/css/fontawesome.css"
+    />
+  </head>
+
+  <body class="busy-bee">
+    <noscript>Sorry, this page requires JavaScript</noscript>
+
+    <div class="wrapper noscript">
+      <div id="menu-bar"></div>
+      <div id="desktop"></div>
+      <div id="task-bar"></div>
+    </div>
+
+    <script>
+      document.querySelector('.wrapper').classList.remove('noscript')
+    </script>
+    <script type="module" src="./app/index.js"></script>
+  </body>
+</html>
