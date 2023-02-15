@@ -1,3 +1,4 @@
+import './menu-bar.scss'
 import { v4 as uuid } from 'uuid'
 import { MENU, MENU_ITEMS, MENU_ITEM } from '../templates'
 
@@ -9,13 +10,12 @@ export default class MenuBar {
   }
 
   getMenu(id) {
-    return this.menus.find(menu => menu.id === id)
+    return this.menus.find((menu) => menu.id === id)
   }
 
   menuPos(id) {
-    const { top, right, bottom, left, width, height } = this.getMenu(
-      id
-    ).menu.getBoundingClientRect()
+    const { top, right, bottom, left, width, height } =
+      this.getMenu(id).menu.getBoundingClientRect()
     return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
@@ -23,20 +23,20 @@ export default class MenuBar {
     const id = uuid()
     const newMenu = MENU.cloneNode(true)
     newMenu.textContent = title
-    newMenu.addEventListener('click', e => this.showMenu(id))
+    newMenu.addEventListener('click', (e) => this.showMenu(id))
     this.menubar.appendChild(newMenu)
     this.menus.push({ id, menu: newMenu, items })
   }
 
   showMenu(id) {
-    document.querySelectorAll('.menu__cover').forEach(menu => menu.remove())
+    document.querySelectorAll('.menu__cover').forEach((menu) => menu.remove())
     const menu = this.getMenu(id)
     menu.menu.classList.add('selected')
 
     const menuWrapper = MENU_ITEMS.cloneNode(true)
     const menuItems = menuWrapper.querySelector('.menu__items')
 
-    document.addEventListener('click', e => {
+    document.addEventListener('click', (e) => {
       if (e.target === menu.menu) {
         return
       }

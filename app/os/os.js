@@ -1,4 +1,3 @@
-import Window from '../window/window'
 import MenuBar from '../menu-bar/menu-bar'
 import Desktop from '../desktop/desktop'
 import TaskBar from '../task-bar/task-bar'
@@ -134,16 +133,16 @@ export default class OS {
         h: 480,
       },
     })
-    // this.desktop.addIcon({
-    //   title: 'shutopia.app',
-    //   type: this.icon.app,
-    //   window: {
-    //     page: 'https://strim.messy.cloud',
-    //     title: 'Shutopia',
-    //     w: 490,
-    //     h: 1000
-    //   }
-    // })
+    this.desktop.addIcon({
+      title: 'shutopia.app',
+      type: this.icon.app,
+      window: {
+        page: 'https://strim.messy.cloud',
+        title: 'Shutopia',
+        w: 490,
+        h: 1000,
+      },
+    })
     this.desktop.addIcon({
       title: 'webtris.exe',
       type: this.icon.app,
@@ -219,13 +218,14 @@ export default class OS {
     return !!this.windows.find((win) => win.page === page)
   }
 
-  openWindow(win, icon) {
+  async openWindow(win, icon) {
     if (this.alreadyOpen(win.page)) {
       this.openDialog({ title: 'Error', text: 'Window is already open!' })
       return
     }
 
     this.addBee()
+    const { Window } = await import('../window/window')
     const newWindow = new Window(this, win)
     const desktop = this.desktop.pos()
     newWindow.icon = icon

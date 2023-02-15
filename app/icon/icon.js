@@ -1,3 +1,4 @@
+import './icon.scss'
 import APP_ICON from './icons/app.png'
 import FILE_ICON from './icons/file.png'
 import TRASH_ICON from './icons/trash.png'
@@ -5,7 +6,7 @@ import TRASH_ICON from './icons/trash.png'
 const ICONS = [APP_ICON, FILE_ICON, TRASH_ICON]
 import { ICON } from '../templates'
 
-export default class Icon {
+export class Icon {
   constructor(os, { title, type, window }) {
     this.os = os
     this.icon = ICON.cloneNode(true)
@@ -15,19 +16,13 @@ export default class Icon {
 
     this.title.textContent = title
     this.image.style.backgroundImage = `url(${ICONS[type]})`
-    this.icon.addEventListener('dblclick', e => this.load(window, e))
-    this.icon.addEventListener('click', e => this.select(e))
+    this.icon.addEventListener('dblclick', (e) => this.load(window, e))
+    this.icon.addEventListener('click', (e) => this.select(e))
   }
 
   pos() {
-    const {
-      top,
-      right,
-      bottom,
-      left,
-      width,
-      height
-    } = this.icon.getBoundingClientRect()
+    const { top, right, bottom, left, width, height } =
+      this.icon.getBoundingClientRect()
     return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 

@@ -1,3 +1,5 @@
+import './task-bar.scss'
+
 export default class TaskBar {
   constructor(os) {
     this.os = os
@@ -9,9 +11,8 @@ export default class TaskBar {
   }
 
   taskPos(id) {
-    const { top, right, bottom, left, width, height } = this.getTask(
-      id
-    ).getBoundingClientRect()
+    const { top, right, bottom, left, width, height } =
+      this.getTask(id).getBoundingClientRect()
     return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
@@ -46,7 +47,7 @@ export default class TaskBar {
     newTask.classList.add('active')
     newTask.textContent = title
     newTask.title = title
-    newTask.addEventListener('click', e => this.os.selectTask(win.id))
+    newTask.addEventListener('click', (e) => this.os.selectTask(win.id))
     this.taskbar.appendChild(newTask)
   }
 

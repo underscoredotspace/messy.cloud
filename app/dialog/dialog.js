@@ -1,6 +1,6 @@
 import { DIALOG } from '../templates'
 
-export default class Dialog {
+export class Dialog {
   constructor({ title, text, link, buttons }, os) {
     this.os = os
     this.dialog = DIALOG.cloneNode(true)
@@ -9,8 +9,8 @@ export default class Dialog {
     this.dialog.querySelector('.dialog__text').textContent = text
 
     this.button = this.dialog.querySelector('.dialog__button.default')
-    this.button.addEventListener('click', e => this.clickButton())
-    document.addEventListener('keypress', e => {
+    this.button.addEventListener('click', (e) => this.clickButton())
+    document.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         this.clickButton()
       }
