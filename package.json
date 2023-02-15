@@ -7,19 +7,20 @@
   "license": "CC-BY-4.0",
   "private": true,
   "scripts": {
-    "start": "parcel app/index.html",
-    "build": "parcel build app/index.html --public-url ./ --detailed-report",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "echo \"No tests yet. Sorry\""
   },
   "dependencies": {
-    "node-sass": "^7.0.0",
-    "parcel-bundler": "^1.12.5",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "vite": "^4.1.1"
   },
   "devDependencies": {
     "husky": "^7.0.4",
     "prettier": "^2.6.2",
-    "pretty-quick": "^3.1.0"
+    "pretty-quick": "^3.1.0",
+    "sass": "^1.58.1"
   },
   "husky": {
     "hooks": {

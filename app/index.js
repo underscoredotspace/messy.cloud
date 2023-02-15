@@ -1,7 +1,9 @@
-import OS from './os/os'
-window.os = new OS()
+import { default as OS } from './os/os'
+const os = new OS()
 
-if (module.hot) {
+window.os = os
+
+if (import.meta.hot) {
   window.os.desktop.desktop.innerHTML = ''
   window.os.taskBar.taskbar.innerHTML = ''
   window.os.menuBar.menubar.innerHTML = ''

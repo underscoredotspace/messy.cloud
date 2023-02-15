@@ -16,10 +16,10 @@ export default class OS {
     this.icon = {
       app: 0,
       file: 1,
-      trash: 2
+      trash: 2,
     }
 
-    window.addEventListener('resize', e => this.handleBrowserResize(e))
+    window.addEventListener('resize', (e) => this.handleBrowserResize(e))
 
     this.minimiseAll = this.minimiseAll.bind(this)
     this.restoreAll = this.restoreAll.bind(this)
@@ -46,28 +46,28 @@ export default class OS {
         { label: 'About', action: this.about },
         {
           label: 'Issues',
-          link: 'https://github.com/underscoredotspace/messy.cloud/issues'
-        }
-      ]
+          link: 'https://github.com/underscoredotspace/messy.cloud/issues',
+        },
+      ],
     })
     this.menuBar.addMenu({
       title: 'File',
-      items: [{ label: 'Not yet', action: this.test }]
+      items: [{ label: 'Not yet', action: this.test }],
     })
     this.menuBar.addMenu({
       title: 'Edit',
-      items: [{ label: 'Not yet', action: this.test }]
+      items: [{ label: 'Not yet', action: this.test }],
     })
     this.menuBar.addMenu({
       title: 'View',
       items: [
         { label: 'Minimise All', action: this.minimiseAll },
-        { label: 'Restore All', action: this.restoreAll }
-      ]
+        { label: 'Restore All', action: this.restoreAll },
+      ],
     })
     this.menuBar.addMenu({
       title: 'Options',
-      items: [{ label: 'Not yet', action: this.test }]
+      items: [{ label: 'Not yet', action: this.test }],
     })
   }
 
@@ -80,8 +80,8 @@ export default class OS {
         title: '[CAB] Emojis',
         w: 362,
         h: 306,
-        fixedSize: true
-      }
+        fixedSize: true,
+      },
     })
     this.desktop.addIcon({
       title: 'scrsaver.app',
@@ -90,8 +90,8 @@ export default class OS {
         page: 'https://screensaver.messy.cloud',
         title: 'Mac Plus Screensaver',
         w: 320,
-        h: 300
-      }
+        h: 300,
+      },
     })
     this.desktop.addIcon({
       title: 'winter.app',
@@ -100,8 +100,8 @@ export default class OS {
         page: 'https://winter.messy.cloud',
         title: 'Winter Scene',
         w: 415,
-        h: 500
-      }
+        h: 500,
+      },
     })
     this.desktop.addIcon({
       title: 'match.app',
@@ -111,8 +111,8 @@ export default class OS {
         title: 'Awesome Match',
         w: 360,
         h: 420,
-        fixedSize: true
-      }
+        fixedSize: true,
+      },
     })
     this.desktop.addIcon({
       title: 'todo.app',
@@ -121,8 +121,8 @@ export default class OS {
         page: 'https://todo.messy.cloud',
         title: 'To-Do',
         w: 550,
-        h: 300
-      }
+        h: 300,
+      },
     })
     this.desktop.addIcon({
       title: 'tictac~1.app',
@@ -131,8 +131,8 @@ export default class OS {
         page: 'https://noughts.messy.cloud',
         title: 'Tic Tac Toe',
         w: 320,
-        h: 480
-      }
+        h: 480,
+      },
     })
     // this.desktop.addIcon({
     //   title: 'shutopia.app',
@@ -148,24 +148,22 @@ export default class OS {
       title: 'webtris.exe',
       type: this.icon.app,
       window: {
-        page:
-        'https://webtris.messy.cloud/',
+        page: 'https://webtris.messy.cloud/',
         title: 'Webtris',
         w: 770,
-        h: 1000
-      }
+        h: 1000,
+      },
     })
     this.desktop.addIcon({
       title: 'llamas.app',
       type: this.icon.app,
       window: {
-        page:
-        'https://llamas.messy.cloud/',
+        page: 'https://llamas.messy.cloud/',
         title: 'Llamatron',
         w: 665,
         h: 455,
-        fixedSize: true
-      }
+        fixedSize: true,
+      },
     })
     this.desktop.addIcon({
       title: 'TRASH',
@@ -174,8 +172,8 @@ export default class OS {
         page: 'https://underscore.space',
         title: '[CAB] underscore .  space',
         w: 490,
-        h: 1000
-      }
+        h: 1000,
+      },
     })
   }
 
@@ -189,16 +187,16 @@ export default class OS {
       text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
       
       Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
-      buttons: {}
+      buttons: {},
     })
   }
 
   restoreAll() {
-    this.windows.forEach(win => this.setFocus(win.id))
+    this.windows.forEach((win) => this.setFocus(win.id))
   }
 
   minimiseAll() {
-    this.windows.forEach(win => this.minimiseWindow(win.id))
+    this.windows.forEach((win) => this.minimiseWindow(win.id))
   }
 
   handleBrowserResize(e) {
@@ -214,11 +212,11 @@ export default class OS {
   }
 
   getWindow(id) {
-    return this.windows.find(win => win.id === id)
+    return this.windows.find((win) => win.id === id)
   }
 
   alreadyOpen(page) {
-    return !!this.windows.find(win => win.page === page)
+    return !!this.windows.find((win) => win.page === page)
   }
 
   openWindow(win, icon) {
@@ -303,7 +301,7 @@ export default class OS {
   closeWindow(id) {
     this.getWindow(id).close()
     this.taskBar.removeWindow(id)
-    this.windows = this.windows.filter(window => window.id !== id)
+    this.windows = this.windows.filter((window) => window.id !== id)
   }
 
   setFocus(id) {
