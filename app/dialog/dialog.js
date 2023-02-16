@@ -1,4 +1,5 @@
 import { DIALOG } from '../templates'
+import './dialog.scss'
 
 export class Dialog {
   constructor({ title, text, link, buttons }, os) {
