@@ -15,8 +15,7 @@
     "preview": "vite preview",
     "test": "echo \"No tests yet. Sorry\""
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "husky": "^7.0.4",
     "nanoid": "^4.0.1",
     "prettier": "^2.6.2",
