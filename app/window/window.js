@@ -1,14 +1,15 @@
-import { v4 as uuid } from 'uuid'
+import './window.scss'
 import { WINDOW } from '../templates'
+import { generateId } from '../generateId'
 
-export default class Window {
+export class Window {
   constructor(os, { page, title, fixedSize = false }) {
     this.os = os
 
     const win = WINDOW.cloneNode(true)
     this.window = win
 
-    this.id = uuid()
+    this.id = generateId()
     this.window.id = `window-${this.id}`
     this.page = page
     this.fixedSize = fixedSize
@@ -53,14 +54,8 @@ export default class Window {
   }
 
   pos() {
-    const {
-      top,
-      right,
-      bottom,
-      left,
-      width,
-      height
-    } = this.window.getBoundingClientRect()
+    const { top, right, bottom, left, width, height } =
+      this.window.getBoundingClientRect()
     return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
@@ -77,7 +72,7 @@ export default class Window {
       this.os.removeBee()
     }, 10 * 1000) // 10s timeout
 
-    this.content.addEventListener('load', e => {
+    this.content.addEventListener('load', () => {
       this.content.style.display = 'grid'
       this.loadingIndicator.style.display = 'none'
       this.content.contentWindow.focus()
@@ -166,22 +161,22 @@ export default class Window {
   }
 
   initEventListeners() {
-    this.window.addEventListener('touchend', e => this.os.setFocus(this.id))
-    this.window.addEventListener('mouseup', e => this.os.setFocus(this.id))
+    this.window.addEventListener('touchend', (e) => this.os.setFocus(this.id))
+    this.window.addEventListener('mouseup', (e) => this.os.setFocus(this.id))
 
-    this.closeButton.addEventListener('click', e =>
+    this.closeButton.addEventListener('click', (e) =>
       this.os.closeWindow(this.id)
     )
-    this.minButton.addEventListener('click', e =>
+    this.minButton.addEventListener('click', (e) =>
       this.os.minimiseWindow(this.id)
     )
 
-    this.maxButton.addEventListener('click', e => {
+    this.maxButton.addEventListener('click', (e) => {
       !this.maximised ? this.maximise() : this.unmaximise()
     })
 
     // Move window start
-    const handleMoveStart = e => {
+    const handleMoveStart = (e) => {
       if (this.maximised) {
         return
       }
@@ -199,7 +194,7 @@ export default class Window {
       const { x, y } = this.pos()
       this.start = {
         x: pageX - x,
-        y: pageY - y
+        y: pageY - y,
       }
 
       e.preventDefault()
@@ -208,7 +203,7 @@ export default class Window {
     this.title.addEventListener('touchstart', handleMoveStart)
 
     // Resize window start
-    const handleResizeStart = e => {
+    const handleResizeStart = (e) => {
       if (this.maximised || this.fixedSize) {
         return
       }
@@ -226,7 +221,7 @@ export default class Window {
       const { w, h } = this.pos()
       this.start = {
         w: pageX - w,
-        h: pageY - h
+        h: pageY - h,
       }
 
       e.preventDefault()
@@ -236,7 +231,7 @@ export default class Window {
     this.sizeHandle.addEventListener('touchstart', handleResizeStart)
 
     // Handle drag for Resize and Move
-    const handleMouseMove = e => {
+    const handleMouseMove = (e) => {
       if (!this.dragging && !this.sizing) {
         return
       }
@@ -260,7 +255,7 @@ export default class Window {
     document.addEventListener('touchmove', handleMouseMove)
 
     // Release Move/Resize
-    const handleMouseUp = e => {
+    const handleMouseUp = () => {
       if (!this.dragging && !this.sizing) {
         return
       }

@@ -1,7 +1,8 @@
 import { DIALOG } from '../templates'
+import './dialog.scss'
 
-export default class Dialog {
-  constructor({ title, text, link, buttons }, os) {
+export class Dialog {
+  constructor({ title, text }, os) {
     this.os = os
     this.dialog = DIALOG.cloneNode(true)
 
@@ -9,29 +10,15 @@ export default class Dialog {
     this.dialog.querySelector('.dialog__text').textContent = text
 
     this.button = this.dialog.querySelector('.dialog__button.default')
-    this.button.addEventListener('click', e => this.clickButton())
-    document.addEventListener('keypress', e => {
+    this.button.addEventListener('click', () => this.close())
+    document.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        this.clickButton()
+        this.close()
       }
     })
   }
 
-  clickButton(id) {
-    this.close()
-  }
-
   close() {
     this.dialog.remove()
-  }
-}
-
-class Button {
-  constructor({ text, action, isDefault = false }, os) {
-    this.os = os
-    this.text = text
-    this.action = action
-    this.isDefault = isDefault
-    this.button = document.createElement('button')
   }
 }

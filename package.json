@@ -16,14 +16,12 @@
     "test": "echo \"No tests yet. Sorry\""
   },
   "dependencies": {
-    "uuid": "^8.3.2",
-    "vite": "^4.1.1"
-  },
-  "devDependencies": {
     "husky": "^7.0.4",
+    "nanoid": "^4.0.1",
     "prettier": "^2.6.2",
     "pretty-quick": "^3.1.0",
-    "sass": "^1.58.1"
+    "sass": "^1.58.1",
+    "vite": "^4.1.1"
   },
   "husky": {
     "hooks": {
