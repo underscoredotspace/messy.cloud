@@ -1,6 +1,6 @@
 import './window.scss'
-import { v4 as uuid } from 'uuid'
 import { WINDOW } from '../templates'
+import { generateId } from '../generateId'
 
 export class Window {
   constructor(os, { page, title, fixedSize = false }) {
@@ -9,7 +9,7 @@ export class Window {
     const win = WINDOW.cloneNode(true)
     this.window = win
 
-    this.id = uuid()
+    this.id = generateId()
     this.window.id = `window-${this.id}`
     this.page = page
     this.fixedSize = fixedSize

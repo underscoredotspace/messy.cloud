@@ -1,6 +1,6 @@
 import './menu-bar.scss'
-import { v4 as uuid } from 'uuid'
 import { MENU, MENU_ITEMS, MENU_ITEM } from '../templates'
+import { generateId } from '../generateId'
 
 export default class MenuBar {
   constructor(os) {
@@ -19,8 +19,8 @@ export default class MenuBar {
     return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
-  addMenu({ title, items }) {
-    const id = uuid()
+  async addMenu({ title, items }) {
+    const id = generateId()
     const newMenu = MENU.cloneNode(true)
     newMenu.textContent = title
     newMenu.addEventListener('click', (e) => this.showMenu(id))
