@@ -23,7 +23,7 @@ export default class MenuBar {
     const id = generateId()
     const newMenu = MENU.cloneNode(true)
     newMenu.textContent = title
-    newMenu.addEventListener('click', (e) => this.showMenu(id))
+    newMenu.addEventListener('click', () => this.showMenu(id))
     this.menubar.appendChild(newMenu)
     this.menus.push({ id, menu: newMenu, items })
   }

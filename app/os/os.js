@@ -199,6 +199,9 @@ export default class OS {
   }
 
   handleBrowserResize(e) {
+    if (e.currentTarget.innerWidth === 0) {
+      return
+    }
     for (let win of this.windows) {
       if (win.minimised) {
         continue

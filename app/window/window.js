@@ -72,7 +72,7 @@ export class Window {
       this.os.removeBee()
     }, 10 * 1000) // 10s timeout
 
-    this.content.addEventListener('load', (e) => {
+    this.content.addEventListener('load', () => {
       this.content.style.display = 'grid'
       this.loadingIndicator.style.display = 'none'
       this.content.contentWindow.focus()
@@ -255,7 +255,7 @@ export class Window {
     document.addEventListener('touchmove', handleMouseMove)
 
     // Release Move/Resize
-    const handleMouseUp = (e) => {
+    const handleMouseUp = () => {
       if (!this.dragging && !this.sizing) {
         return
       }
