@@ -1,12 +1,12 @@
 import './window.scss'
-import { WINDOW } from '../templates'
 import { generateId } from '../generateId'
 
 export class Window {
   constructor(os, { page, title, fixedSize = false }) {
     this.os = os
 
-    const win = WINDOW.cloneNode(true)
+    const WINDOW = document.getElementById('messy-window')
+    const win = WINDOW.content.firstElementChild.cloneNode(true)
     this.window = win
 
     this.id = generateId()
