@@ -1,12 +1,12 @@
 import './window.scss'
-import { WINDOW } from '../templates'
 import { generateId } from '../generateId'
 
 export class Window {
   constructor(os, { page, title, fixedSize = false }) {
     this.os = os
 
-    const win = WINDOW.cloneNode(true)
+    const WINDOW = document.getElementById('messy-window')
+    const win = WINDOW.content.firstElementChild.cloneNode(true)
     this.window = win
 
     this.id = generateId()
@@ -44,13 +44,7 @@ export class Window {
   translate(icon, win) {
     const x = icon.x - win.x - win.w / 2
     const y = icon.y - win.y - win.h / 2
-
     this.window.style.transform = `translate(${x}px, ${y}px) scale(0)`
-    requestAnimationFrame(() => {
-      this.animate(() => {
-        this.window.style.transform = ''
-      })
-    })
   }
 
   pos() {
@@ -77,14 +71,9 @@ export class Window {
       this.loadingIndicator.style.display = 'none'
       this.content.contentWindow.focus()
       clearTimeout(timeout)
+      this.window.style.transform = ''
       this.os.removeBee()
     })
-  }
-
-  animate(callback) {
-    this.window.classList.add('animate')
-    callback()
-    setTimeout(() => this.window.classList.remove('animate'), 500)
   }
 
   move(x, y) {
@@ -98,17 +87,13 @@ export class Window {
   }
 
   minimise(translateX, translateY) {
-    this.animate(() => {
-      this.window.style.transform = `translate(${translateX}px, ${translateY}px) scale(0)`
-    })
+    this.window.style.transform = `translate(${translateX}px, ${translateY}px) scale(0)`
     this.minimised = true
     this.unFocus()
   }
 
   unminimise() {
-    this.animate(() => {
-      this.window.style.transform = 'none'
-    })
+    this.window.style.transform = 'none'
     this.minimised = false
   }
 
@@ -116,33 +101,28 @@ export class Window {
     if (this.fixedSize) {
       return
     }
-    this.animate(() => {
-      this.beforeMax = this.pos()
-      this.os.maximiseWindow(this.id)
-      this.sizeHandle.classList.add('disabled')
-      this.maximised = true
-    })
+
+    this.beforeMax = this.pos()
+    this.os.maximiseWindow(this.id)
+    this.sizeHandle.classList.add('disabled')
+    this.maximised = true
   }
 
   unmaximise() {
-    this.animate(() => {
-      this.resize(this.beforeMax.w, this.beforeMax.h)
-      this.move(this.beforeMax.x, this.beforeMax.y)
-      this.beforeMax = {}
-      this.sizeHandle.classList.remove('disabled')
-      this.maximised = false
-    })
+    this.resize(this.beforeMax.w, this.beforeMax.h)
+    this.move(this.beforeMax.x, this.beforeMax.y)
+    this.beforeMax = {}
+    this.sizeHandle.classList.remove('disabled')
+    this.maximised = false
   }
 
   close() {
-    this.animate(() => {
-      this.window.style.transformOrigin = 'left top'
-      this.window.style.transform = 'scale(0)'
-      setTimeout(() => {
-        this.content.src = 'about:blank'
-        this.window.remove()
-      }, 500)
-    })
+    this.window.style.transformOrigin = 'left top'
+    this.window.style.transform = 'scale(0)'
+    setTimeout(() => {
+      this.content.src = 'about:blank'
+      this.window.remove()
+    }, 500)
   }
 
   setFocus() {

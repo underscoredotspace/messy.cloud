@@ -1,5 +1,4 @@
 import './menu-bar.scss'
-import { MENU, MENU_ITEMS, MENU_ITEM } from '../templates'
 import { generateId } from '../generateId'
 
 export default class MenuBar {
@@ -21,7 +20,8 @@ export default class MenuBar {
 
   async addMenu({ title, items }) {
     const id = generateId()
-    const newMenu = MENU.cloneNode(true)
+    const MENU = document.getElementById('messy-menu')
+    const newMenu = MENU.content.firstElementChild.cloneNode(true)
     newMenu.textContent = title
     newMenu.addEventListener('click', () => this.showMenu(id))
     this.menubar.appendChild(newMenu)
@@ -33,7 +33,8 @@ export default class MenuBar {
     const menu = this.getMenu(id)
     menu.menu.classList.add('selected')
 
-    const menuWrapper = MENU_ITEMS.cloneNode(true)
+    const MENU_ITEMS = document.getElementById('messy-menu-items')
+    const menuWrapper = MENU_ITEMS.content.firstElementChild.cloneNode(true)
     const menuItems = menuWrapper.querySelector('.menu__items')
 
     document.addEventListener('click', (e) => {
@@ -57,7 +58,8 @@ export default class MenuBar {
         menuLink.target = '_blank'
         menuItems.appendChild(menuLink)
       } else {
-        const menuItem = MENU_ITEM.cloneNode(true)
+        const MENU_ITEM = document.getElementById('messy-menu-item')
+        const menuItem = MENU_ITEM.content.firstElementChild.cloneNode(true)
         menuItem.textContent = item.label
         menuItem.addEventListener('click', item.action)
         menuItems.appendChild(menuItem)

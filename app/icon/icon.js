@@ -4,12 +4,13 @@ import FILE_ICON from './icons/file.png'
 import TRASH_ICON from './icons/trash.png'
 
 const ICONS = [APP_ICON, FILE_ICON, TRASH_ICON]
-import { ICON } from '../templates'
 
 export class Icon {
   constructor(os, { title, type, window }) {
     this.os = os
-    this.icon = ICON.cloneNode(true)
+
+    const ICON = document.getElementById('messy-icon')
+    this.icon = ICON.content.firstElementChild.cloneNode(true)
 
     this.title = this.icon.querySelector('.icon__title')
     this.image = this.icon.querySelector('.icon__image')
@@ -18,6 +19,10 @@ export class Icon {
     this.image.style.backgroundImage = `url(${ICONS[type]})`
     this.icon.addEventListener('dblclick', (e) => this.load(window, e))
     this.icon.addEventListener('click', (e) => this.select(e))
+
+    if (type == this.os.icon.trash) {
+      this.icon.classList.add('trash')
+    }
   }
 
   pos() {

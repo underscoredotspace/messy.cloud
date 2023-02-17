@@ -1,10 +1,11 @@
-import { DIALOG } from '../templates'
 import './dialog.scss'
 
 export class Dialog {
   constructor({ title, text }, os) {
     this.os = os
-    this.dialog = DIALOG.cloneNode(true)
+
+    const DIALOG = document.getElementById('messy-dialog')
+    this.dialog = DIALOG.content.firstElementChild.cloneNode(true)
 
     this.dialog.querySelector('.dialog__title').textContent = title
     this.dialog.querySelector('.dialog__text').textContent = text
