@@ -178,12 +178,11 @@ export default class OS {
   }
 
   about() {
-    os.openDialog({
-      title: 'Messy Cloud v0.6',
+    this.openDialog({
+      title: 'Messy Cloud v1.0',
       text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
       
       Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
-      buttons: {},
     })
   }
 
