@@ -23,7 +23,9 @@ export default class MenuBar {
     const MENU = document.getElementById('messy-menu')
     const newMenu = MENU.content.firstElementChild.cloneNode(true)
     newMenu.textContent = title
-    newMenu.addEventListener('click', () => this.showMenu(id))
+    newMenu.addEventListener('click', () =>
+      os.ifNotBusy(() => this.showMenu(id))
+    )
     this.menubar.appendChild(newMenu)
     this.menus.push({ id, menu: newMenu, items })
   }

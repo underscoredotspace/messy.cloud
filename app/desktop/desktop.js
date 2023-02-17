@@ -7,7 +7,9 @@ export default class Desktop {
 
     this.desktop = document.getElementById('desktop')
 
-    this.desktop.addEventListener('click', (e) => this.deselectAllIcons(e))
+    this.desktop.addEventListener('click', (e) =>
+      os.ifNotBusy(() => this.deselectAllIcons(e))
+    )
   }
 
   pos() {
