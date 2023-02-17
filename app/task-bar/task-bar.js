@@ -47,7 +47,9 @@ export default class TaskBar {
     newTask.classList.add('active')
     newTask.textContent = title
     newTask.title = title
-    newTask.addEventListener('click', (e) => this.os.selectTask(win.id))
+    newTask.addEventListener('click', () =>
+      os.ifNotBusy(() => this.os.selectTask(win.id))
+    )
     this.taskbar.appendChild(newTask)
   }
 

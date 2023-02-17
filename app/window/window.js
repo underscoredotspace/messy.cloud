@@ -141,18 +141,20 @@ export class Window {
   }
 
   initEventListeners() {
-    this.window.addEventListener('touchend', (e) => this.os.setFocus(this.id))
-    this.window.addEventListener('mouseup', (e) => this.os.setFocus(this.id))
+    this.window.addEventListener('touchend', () => this.os.setFocus(this.id))
+    this.window.addEventListener('mouseup', () => this.os.setFocus(this.id))
 
-    this.closeButton.addEventListener('click', (e) =>
-      this.os.closeWindow(this.id)
+    this.closeButton.addEventListener('click', () =>
+      os.ifNotBusy(() => this.os.closeWindow(this.id))
     )
-    this.minButton.addEventListener('click', (e) =>
-      this.os.minimiseWindow(this.id)
+    this.minButton.addEventListener('click', () =>
+      os.ifNotBusy(() => this.os.minimiseWindow(this.id))
     )
 
-    this.maxButton.addEventListener('click', (e) => {
-      !this.maximised ? this.maximise() : this.unmaximise()
+    this.maxButton.addEventListener('click', () => {
+      os.ifNotBusy(() =>
+        !this.maximised ? this.maximise() : this.unmaximise()
+      )
     })
 
     // Move window start
@@ -179,8 +181,12 @@ export class Window {
 
       e.preventDefault()
     }
-    this.title.addEventListener('mousedown', handleMoveStart)
-    this.title.addEventListener('touchstart', handleMoveStart)
+    this.title.addEventListener('mousedown', (e) =>
+      os.ifNotBusy(() => handleMoveStart(e))
+    )
+    this.title.addEventListener('touchstart', (e) =>
+      os.ifNotBusy(() => handleMoveStart(e))
+    )
 
     // Resize window start
     const handleResizeStart = (e) => {
@@ -207,8 +213,12 @@ export class Window {
       e.preventDefault()
     }
 
-    this.sizeHandle.addEventListener('mousedown', handleResizeStart)
-    this.sizeHandle.addEventListener('touchstart', handleResizeStart)
+    this.sizeHandle.addEventListener('mousedown', (e) =>
+      os.ifNotBusy(() => handleResizeStart(e))
+    )
+    this.sizeHandle.addEventListener('touchstart', (e) =>
+      os.ifNotBusy(() => handleResizeStart(e))
+    )
 
     // Handle drag for Resize and Move
     const handleMouseMove = (e) => {

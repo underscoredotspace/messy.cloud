@@ -38,6 +38,15 @@ export default class OS {
     document.body.classList.remove('busy-bee')
   }
 
+  ifNotBusy(callback = () => {}) {
+    const busy = document.body.classList.contains('busy-bee')
+    if (!busy) {
+      callback()
+    }
+
+    console.log(busy)
+  }
+
   loadMenus() {
     this.menuBar.addMenu({
       title: 'Messy Cloud',
