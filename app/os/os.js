@@ -49,7 +49,7 @@ export default class OS {
     this.menuBar.addMenu({
       title: 'Messy Cloud',
       items: [
-        { label: 'About', action: this.about },
+        { label: 'About', action: this.about.bind(this) },
         {
           label: 'Issues',
           link: 'https://github.com/underscoredotspace/messy.cloud/issues',
@@ -180,9 +180,7 @@ export default class OS {
   about() {
     this.openDialog({
       title: 'Messy Cloud v1.0',
-      text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. 
-      
-      Please double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
+      text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. \n\nPlease double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
     })
   }
 
