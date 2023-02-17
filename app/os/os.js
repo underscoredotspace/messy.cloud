@@ -43,8 +43,6 @@ export default class OS {
     if (!busy) {
       callback()
     }
-
-    console.log(busy)
   }
 
   loadMenus() {
