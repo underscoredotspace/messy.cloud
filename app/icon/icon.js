@@ -19,6 +19,10 @@ export class Icon {
     this.image.style.backgroundImage = `url(${ICONS[type]})`
     this.icon.addEventListener('dblclick', (e) => this.load(window, e))
     this.icon.addEventListener('click', (e) => this.select(e))
+
+    if (type == this.os.icon.trash) {
+      this.icon.classList.add('trash')
+    }
   }
 
   pos() {
