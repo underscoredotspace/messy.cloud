@@ -188,7 +188,9 @@ export default class OS {
   }
 
   restoreAll() {
-    this.windows.forEach((win) => this.setFocus(win.id))
+    this.windows
+      .sort((a, b) => a.zIndex - b.zIndex)
+      .forEach((win) => this.setFocus(win.id))
   }
 
   minimiseAll() {
@@ -199,8 +201,14 @@ export default class OS {
     if (e.currentTarget.innerWidth === 0) {
       return
     }
+
     for (let win of this.windows) {
       if (win.minimised) {
+        continue
+      }
+
+      if (win.maximised) {
+        this.maximiseWindow(win.id)
         continue
       }
 
@@ -302,6 +310,19 @@ export default class OS {
     this.getWindow(id).close()
     this.taskBar.removeWindow(id)
     this.windows = this.windows.filter((window) => window.id !== id)
+    this.focusNextwindow()
+  }
+
+  focusNextwindow() {
+    const visibleWindows = this.windows.filter((window) => !window.minimised)
+
+    const nextWindow = visibleWindows.sort((a, b) => a.zIndex - b.zIndex)[
+      visibleWindows.length - 1
+    ]
+
+    if (nextWindow) {
+      this.setFocus(nextWindow.id)
+    }
   }
 
   setFocus(id) {
@@ -342,6 +363,8 @@ export default class OS {
       this.taskBar.minimiseWindow(id) - (winPos.x + winPos.w / 2)
     const translateY = this.desktop.pos().b - winPos.y
     win.minimise(translateX, translateY)
+
+    this.focusNextwindow()
   }
 
   maximiseWindow(id) {
