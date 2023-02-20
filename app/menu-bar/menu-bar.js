@@ -24,7 +24,7 @@ export default class MenuBar {
     const newMenu = MENU.content.firstElementChild.cloneNode(true)
     newMenu.textContent = title
     newMenu.addEventListener('click', () =>
-      os.ifNotBusy(() => this.showMenu(id))
+      this.os.ifNotBusy(() => this.showMenu(id))
     )
     this.menubar.appendChild(newMenu)
     this.menus.push({ id, menu: newMenu, items })

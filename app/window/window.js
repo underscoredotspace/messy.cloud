@@ -145,14 +145,14 @@ export class Window {
     this.window.addEventListener('mouseup', () => this.os.setFocus(this.id))
 
     this.closeButton.addEventListener('click', () =>
-      os.ifNotBusy(() => this.os.closeWindow(this.id))
+      this.os.ifNotBusy(() => this.os.closeWindow(this.id))
     )
     this.minButton.addEventListener('click', () =>
-      os.ifNotBusy(() => this.os.minimiseWindow(this.id))
+      this.os.ifNotBusy(() => this.os.minimiseWindow(this.id))
     )
 
     this.maxButton.addEventListener('click', () => {
-      os.ifNotBusy(() =>
+      this.os.ifNotBusy(() =>
         !this.maximised ? this.maximise() : this.unmaximise()
       )
     })
@@ -182,10 +182,10 @@ export class Window {
       e.preventDefault()
     }
     this.title.addEventListener('mousedown', (e) =>
-      os.ifNotBusy(() => handleMoveStart(e))
+      this.os.ifNotBusy(() => handleMoveStart(e))
     )
     this.title.addEventListener('touchstart', (e) =>
-      os.ifNotBusy(() => handleMoveStart(e))
+      this.os.ifNotBusy(() => handleMoveStart(e))
     )
 
     // Resize window start
@@ -214,10 +214,10 @@ export class Window {
     }
 
     this.sizeHandle.addEventListener('mousedown', (e) =>
-      os.ifNotBusy(() => handleResizeStart(e))
+      this.os.ifNotBusy(() => handleResizeStart(e))
     )
     this.sizeHandle.addEventListener('touchstart', (e) =>
-      os.ifNotBusy(() => handleResizeStart(e))
+      this.os.ifNotBusy(() => handleResizeStart(e))
     )
 
     // Handle drag for Resize and Move
