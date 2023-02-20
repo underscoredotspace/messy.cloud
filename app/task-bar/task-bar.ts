@@ -1,24 +1,32 @@
+import type OS from '../os/os'
+import type { Window } from '../window/window'
 import './task-bar.scss'
 
 export default class TaskBar {
-  constructor(os) {
+  private os: OS
+  private taskbar: HTMLElement
+
+  constructor(os: OS) {
     this.os = os
-    this.taskbar = document.getElementById('task-bar')
+    this.taskbar = document.getElementById('task-bar')!
   }
 
-  getTask(id) {
-    return this.taskbar.querySelector(`#task-${id}`)
+  getTask(id: string): HTMLElement {
+    return this.taskbar.querySelector(`#task-${id}`)!
   }
 
-  taskPos(id) {
+  taskPos(id: string) {
+    const task = this.getTask(id)
+
     const { top, right, bottom, left, width, height } =
-      this.getTask(id).getBoundingClientRect()
+      task.getBoundingClientRect()
     return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
-  setActive(id) {
+  setActive(id: string): void {
     for (let win of this.os.windows) {
       const task = this.getTask(win.id)
+
       task.classList.remove('active')
 
       if (win.id === id) {
@@ -31,8 +39,10 @@ export default class TaskBar {
     }
   }
 
-  minimiseWindow(id) {
+  /** @returns x position of task button's center */
+  minimiseWindow(id: string): number {
     const task = this.getTask(id)
+
     task.classList.remove('active')
     task.classList.add('minimised')
 
@@ -40,7 +50,7 @@ export default class TaskBar {
     return taskPos.x + taskPos.w / 2
   }
 
-  addWindow(win, title) {
+  addWindow(win: Window, title: string): void {
     const newTask = document.createElement('div')
     newTask.className = 'task'
     newTask.id = `task-${win.id}`
@@ -48,12 +58,12 @@ export default class TaskBar {
     newTask.textContent = title
     newTask.title = title
     newTask.addEventListener('click', () =>
-      os.ifNotBusy(() => this.os.selectTask(win.id))
+      this.os.ifNotBusy(() => this.os.selectTask(win.id))
     )
     this.taskbar.appendChild(newTask)
   }
 
-  removeWindow(id) {
+  removeWindow(id: string): void {
     this.getTask(id).remove()
   }
 }
