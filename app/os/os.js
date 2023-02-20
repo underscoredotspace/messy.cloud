@@ -178,10 +178,10 @@ export default class OS {
   }
 
   about() {
-    this.openDialog({
-      title: 'Messy Cloud v1.0',
-      text: `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. \n\nPlease double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `,
-    })
+    this.openDialog(
+      'Messy Cloud v1.0',
+      `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. \n\nPlease double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `
+    )
   }
 
   restoreAll() {
@@ -225,7 +225,7 @@ export default class OS {
 
   async openWindow(win, icon) {
     if (this.alreadyOpen(win.page)) {
-      this.openDialog({ title: 'Error', text: 'Window is already open!' })
+      this.openDialog('Error', 'Window is already open!')
       return
     }
 
@@ -253,8 +253,8 @@ export default class OS {
     this.setFocus(newWindow.id)
   }
 
-  openDialog(dialog) {
-    this.desktop.addDialog(dialog)
+  openDialog(title, text) {
+    this.desktop.addDialog(title, text)
   }
 
   resizeWindow(id, w, h) {

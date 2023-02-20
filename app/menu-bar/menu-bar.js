@@ -60,6 +60,7 @@ export default class MenuBar {
         menuLink.target = '_blank'
         menuItems.appendChild(menuLink)
       } else {
+        const MENU_ITEM = document.getElementById('messy-menu-item')
         const menuItem = MENU_ITEM.content.firstElementChild.cloneNode(true)
         menuItem.textContent = item.label
         menuItem.addEventListener('click', item.action)
