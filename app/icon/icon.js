@@ -4,12 +4,12 @@ import FILE_ICON from './icons/file.png'
 import TRASH_ICON from './icons/trash.png'
 
 const ICONS = [APP_ICON, FILE_ICON, TRASH_ICON]
+const ICON = document.getElementById('messy-icon')
 
 export class Icon {
   constructor(os, { title, type, window }) {
     this.os = os
 
-    const ICON = document.getElementById('messy-icon')
     this.icon = ICON.content.firstElementChild.cloneNode(true)
 
     this.title = this.icon.querySelector('.icon__title')
