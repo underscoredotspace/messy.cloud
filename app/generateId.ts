@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid/non-secure'
 
-export const generateId = () => {
+export const generateId = (): string => {
   const id = nanoid()
 
   return id
