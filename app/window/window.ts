@@ -1,28 +1,68 @@
 import './window.scss'
 import { generateId } from '../generateId'
+import type OS from '../os/os'
+import type { IconPos } from '../icon/icon'
+
+export interface WindowDef {
+  w: number
+  h: number
+  x?: number
+  y?: number
+  page: string
+  titleText: string
+  fixedSize?: boolean
+}
 
 export class Window {
-  constructor(os, { page, title, fixedSize = false }) {
+  private os: OS
+  public window: HTMLElement
+
+  public id: string
+  public page: string
+  public titleText: string
+
+  public fixedSize: boolean
+  public zIndex: number = -1
+  public minimised = false
+  public maximised = false
+  public focused = false
+  private dragging = false
+  private beforeMax: ReturnType<typeof this.pos> | null = null
+  private moveStart: Omit<ReturnType<typeof this.pos>, 'r' | 'b'> | null = null
+  private sizing = false
+
+  private sizeHandle: HTMLButtonElement
+  private closeButton: HTMLButtonElement
+  private maxButton: HTMLButtonElement
+  private minButton: HTMLButtonElement
+  private title: HTMLElement
+  private content: HTMLIFrameElement
+  private contentCover: HTMLElement
+  private loadingIndicator: HTMLElement
+
+  constructor(os: OS, page: string, titleText: string, fixedSize = false) {
     this.os = os
 
-    const WINDOW = document.getElementById('messy-window')
-    const win = WINDOW.content.firstElementChild.cloneNode(true)
+    const WINDOW = <HTMLTemplateElement>document.getElementById('messy-window')
+    const win = WINDOW.content.firstElementChild!.cloneNode(
+      true
+    )! as HTMLElement
     this.window = win
 
     this.id = generateId()
     this.window.id = `window-${this.id}`
-    this.page = page
     this.fixedSize = fixedSize
-    this.zIndex = null
+    this.page = page
+    this.titleText = titleText
 
-    this.sizeHandle = win.querySelector('.window__button.size')
-    this.closeButton = win.querySelector('.window__button.close')
-    this.maxButton = win.querySelector('.window__button.max')
-    this.minButton = win.querySelector('.window__button.min')
-    this.title = win.querySelector('.window__title')
-    this.content = win.querySelector('.window__content__iframe')
-    this.contentCover = win.querySelector('.window__content__cover')
-    this.loadingIndicator = win.querySelector('.window__content__loading')
+    this.sizeHandle = win.querySelector('.window__button.size')!
+    this.closeButton = win.querySelector('.window__button.close')!
+    this.maxButton = win.querySelector('.window__button.max')!
+    this.minButton = win.querySelector('.window__button.min')!
+    this.title = win.querySelector('.window__title')!
+    this.content = win.querySelector('.window__content__iframe')!
+    this.contentCover = win.querySelector('.window__content__cover')!
+    this.loadingIndicator = win.querySelector('.window__content__loading')!
 
     if (this.fixedSize) {
       this.sizeHandle.style.display = 'none'
@@ -35,15 +75,15 @@ export class Window {
     }
 
     if (page) {
-      this.loadContent(page, title)
+      this.loadContent(page, titleText)
     }
 
     this.initEventListeners()
   }
 
-  translate(icon, win) {
-    const x = icon.x - win.x - win.w / 2
-    const y = icon.y - win.y - win.h / 2
+  translate(iconPos: IconPos, win: WindowDef) {
+    const x = iconPos.x - win.x! - win.w / 2
+    const y = iconPos.y - win.y! - win.h / 2
     this.window.style.transform = `translate(${x}px, ${y}px) scale(0)`
   }
 
@@ -53,13 +93,14 @@ export class Window {
     return { y: top, r: right, b: bottom, x: left, w: width, h: height }
   }
 
-  setIndex(zIndex) {
-    this.window.style.zIndex = this.zIndex = zIndex
+  setIndex(zIndex: number) {
+    this.zIndex = zIndex
+    this.window.style.zIndex = `${zIndex}`
   }
 
-  loadContent(page, title = this.window.id) {
+  loadContent(page: string, titleText: string) {
     this.content.src = page
-    this.title.textContent = title
+    this.title.textContent = titleText
 
     const timeout = setTimeout(() => {
       this.loadingIndicator.textContent = 'Error: timeout'
@@ -69,24 +110,24 @@ export class Window {
     this.content.addEventListener('load', () => {
       this.content.style.display = 'grid'
       this.loadingIndicator.style.display = 'none'
-      this.content.contentWindow.focus()
+      this.content.contentWindow?.focus()
       clearTimeout(timeout)
       this.window.style.transform = ''
       this.os.removeBee()
     })
   }
 
-  move(x, y) {
+  move(x: number, y: number) {
     this.window.style.left = `${x}px`
     this.window.style.top = `${y}px`
   }
 
-  resize(w, h) {
+  resize(w: number, h: number) {
     this.window.style.width = `${w}px`
     this.window.style.height = `${h}px`
   }
 
-  minimise(translateX, translateY) {
+  minimise(translateX: number, translateY: number) {
     this.window.style.transform = `translate(${translateX}px, ${translateY}px) scale(0)`
     this.minimised = true
     this.unFocus()
@@ -109,9 +150,12 @@ export class Window {
   }
 
   unmaximise() {
+    if (!this.beforeMax) {
+      return
+    }
     this.resize(this.beforeMax.w, this.beforeMax.h)
     this.move(this.beforeMax.x, this.beforeMax.y)
-    this.beforeMax = {}
+    this.beforeMax = null
     this.sizeHandle.classList.remove('disabled')
     this.maximised = false
   }
@@ -130,7 +174,7 @@ export class Window {
     this.window.classList.add('active')
     this.title.classList.add('active')
     this.contentCover.classList.add('active')
-    this.content.contentWindow.focus()
+    this.content.contentWindow?.focus()
   }
 
   unFocus() {
@@ -158,7 +202,7 @@ export class Window {
     })
 
     // Move window start
-    const handleMoveStart = (e) => {
+    const handleMoveStart = (e: TouchEvent | MouseEvent) => {
       if (this.maximised) {
         return
       }
@@ -166,7 +210,9 @@ export class Window {
         this.os.setFocus(this.id)
       }
 
+      //@ts-ignore
       const pageX = e.pageX || e.touches[0].pageX
+      //@ts-ignore
       const pageY = e.pageY || e.touches[0].pageY
 
       this.window.classList.add('changing', 'move')
@@ -174,7 +220,9 @@ export class Window {
       this.dragging = true
 
       const { x, y } = this.pos()
-      this.start = {
+      this.moveStart = {
+        h: 0,
+        w: 0,
         x: pageX - x,
         y: pageY - y,
       }
@@ -189,7 +237,7 @@ export class Window {
     )
 
     // Resize window start
-    const handleResizeStart = (e) => {
+    const handleResizeStart = (e: TouchEvent | MouseEvent) => {
       if (this.maximised || this.fixedSize) {
         return
       }
@@ -197,7 +245,9 @@ export class Window {
         this.os.setFocus(this.id)
       }
 
+      // @ts-ignore
       const pageX = e.pageX || e.touches[0].pageX
+      // @ts-ignore
       const pageY = e.pageY || e.touches[0].pageY
 
       this.window.classList.add('changing', 'resize')
@@ -205,7 +255,9 @@ export class Window {
       this.sizing = true
 
       const { w, h } = this.pos()
-      this.start = {
+      this.moveStart = {
+        x: 0,
+        y: 0,
         w: pageX - w,
         h: pageY - h,
       }
@@ -221,22 +273,28 @@ export class Window {
     )
 
     // Handle drag for Resize and Move
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent | TouchEvent) => {
       if (!this.dragging && !this.sizing) {
         return
       }
+      // @ts-ignore
       const pageX = e.pageX || e.touches[0].pageX
+      // @ts-ignore
       const pageY = e.pageY || e.touches[0].pageY
 
       this.contentCover.classList.remove('active')
 
       if (this.dragging) {
-        this.os.moveWindow(this.id, pageX - this.start.x, pageY - this.start.y)
+        this.os.moveWindow(
+          this.id,
+          pageX - this.moveStart!.x,
+          pageY - this.moveStart!.y
+        )
       } else if (this.sizing) {
         this.os.resizeWindow(
           this.id,
-          pageX - this.start.w,
-          pageY - this.start.h
+          pageX - this.moveStart!.w,
+          pageY - this.moveStart!.h
         )
       }
     }
@@ -255,7 +313,7 @@ export class Window {
 
       this.dragging = false
       this.sizing = false
-      this.start = {}
+      this.moveStart = null
     }
 
     document.addEventListener('mouseup', handleMouseUp)

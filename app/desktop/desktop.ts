@@ -1,6 +1,6 @@
-import type { Icon } from '../icon/icon'
+import type { Icon, ICONS } from '../icon/icon'
 import type OS from '../os/os'
-import type { Window } from '../window/window'
+import type { Window, WindowDef } from '../window/window'
 import './desktop.scss'
 
 export default class Desktop {
@@ -31,10 +31,9 @@ export default class Desktop {
     this.desktop.appendChild(new Dialog(title, text).dialog)
   }
 
-  async addIcon(icon: Icon) {
+  async addIcon(title: string, type: ICONS, win: WindowDef) {
     const { Icon } = await import('../icon/icon')
-    // @ts-ignore
-    const newIcon = new Icon(this.os, icon)
+    const newIcon = new Icon(this.os, title, type, win)
     this.icons.push(newIcon)
     this.desktop.appendChild(newIcon.icon)
   }

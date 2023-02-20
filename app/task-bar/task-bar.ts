@@ -3,7 +3,7 @@ import type { Window } from '../window/window'
 import './task-bar.scss'
 
 export default class TaskBar {
-  private os: OS
+  public os: OS
   private taskbar: HTMLElement
 
   constructor(os: OS) {

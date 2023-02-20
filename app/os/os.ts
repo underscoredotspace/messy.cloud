@@ -1,23 +1,19 @@
 import MenuBar from '../menu-bar/menu-bar'
 import Desktop from '../desktop/desktop'
 import TaskBar from '../task-bar/task-bar'
+import { IconPos, ICONS } from '../icon/icon'
+import type { Window as MessyWindow, WindowDef } from '../window/window'
 
 const MIN_WINDOW_W = 240
 const MIN_WINDOW_H = 200
 
 export default class OS {
+  public windows: Array<MessyWindow> = []
+  private menuBar = new MenuBar(this)
+  public desktop = new Desktop(this)
+  private taskBar = new TaskBar(this)
+
   constructor() {
-    this.windows = []
-    this.menuBar = new MenuBar(this)
-    this.desktop = new Desktop(this)
-    this.taskBar = new TaskBar(this)
-
-    this.icon = {
-      app: 0,
-      file: 1,
-      trash: 2,
-    }
-
     window.addEventListener('resize', (e) => this.handleBrowserResize(e))
 
     this.minimiseAll = this.minimiseAll.bind(this)
@@ -63,98 +59,62 @@ export default class OS {
   }
 
   loadIcons() {
-    this.desktop.addIcon({
-      title: 'emojis.htm',
-      type: this.icon.file,
-      window: {
-        page: 'https://emoji.messy.cloud',
-        title: '[CAB] Emojis',
-        w: 362,
-        h: 306,
-        fixedSize: true,
-      },
+    this.desktop.addIcon('emojis.htm', ICONS.FILE_ICON, {
+      page: 'https://emoji.messy.cloud',
+      titleText: '[CAB] Emojis',
+      w: 362,
+      h: 306,
+      fixedSize: true,
     })
-    this.desktop.addIcon({
-      title: 'scrsaver.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://screensaver.messy.cloud',
-        title: 'Mac Plus Screensaver',
-        w: 320,
-        h: 300,
-      },
+    this.desktop.addIcon('scrsaver.app', ICONS.APP_ICON, {
+      page: 'https://screensaver.messy.cloud',
+      titleText: 'Mac Plus Screensaver',
+      w: 320,
+      h: 300,
     })
-    this.desktop.addIcon({
-      title: 'winter.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://winter.messy.cloud',
-        title: 'Winter Scene',
-        w: 415,
-        h: 500,
-      },
+    this.desktop.addIcon('winter.app', ICONS.APP_ICON, {
+      page: 'https://winter.messy.cloud',
+      titleText: 'Winter Scene',
+      w: 415,
+      h: 500,
     })
-    this.desktop.addIcon({
-      title: 'match.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://match.messy.cloud',
-        title: 'Awesome Match',
-        w: 360,
-        h: 420,
-        fixedSize: true,
-      },
+    this.desktop.addIcon('match.app', ICONS.APP_ICON, {
+      page: 'https://match.messy.cloud',
+      titleText: 'Awesome Match',
+      w: 360,
+      h: 420,
+      fixedSize: true,
     })
-    this.desktop.addIcon({
-      title: 'todo.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://todo.messy.cloud',
-        title: 'To-Do',
-        w: 550,
-        h: 300,
-      },
+    this.desktop.addIcon('todo.app', ICONS.APP_ICON, {
+      page: 'https://todo.messy.cloud',
+      titleText: 'To-Do',
+      w: 550,
+      h: 300,
     })
-    this.desktop.addIcon({
-      title: 'tictac~1.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://noughts.messy.cloud',
-        title: 'Tic Tac Toe',
-        w: 320,
-        h: 480,
-      },
+    this.desktop.addIcon('tictac~1.app', ICONS.APP_ICON, {
+      page: 'https://noughts.messy.cloud',
+      titleText: 'Tic Tac Toe',
+      w: 320,
+      h: 480,
     })
-    this.desktop.addIcon({
-      title: 'webtris.exe',
-      type: this.icon.app,
-      window: {
-        page: 'https://webtris.messy.cloud/',
-        title: 'Webtris',
-        w: 770,
-        h: 1000,
-      },
+    this.desktop.addIcon('webtris.exe', ICONS.APP_ICON, {
+      page: 'https://webtris.messy.cloud/',
+      titleText: 'Webtris',
+      w: 770,
+      h: 1000,
     })
-    this.desktop.addIcon({
-      title: 'llamas.app',
-      type: this.icon.app,
-      window: {
-        page: 'https://llamas.messy.cloud/',
-        title: 'Llamatron',
-        w: 665,
-        h: 455,
-        fixedSize: true,
-      },
+    this.desktop.addIcon('llamas.app', ICONS.APP_ICON, {
+      page: 'https://llamas.messy.cloud/',
+      titleText: 'Llamatron',
+      w: 665,
+      h: 455,
+      fixedSize: true,
     })
-    this.desktop.addIcon({
-      title: 'TRASH',
-      type: this.icon.trash,
-      window: {
-        page: 'https://underscore.space',
-        title: '[CAB] underscore .  space',
-        w: 490,
-        h: 1000,
-      },
+    this.desktop.addIcon('TRASH', ICONS.TRASH_ICON, {
+      page: 'https://underscore.space',
+      titleText: '[CAB] underscore .  space',
+      w: 490,
+      h: 1000,
     })
   }
 
@@ -179,8 +139,8 @@ export default class OS {
     this.windows.forEach((win) => this.minimiseWindow(win.id))
   }
 
-  handleBrowserResize(e) {
-    if (e.currentTarget.innerWidth === 0) {
+  handleBrowserResize(e: UIEvent) {
+    if ((e.target as Window)?.innerWidth === 0) {
       return
     }
 
@@ -200,15 +160,15 @@ export default class OS {
     }
   }
 
-  getWindow(id) {
-    return this.windows.find((win) => win.id === id)
+  getWindow(id: string): MessyWindow {
+    return this.windows.find((win) => win.id === id)!
   }
 
-  alreadyOpen(page) {
+  alreadyOpen(page: string) {
     return !!this.windows.find((win) => win.page === page)
   }
 
-  async openWindow(win, icon) {
+  async openWindow(win: WindowDef, iconPos: IconPos) {
     if (this.alreadyOpen(win.page)) {
       this.openDialog('Error', 'Window is already open!')
       return
@@ -216,13 +176,12 @@ export default class OS {
 
     this.addBee()
     const { Window } = await import('../window/window')
-    const newWindow = new Window(this, win)
+    const newWindow = new Window(this, win.page, win.titleText, win.fixedSize)
     const desktop = this.desktop.pos
-    newWindow.icon = icon
 
     this.windows.push(newWindow)
     this.desktop.addWindow(newWindow)
-    this.taskBar.addWindow(newWindow, win.title)
+    this.taskBar.addWindow(newWindow, win.titleText)
 
     this.resizeWindow(newWindow.id, win.w, win.h)
 
@@ -233,16 +192,16 @@ export default class OS {
       win.y = (desktop.b - desktop.y) / 2 - win.h / 2
     }
 
-    this.moveWindow(newWindow.id, win.x + desktop.x, win.y + desktop.y)
-    newWindow.translate(icon, win)
+    this.moveWindow(newWindow.id, win.x! + desktop.x, win.y! + desktop.y)
+    newWindow.translate(iconPos, win)
     this.setFocus(newWindow.id)
   }
 
-  openDialog(title, text) {
+  openDialog(title: string, text: string) {
     this.desktop.addDialog(title, text)
   }
 
-  resizeWindow(id, w, h) {
+  resizeWindow(id: string, w: number, h: number) {
     const win = this.getWindow(id)
     const { x, y } = win.pos()
     const desktop = this.desktop.pos
@@ -261,7 +220,7 @@ export default class OS {
     win.resize(w, h)
   }
 
-  moveWindow(id, x, y) {
+  moveWindow(id: string, x: number, y: number) {
     const win = this.getWindow(id)
     const { w, h } = win.pos()
     const desktop = this.desktop.pos
@@ -288,7 +247,7 @@ export default class OS {
     win.move(x, y)
   }
 
-  closeWindow(id) {
+  closeWindow(id: string) {
     this.getWindow(id).close()
     this.taskBar.removeWindow(id)
     this.windows = this.windows.filter((window) => window.id !== id)
@@ -307,7 +266,7 @@ export default class OS {
     }
   }
 
-  setFocus(id) {
+  setFocus(id: string) {
     const thisWin = this.getWindow(id)
     if (thisWin.focused) {
       return
@@ -333,12 +292,12 @@ export default class OS {
     this.taskBar.setActive(id)
   }
 
-  selectTask(id) {
+  selectTask(id: string) {
     // If window is already active it should be minimised instead
     this.getWindow(id).focused ? this.minimiseWindow(id) : this.setFocus(id)
   }
 
-  minimiseWindow(id) {
+  minimiseWindow(id: string) {
     const win = this.getWindow(id)
     const winPos = win.pos()
     const translateX =
@@ -349,7 +308,7 @@ export default class OS {
     this.focusNextwindow()
   }
 
-  maximiseWindow(id) {
+  maximiseWindow(id: string) {
     const win = this.getWindow(id)
     const { x, y, w, h } = this.desktop.pos
     win.move(x, y)
