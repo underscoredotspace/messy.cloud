@@ -1,7 +1,7 @@
 import MenuBar from '../menu-bar/menu-bar'
 import Desktop from '../desktop/desktop'
 import TaskBar from '../task-bar/task-bar'
-import { IconPos, ICONS } from '../icon/icon'
+import type { IconPos } from '../icon/icon'
 import type { Window as MessyWindow, WindowDef } from '../window/window'
 
 const MIN_WINDOW_W = 240
@@ -58,7 +58,8 @@ export default class OS {
     this.menuBar.addMenu('Options', [{ label: 'Not yet', action: this.test }])
   }
 
-  loadIcons() {
+  async loadIcons() {
+    const { ICONS } = await import('../icon/icon')
     this.desktop.addIcon('emojis.htm', ICONS.FILE_ICON, {
       page: 'https://emoji.messy.cloud',
       titleText: '[CAB] Emojis',
