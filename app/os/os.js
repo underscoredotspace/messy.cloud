@@ -46,35 +46,20 @@ export default class OS {
   }
 
   loadMenus() {
-    this.menuBar.addMenu({
-      title: 'Messy Cloud',
-      items: [
-        { label: 'About', action: this.about.bind(this) },
-        {
-          label: 'Issues',
-          link: 'https://github.com/underscoredotspace/messy.cloud/issues',
-        },
-      ],
-    })
-    this.menuBar.addMenu({
-      title: 'File',
-      items: [{ label: 'Not yet', action: this.test }],
-    })
-    this.menuBar.addMenu({
-      title: 'Edit',
-      items: [{ label: 'Not yet', action: this.test }],
-    })
-    this.menuBar.addMenu({
-      title: 'View',
-      items: [
-        { label: 'Minimise All', action: this.minimiseAll },
-        { label: 'Restore All', action: this.restoreAll },
-      ],
-    })
-    this.menuBar.addMenu({
-      title: 'Options',
-      items: [{ label: 'Not yet', action: this.test }],
-    })
+    this.menuBar.addMenu('Messy Cloud', [
+      { label: 'About', action: this.about.bind(this) },
+      {
+        label: 'Issues',
+        link: 'https://github.com/underscoredotspace/messy.cloud/issues',
+      },
+    ])
+    this.menuBar.addMenu('File', [{ label: 'Not yet', action: this.test }])
+    this.menuBar.addMenu('Edit', [{ label: 'Not yet', action: this.test }])
+    this.menuBar.addMenu('View', [
+      { label: 'Minimise All', action: this.minimiseAll },
+      { label: 'Restore All', action: this.restoreAll },
+    ])
+    this.menuBar.addMenu('Options', [{ label: 'Not yet', action: this.test }])
   }
 
   loadIcons() {
