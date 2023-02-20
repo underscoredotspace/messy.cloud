@@ -1,8 +1,5 @@
 import './menu-bar.scss'
 import { generateId } from '../generateId'
-const MENU = document.getElementById('messy-menu')
-const MENU_ITEMS = document.getElementById('messy-menu-items')
-const MENU_ITEM = document.getElementById('messy-menu-item')
 
 export default class MenuBar {
   constructor(os) {
@@ -23,6 +20,7 @@ export default class MenuBar {
 
   async addMenu({ title, items }) {
     const id = generateId()
+    const MENU = document.getElementById('messy-menu')
     const newMenu = MENU.content.firstElementChild.cloneNode(true)
     newMenu.textContent = title
     newMenu.addEventListener('click', () =>
@@ -37,6 +35,7 @@ export default class MenuBar {
     const menu = this.getMenu(id)
     menu.menu.classList.add('selected')
 
+    const MENU_ITEMS = document.getElementById('messy-menu-items')
     const menuWrapper = MENU_ITEMS.content.firstElementChild.cloneNode(true)
     const menuItems = menuWrapper.querySelector('.menu__items')
 

@@ -232,7 +232,7 @@ export default class OS {
     this.addBee()
     const { Window } = await import('../window/window')
     const newWindow = new Window(this, win)
-    const desktop = this.desktop.pos()
+    const desktop = this.desktop.pos
     newWindow.icon = icon
 
     this.windows.push(newWindow)
@@ -260,7 +260,7 @@ export default class OS {
   resizeWindow(id, w, h) {
     const win = this.getWindow(id)
     const { x, y } = win.pos()
-    const desktop = this.desktop.pos()
+    const desktop = this.desktop.pos
     if (w + x > desktop.r) {
       w = desktop.r - x
     }
@@ -279,7 +279,7 @@ export default class OS {
   moveWindow(id, x, y) {
     const win = this.getWindow(id)
     const { w, h } = win.pos()
-    const desktop = this.desktop.pos()
+    const desktop = this.desktop.pos
 
     if (x < desktop.x) {
       x = desktop.x
@@ -358,7 +358,7 @@ export default class OS {
     const winPos = win.pos()
     const translateX =
       this.taskBar.minimiseWindow(id) - (winPos.x + winPos.w / 2)
-    const translateY = this.desktop.pos().b - winPos.y
+    const translateY = this.desktop.pos.b - winPos.y
     win.minimise(translateX, translateY)
 
     this.focusNextwindow()
@@ -366,7 +366,7 @@ export default class OS {
 
   maximiseWindow(id) {
     const win = this.getWindow(id)
-    const { x, y, w, h } = this.desktop.pos()
+    const { x, y, w, h } = this.desktop.pos
     win.move(x, y)
     win.resize(w, h)
   }
