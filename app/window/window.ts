@@ -38,7 +38,6 @@ export class Window {
   private title: HTMLElement
   private content: HTMLIFrameElement
   private contentCover: HTMLElement
-  private loadingIndicator: HTMLElement
 
   constructor(os: OS, page: string, titleText: string, fixedSize = false) {
     this.os = os
@@ -62,7 +61,6 @@ export class Window {
     this.title = win.querySelector('.window__title')!
     this.content = win.querySelector('.window__content__iframe')!
     this.contentCover = win.querySelector('.window__content__cover')!
-    this.loadingIndicator = win.querySelector('.window__content__loading')!
 
     if (this.fixedSize) {
       this.sizeHandle.style.display = 'none'
@@ -102,16 +100,22 @@ export class Window {
     this.content.src = page
     this.title.textContent = titleText
 
-    const timeout = setTimeout(() => {
-      this.loadingIndicator.textContent = 'Error: timeout'
+    this.content.addEventListener('error', () => {
+      this.os.openDialog(
+        'Error',
+        'Drive A: is not responding. Please check the disk drive and insert a disk. If it is a hard disk, check its connections.'
+      )
       this.os.removeBee()
-    }, 10 * 1000) // 10s timeout
+      this.os.closeWindow(this.id)
+    })
+
+    setTimeout(() => {
+      debugger
+    }, 1000)
 
     this.content.addEventListener('load', () => {
       this.content.style.display = 'grid'
-      this.loadingIndicator.style.display = 'none'
       this.content.contentWindow?.focus()
-      clearTimeout(timeout)
       this.window.style.transform = ''
       this.os.removeBee()
     })

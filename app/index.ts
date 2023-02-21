@@ -6,3 +6,5 @@ os.init()
 if (location.hostname !== 'localhost') {
   os.about()
 }
+
+document.querySelector('.wrapper')!.classList.remove('noscript')
