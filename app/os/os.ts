@@ -249,7 +249,7 @@ export default class OS {
   }
 
   closeWindow(id: string) {
-    this.getWindow(id).close()
+    this.getWindow(id).close(true)
     this.taskBar.removeWindow(id)
     this.windows = this.windows.filter((window) => window.id !== id)
     this.focusNextwindow()

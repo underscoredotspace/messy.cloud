@@ -97,23 +97,20 @@ export class Window {
   }
 
   loadContent(page: string, titleText: string) {
-    this.content.src = page
-    this.title.textContent = titleText
-
-    this.content.addEventListener('error', () => {
+    const errorTimeout = setTimeout(() => {
+      this.os.closeWindow(this.id)
       this.os.openDialog(
         'Error',
         'Drive A: is not responding. Please check the disk drive and insert a disk. If it is a hard disk, check its connections.'
       )
       this.os.removeBee()
-      this.os.closeWindow(this.id)
-    })
+    }, 10 * 1000)
 
-    setTimeout(() => {
-      debugger
-    }, 1000)
+    this.content.src = page
+    this.title.textContent = titleText
 
     this.content.addEventListener('load', () => {
+      clearTimeout(errorTimeout)
       this.content.style.display = 'grid'
       this.content.contentWindow?.focus()
       this.window.style.transform = ''
@@ -164,7 +161,13 @@ export class Window {
     this.maximised = false
   }
 
-  close() {
+  close(hide?: boolean) {
+    if (hide) {
+      this.content.src = 'about:blank'
+      this.window.remove()
+      return
+    }
+
     this.window.style.transformOrigin = 'left top'
     this.window.style.transform = 'scale(0)'
     setTimeout(() => {
