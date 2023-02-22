@@ -68,7 +68,7 @@ export default class OS {
       fixedSize: true,
     })
     this.desktop.addIcon('scrsaver.app', ICONS.APP_ICON, {
-      page: 'https://screensaver.messy.cloud/1',
+      page: 'https://screensaver.messy.cloud',
       titleText: 'Mac Plus Screensaver',
       w: 320,
       h: 300,
