@@ -248,8 +248,8 @@ export default class OS {
     win.move(x, y)
   }
 
-  closeWindow(id: string) {
-    this.getWindow(id).close(true)
+  closeWindow(id: string, hide?: boolean) {
+    this.getWindow(id).close(hide)
     this.taskBar.removeWindow(id)
     this.windows = this.windows.filter((window) => window.id !== id)
     this.focusNextwindow()

@@ -98,7 +98,7 @@ export class Window {
 
   loadContent(page: string, titleText: string) {
     const errorTimeout = setTimeout(() => {
-      this.os.closeWindow(this.id)
+      this.os.closeWindow(this.id, true)
       this.os.openDialog(
         'Error',
         'Drive A: is not responding. Please check the disk drive and insert a disk. If it is a hard disk, check its connections.'
