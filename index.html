@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="The portfolio of senior software engineer Colin Tindle, in the style of Atari's graphical OS."
+    />
     <title>Colin Tindle - Portfolio</title>
     <link rel="stylesheet" href="./app/index.scss" />
   </head>
@@ -83,7 +87,6 @@
             src="about:blank"
             scrolling="yes"
           ></iframe>
-          <div class="window__content__loading">Loading...</div>
           <div class="window__content__cover"></div>
         </div>
         <button class="window__button size">
@@ -123,9 +126,6 @@
       <div id="task-bar"></div>
     </div>
 
-    <script>
-      document.querySelector('.wrapper').classList.remove('noscript')
-    </script>
-    <script type="module" src="./app/index.js"></script>
+    <script type="module" src="./app/index.ts"></script>
   </body>
 </html>
