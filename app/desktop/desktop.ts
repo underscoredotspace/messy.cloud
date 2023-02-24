@@ -1,17 +1,17 @@
-import type { Icon, ICONS } from '../icon/icon'
-import type OS from '../os/os'
-import type { Window, WindowDef } from '../window/window'
-import './desktop.scss'
+import type { Icon, ICONS } from "../icon/icon"
+import type OS from "../os/os"
+import type { Window, WindowDef } from "../window/window"
+import "./desktop.scss"
 
 export default class Desktop {
   private os
   private icons: Array<Icon> = []
-  private desktop: HTMLElement = document.getElementById('desktop')!
+  private desktop: HTMLElement = document.getElementById("desktop")!
 
   constructor(os: OS) {
     this.os = os
 
-    this.desktop.addEventListener('click', (e: MouseEvent) =>
+    this.desktop.addEventListener("click", (e: MouseEvent) =>
       os.ifNotBusy(() => this.deselectAllIcons(e))
     )
   }
@@ -27,12 +27,12 @@ export default class Desktop {
   }
 
   async addDialog(title: string, text: string) {
-    const { Dialog } = await import('../dialog/dialog')
+    const { Dialog } = await import("../dialog/dialog")
     this.desktop.appendChild(new Dialog(title, text).dialog)
   }
 
   async addIcon(title: string, type: ICONS, win: WindowDef) {
-    const { Icon } = await import('../icon/icon')
+    const { Icon } = await import("../icon/icon")
     const newIcon = new Icon(this.os, title, type, win)
     this.icons.push(newIcon)
     this.desktop.appendChild(newIcon.icon)

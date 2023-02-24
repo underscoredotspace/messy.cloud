@@ -1,9 +1,9 @@
-import type OS from '../os/os'
-import type { WindowDef } from '../window/window'
-import './icon.scss'
-import APP_ICON from './icons/app.png'
-import FILE_ICON from './icons/file.png'
-import TRASH_ICON from './icons/trash.png'
+import type OS from "../os/os"
+import type { WindowDef } from "../window/window"
+import "./icon.scss"
+import APP_ICON from "./icons/app.png"
+import FILE_ICON from "./icons/file.png"
+import TRASH_ICON from "./icons/trash.png"
 
 export enum ICONS {
   APP_ICON,
@@ -27,28 +27,28 @@ export class Icon {
   public icon: HTMLElement
   private title: HTMLElement
   private image: HTMLImageElement
-  private selected: boolean = false
+  private selected = false
 
   constructor(os: OS, title: string, type: ICONS, window: WindowDef) {
     this.os = os
 
-    const ICON = <HTMLTemplateElement>document.getElementById('messy-icon')!
+    const ICON = <HTMLTemplateElement>document.getElementById("messy-icon")!
     this.icon = ICON.content.firstElementChild!.cloneNode(true) as HTMLElement
 
-    this.title = this.icon.querySelector('.icon__title')!
-    this.image = this.icon.querySelector('.icon__image')!
+    this.title = this.icon.querySelector(".icon__title")!
+    this.image = this.icon.querySelector(".icon__image")!
 
     this.title.textContent = title
     this.image.style.backgroundImage = `url(${iconMap[type]})`
-    this.icon.addEventListener('dblclick', (e) =>
+    this.icon.addEventListener("dblclick", (e) =>
       os.ifNotBusy(() => this.load(window, e))
     )
-    this.icon.addEventListener('click', (e) =>
+    this.icon.addEventListener("click", (e) =>
       os.ifNotBusy(() => this.select(e))
     )
 
     if (type == ICONS.TRASH_ICON) {
-      this.icon.classList.add('trash')
+      this.icon.classList.add("trash")
     }
   }
 
@@ -76,15 +76,15 @@ export class Icon {
 
     this.os.desktop.deselectAllIcons(e)
     this.selected = true
-    this.icon.classList.add('selected')
-    this.icon.style.setProperty('--text-color', 'var(--atari-white)')
-    this.icon.style.setProperty('--icon-title', 'black')
+    this.icon.classList.add("selected")
+    this.icon.style.setProperty("--text-color", "var(--atari-white)")
+    this.icon.style.setProperty("--icon-title", "black")
   }
 
   deselect() {
     this.selected = false
-    this.icon.classList.remove('selected')
-    this.icon.style.setProperty('--text-color', 'black')
-    this.icon.style.setProperty('--icon-title', 'var(--atari-white)')
+    this.icon.classList.remove("selected")
+    this.icon.style.setProperty("--text-color", "black")
+    this.icon.style.setProperty("--icon-title", "var(--atari-white)")
   }
 }

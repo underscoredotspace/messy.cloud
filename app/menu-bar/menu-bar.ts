@@ -1,6 +1,6 @@
-import './menu-bar.scss'
-import { generateId } from '../generateId'
-import type OS from '../os/os'
+import "./menu-bar.scss"
+import { generateId } from "../generateId"
+import type OS from "../os/os"
 
 interface MenuItemAction {
   label: string
@@ -15,7 +15,7 @@ interface MenuItemLink {
 type MenuItem = MenuItemAction | MenuItemLink
 
 const isMenuItemLink = (menuItem: MenuItem): menuItem is MenuItemLink =>
-  menuItem.hasOwnProperty('link')
+  Object.prototype.hasOwnProperty.call(menuItem, "link")
 
 interface Menu {
   id: string
@@ -26,7 +26,7 @@ interface Menu {
 export default class MenuBar {
   private os: OS
   private menus: Array<Menu> = []
-  private menubar: HTMLElement = document.getElementById('menu-bar')!
+  private menubar: HTMLElement = document.getElementById("menu-bar")!
 
   constructor(os: OS) {
     this.os = os
@@ -44,12 +44,12 @@ export default class MenuBar {
 
   async addMenu(title: string, items: Array<MenuItem>) {
     const id = generateId()
-    const MENU = <HTMLTemplateElement>document.getElementById('messy-menu')!
+    const MENU = <HTMLTemplateElement>document.getElementById("messy-menu")!
     const newMenu = MENU.content.firstElementChild!.cloneNode(
       true
     ) as HTMLElement
     newMenu.textContent = title
-    newMenu.addEventListener('click', () =>
+    newMenu.addEventListener("click", () =>
       this.os.ifNotBusy(() => this.showMenu(id))
     )
     this.menubar.appendChild(newMenu)
@@ -57,53 +57,53 @@ export default class MenuBar {
   }
 
   showMenu(id: string) {
-    document.querySelectorAll('.menu__cover').forEach((menu) => menu.remove())
+    document.querySelectorAll(".menu__cover").forEach((menu) => menu.remove())
     const menu = this.getMenu(id)
-    menu.menu.classList.add('selected')
+    menu.menu.classList.add("selected")
 
     const MENU_ITEMS = <HTMLTemplateElement>(
-      document.getElementById('messy-menu-items')!
+      document.getElementById("messy-menu-items")!
     )
     const menuWrapper = MENU_ITEMS.content.firstElementChild!.cloneNode(
       true
     ) as HTMLElement
-    const menuItems = menuWrapper.querySelector('.menu__items')! as HTMLElement
+    const menuItems = menuWrapper.querySelector(".menu__items")! as HTMLElement
 
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (e.target === menu.menu) {
         return
       }
-      menuItems.style.opacity = '0'
+      menuItems.style.opacity = "0"
       setTimeout(() => {
-        menu.menu.classList.remove('selected')
+        menu.menu.classList.remove("selected")
         menuWrapper.remove()
       }, 200)
     })
     menuItems.style.left = `${this.menuPos(id).x}px`
 
-    for (let item of menu.items) {
+    for (const item of menu.items) {
       if (isMenuItemLink(item)) {
-        const menuLink = document.createElement('a')
-        menuLink.className = 'menu__item'
+        const menuLink = document.createElement("a")
+        menuLink.className = "menu__item"
         menuLink.textContent = item.label
         menuLink.href = item.link
-        menuLink.target = '_blank'
+        menuLink.target = "_blank"
         menuItems.appendChild(menuLink)
       } else {
         const MENU_ITEM = <HTMLTemplateElement>(
-          document.getElementById('messy-menu-item')!
+          document.getElementById("messy-menu-item")!
         )
         const menuItem = MENU_ITEM.content.firstElementChild!.cloneNode(
           true
         )! as HTMLElement
         menuItem.textContent = item.label
-        menuItem.addEventListener('click', item.action)
+        menuItem.addEventListener("click", item.action)
         menuItems.appendChild(menuItem)
       }
     }
     this.menubar.appendChild(menuWrapper)
     setTimeout(() => {
-      menuItems.style.opacity = '1'
+      menuItems.style.opacity = "1"
     }, 10)
   }
 }

@@ -1,8 +1,8 @@
-import MenuBar from '../menu-bar/menu-bar'
-import Desktop from '../desktop/desktop'
-import TaskBar from '../task-bar/task-bar'
-import type { IconPos } from '../icon/icon'
-import type { Window as MessyWindow, WindowDef } from '../window/window'
+import MenuBar from "../menu-bar/menu-bar"
+import Desktop from "../desktop/desktop"
+import TaskBar from "../task-bar/task-bar"
+import type { IconPos } from "../icon/icon"
+import type { Window as MessyWindow, WindowDef } from "../window/window"
 
 const MIN_WINDOW_W = 240
 const MIN_WINDOW_H = 200
@@ -14,7 +14,7 @@ export default class OS {
   private taskBar = new TaskBar(this)
 
   constructor() {
-    window.addEventListener('resize', (e) => this.handleBrowserResize(e))
+    window.addEventListener("resize", (e) => this.handleBrowserResize(e))
 
     this.minimiseAll = this.minimiseAll.bind(this)
     this.restoreAll = this.restoreAll.bind(this)
@@ -27,106 +27,106 @@ export default class OS {
   }
 
   addBee() {
-    document.body.classList.add('busy-bee')
+    document.body.classList.add("busy-bee")
   }
 
   removeBee() {
-    document.body.classList.remove('busy-bee')
+    document.body.classList.remove("busy-bee")
   }
 
-  ifNotBusy(callback = () => {}) {
-    const busy = document.body.classList.contains('busy-bee')
+  ifNotBusy(callback: () => void) {
+    const busy = document.body.classList.contains("busy-bee")
     if (!busy) {
       callback()
     }
   }
 
   loadMenus() {
-    this.menuBar.addMenu('Messy Cloud', [
-      { label: 'About', action: this.about.bind(this) },
+    this.menuBar.addMenu("Messy Cloud", [
+      { label: "About", action: this.about.bind(this) },
       {
-        label: 'Issues',
-        link: 'https://github.com/underscoredotspace/messy.cloud/issues',
+        label: "Issues",
+        link: "https://github.com/underscoredotspace/messy.cloud/issues",
       },
     ])
-    this.menuBar.addMenu('File', [{ label: 'Not yet', action: this.test }])
-    this.menuBar.addMenu('Edit', [{ label: 'Not yet', action: this.test }])
-    this.menuBar.addMenu('View', [
-      { label: 'Minimise All', action: this.minimiseAll },
-      { label: 'Restore All', action: this.restoreAll },
+    this.menuBar.addMenu("File", [{ label: "Not yet", action: this.test }])
+    this.menuBar.addMenu("Edit", [{ label: "Not yet", action: this.test }])
+    this.menuBar.addMenu("View", [
+      { label: "Minimise All", action: this.minimiseAll },
+      { label: "Restore All", action: this.restoreAll },
     ])
-    this.menuBar.addMenu('Options', [{ label: 'Not yet', action: this.test }])
+    this.menuBar.addMenu("Options", [{ label: "Not yet", action: this.test }])
   }
 
   async loadIcons() {
-    const { ICONS } = await import('../icon/icon')
-    this.desktop.addIcon('emojis.htm', ICONS.FILE_ICON, {
-      page: 'https://emoji.messy.cloud',
-      titleText: '[CAB] Emojis',
+    const { ICONS } = await import("../icon/icon")
+    this.desktop.addIcon("emojis.htm", ICONS.FILE_ICON, {
+      page: "https://emoji.messy.cloud",
+      titleText: "[CAB] Emojis",
       w: 362,
       h: 306,
       fixedSize: true,
     })
-    this.desktop.addIcon('scrsaver.app', ICONS.APP_ICON, {
-      page: 'https://screensaver.messy.cloud',
-      titleText: 'Mac Plus Screensaver',
+    this.desktop.addIcon("scrsaver.app", ICONS.APP_ICON, {
+      page: "https://screensaver.messy.cloud",
+      titleText: "Mac Plus Screensaver",
       w: 320,
       h: 300,
     })
-    this.desktop.addIcon('winter.app', ICONS.APP_ICON, {
-      page: 'https://winter.messy.cloud',
-      titleText: 'Winter Scene',
+    this.desktop.addIcon("winter.app", ICONS.APP_ICON, {
+      page: "https://winter.messy.cloud",
+      titleText: "Winter Scene",
       w: 415,
       h: 500,
     })
-    this.desktop.addIcon('match.app', ICONS.APP_ICON, {
-      page: 'https://match.messy.cloud',
-      titleText: 'Awesome Match',
+    this.desktop.addIcon("match.app", ICONS.APP_ICON, {
+      page: "https://match.messy.cloud",
+      titleText: "Awesome Match",
       w: 360,
       h: 420,
       fixedSize: true,
     })
-    this.desktop.addIcon('todo.app', ICONS.APP_ICON, {
-      page: 'https://todo.messy.cloud',
-      titleText: 'To-Do',
+    this.desktop.addIcon("todo.app", ICONS.APP_ICON, {
+      page: "https://todo.messy.cloud",
+      titleText: "To-Do",
       w: 550,
       h: 300,
     })
-    this.desktop.addIcon('tictac~1.app', ICONS.APP_ICON, {
-      page: 'https://noughts.messy.cloud',
-      titleText: 'Tic Tac Toe',
+    this.desktop.addIcon("tictac~1.app", ICONS.APP_ICON, {
+      page: "https://noughts.messy.cloud",
+      titleText: "Tic Tac Toe",
       w: 320,
       h: 480,
     })
-    this.desktop.addIcon('webtris.exe', ICONS.APP_ICON, {
-      page: 'https://webtris.messy.cloud/',
-      titleText: 'Webtris',
+    this.desktop.addIcon("webtris.exe", ICONS.APP_ICON, {
+      page: "https://webtris.messy.cloud/",
+      titleText: "Webtris",
       w: 770,
       h: 1000,
     })
-    this.desktop.addIcon('llamas.app', ICONS.APP_ICON, {
-      page: 'https://llamas.messy.cloud/',
-      titleText: 'Llamatron',
+    this.desktop.addIcon("llamas.app", ICONS.APP_ICON, {
+      page: "https://llamas.messy.cloud/",
+      titleText: "Llamatron",
       w: 665,
       h: 455,
       fixedSize: true,
     })
-    this.desktop.addIcon('TRASH', ICONS.TRASH_ICON, {
-      page: 'https://underscore.space',
-      titleText: '[CAB] underscore .  space',
+    this.desktop.addIcon("TRASH", ICONS.TRASH_ICON, {
+      page: "https://underscore.space",
+      titleText: "[CAB] underscore .  space",
       w: 490,
       h: 1000,
     })
   }
 
   test() {
-    console.log('menu test')
+    console.log("menu test")
   }
 
   about() {
     this.openDialog(
-      'Messy Cloud v1.0',
-      `Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. \n\nPlease double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. `
+      "Messy Cloud v1.0",
+      "Welcome! This is the portfolio of Colin Tindle, in the style of Atari's graphical OS. \n\nPlease double click on each of the icons to load a section. A window will open - you can move, resize, minimise and maximise these windows to your heart's content. "
     )
   }
 
@@ -145,7 +145,7 @@ export default class OS {
       return
     }
 
-    for (let win of this.windows) {
+    for (const win of this.windows) {
       if (win.minimised) {
         continue
       }
@@ -171,12 +171,12 @@ export default class OS {
 
   async openWindow(win: WindowDef, iconPos: IconPos) {
     if (this.alreadyOpen(win.page)) {
-      this.openDialog('Error', 'Window is already open!')
+      this.openDialog("Error", "Window is already open!")
       return
     }
 
     this.addBee()
-    const { Window } = await import('../window/window')
+    const { Window } = await import("../window/window")
     const newWindow = new Window(this, win.page, win.titleText, win.fixedSize)
     const desktop = this.desktop.pos
 
@@ -186,10 +186,10 @@ export default class OS {
 
     this.resizeWindow(newWindow.id, win.w, win.h)
 
-    if (!win.hasOwnProperty('x')) {
+    if (!win.x) {
       win.x = (desktop.r - desktop.x) / 2 - win.w / 2
     }
-    if (!win.hasOwnProperty('y')) {
+    if (!win.y) {
       win.y = (desktop.b - desktop.y) / 2 - win.h / 2
     }
 
@@ -274,7 +274,7 @@ export default class OS {
     }
     const startIndex = thisWin.zIndex
 
-    for (let win of this.windows) {
+    for (const win of this.windows) {
       if (win.zIndex > startIndex) {
         win.setIndex(win.zIndex - 1)
       }
@@ -283,7 +283,7 @@ export default class OS {
       }
     }
 
-    if (!thisWin.hasOwnProperty('zIndex')) {
+    if (!thisWin.zIndex) {
       thisWin.setIndex(this.windows.length)
     } else {
       thisWin.setIndex(this.windows.length + 1)

@@ -1,6 +1,6 @@
-import type OS from '../os/os'
-import type { Window } from '../window/window'
-import './task-bar.scss'
+import type OS from "../os/os"
+import type { Window } from "../window/window"
+import "./task-bar.scss"
 
 export default class TaskBar {
   public os: OS
@@ -8,7 +8,7 @@ export default class TaskBar {
 
   constructor(os: OS) {
     this.os = os
-    this.taskbar = document.getElementById('task-bar')!
+    this.taskbar = document.getElementById("task-bar")!
   }
 
   getTask(id: string): HTMLElement {
@@ -24,17 +24,17 @@ export default class TaskBar {
   }
 
   setActive(id: string): void {
-    for (let win of this.os.windows) {
+    for (const win of this.os.windows) {
       const task = this.getTask(win.id)
 
-      task.classList.remove('active')
+      task.classList.remove("active")
 
       if (win.id === id) {
         if (win.minimised) {
           win.unminimise()
-          task.classList.remove('minimised')
+          task.classList.remove("minimised")
         }
-        task.classList.add('active')
+        task.classList.add("active")
       }
     }
   }
@@ -43,21 +43,21 @@ export default class TaskBar {
   minimiseWindow(id: string): number {
     const task = this.getTask(id)
 
-    task.classList.remove('active')
-    task.classList.add('minimised')
+    task.classList.remove("active")
+    task.classList.add("minimised")
 
     const taskPos = this.taskPos(id)
     return taskPos.x + taskPos.w / 2
   }
 
   addWindow(win: Window, title: string): void {
-    const newTask = document.createElement('div')
-    newTask.className = 'task'
+    const newTask = document.createElement("div")
+    newTask.className = "task"
     newTask.id = `task-${win.id}`
-    newTask.classList.add('active')
+    newTask.classList.add("active")
     newTask.textContent = title
     newTask.title = title
-    newTask.addEventListener('click', () =>
+    newTask.addEventListener("click", () =>
       this.os.ifNotBusy(() => this.os.selectTask(win.id))
     )
     this.taskbar.appendChild(newTask)
