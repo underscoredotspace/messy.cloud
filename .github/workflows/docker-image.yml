@@ -25,5 +25,5 @@ jobs:
           context: .
           push: true
           tags: |
-            https://100.107.72.127:5000/underscoredotspace/messy-cloud:latest
-            https://100.107.72.127:5000/underscoredotspace/messy-cloud:${{ github.sha }}
+            100.107.72.127:5000/underscoredotspace/messy-cloud:latest
+            100.107.72.127:5000/underscoredotspace/messy-cloud:${{ github.sha }}
