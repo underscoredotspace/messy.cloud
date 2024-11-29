@@ -22,6 +22,10 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
+          config-inline: |
+            [registry."100.107.72.127:5000"]
+              http = true
+              insecure = true
           context: .
           push: true
           tags: |
