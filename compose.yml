@@ -1,0 +1,5 @@
+services:
+  messycloud:
+    container_name: messycloud
+    build: .
+    restart: unless-stopped
