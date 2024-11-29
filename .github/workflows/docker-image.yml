@@ -19,11 +19,6 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
-        with:
-          registry: https://100.107.72.127:5000
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
