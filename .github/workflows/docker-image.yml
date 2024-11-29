@@ -22,8 +22,8 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          config-inline: |
-            [registry."100.107.72.127:5000"]
+          buildkitd-config-inline: |
+            [registry."100.107.72.127:5080"]
               http = true
               insecure = true
 
@@ -33,5 +33,5 @@ jobs:
           context: .
           push: true
           tags: |
-            100.107.72.127:5000/underscoredotspace/messy-cloud:latest
-            100.107.72.127:5000/underscoredotspace/messy-cloud:${{ github.sha }}
+            100.107.72.127:5080/underscoredotspace/messy-cloud:latest
+            100.107.72.127:5080/underscoredotspace/messy-cloud:${{ github.sha }}
