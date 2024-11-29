@@ -23,7 +23,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
         with:
           buildkitd-config-inline: |
-            [registry."100.107.72.127:5080"]
+            [registry."100.94.122.89:5080"]
               http = true
               insecure = true
 
@@ -33,5 +33,5 @@ jobs:
           context: .
           push: true
           tags: |
-            100.107.72.127:5080/underscoredotspace/messy-cloud:latest
-            100.107.72.127:5080/underscoredotspace/messy-cloud:${{ github.sha }}
+            100.94.122.89:5080/underscoredotspace/messy-cloud:latest
+            100.94.122.89:5080/underscoredotspace/messy-cloud:${{ github.sha }}
