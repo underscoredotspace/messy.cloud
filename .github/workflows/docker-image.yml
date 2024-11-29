@@ -25,5 +25,5 @@ jobs:
           context: .
           push: true
           tags: |
-            100.107.72.127:5000/underscoredotspace/messy-cloud:latest
-            100.107.72.127:5000/underscoredotspace/messy-cloud:${{ github.sha }}
+            registry.home.underscore.space/underscoredotspace/messy-cloud:latest
+            registry.home.underscore.space/underscoredotspace/messy-cloud:${{ github.sha }}
